@@ -1,0 +1,3 @@
+[submodule "bearplane"]
+	path = bearplane
+	url = https://github.com/satori87/bearplane
