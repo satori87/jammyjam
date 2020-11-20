@@ -2,7 +2,6 @@ package com.bg.ody.client.core;
 
 import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.engine.BearTool.Position;
-import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Scene;
 
 public class Floater {

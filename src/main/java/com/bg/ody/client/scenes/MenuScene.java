@@ -1,8 +1,6 @@
 package com.bg.ody.client.scenes;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
-import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Button;
 import com.bg.bearplane.gui.Frame;
 import com.bg.bearplane.gui.Label;

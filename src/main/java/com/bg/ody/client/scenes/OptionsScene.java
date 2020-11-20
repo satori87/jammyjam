@@ -3,7 +3,6 @@ package com.bg.ody.client.scenes;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.gui.Button;
-import com.bg.bearplane.gui.CheckBox;
 import com.bg.bearplane.gui.Label;
 import com.bg.bearplane.gui.Scene;
 import com.bg.ody.shared.Shared;

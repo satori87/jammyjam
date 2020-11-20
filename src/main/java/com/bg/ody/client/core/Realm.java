@@ -1,28 +1,17 @@
 package com.bg.ody.client.core;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.zip.DeflaterOutputStream;
-import java.util.zip.InflaterInputStream;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.utils.IntMap;
 import com.bg.bearplane.engine.BearTool.Position;
 import com.bg.bearplane.engine.Effect;
-import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Scene;
-import com.bg.ody.shared.Shared;
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Input;
-import com.esotericsoftware.kryo.io.Output;
 
 public class Realm {
 

@@ -1,22 +1,9 @@
 package com.bg.ody.client.core;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import com.badlogic.gdx.graphics.Color;
-import com.bg.bearplane.engine.BearTool;
 import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Timer;
 import com.bg.bearplane.gui.Scene;
-import com.bg.bearplane.net.BearNet;
-import com.bg.bearplane.net.TCPClient;
-import com.bg.bearplane.net.packets.DisconnectError;
-import com.bg.bearplane.net.packets.Logon;
-import com.bg.bearplane.net.packets.PingPacket;
 import com.bg.ody.client.scenes.MenuScene;
 import com.bg.ody.client.scenes.OptionsScene;
 import com.bg.ody.client.scenes.PlayScene;

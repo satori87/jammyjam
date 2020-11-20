@@ -1,10 +1,8 @@
 package com.bg.ody.client.core;
 
 import java.io.File;
-import java.util.HashMap;
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.bg.bearplane.engine.BearEssentials;
