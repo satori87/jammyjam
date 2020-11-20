@@ -178,4 +178,8 @@ public class JammyJam implements Bearable {
 		return assets;
 	}
 	
+	public Object getNetwork() {
+		return null;
+	}
+	
 }
