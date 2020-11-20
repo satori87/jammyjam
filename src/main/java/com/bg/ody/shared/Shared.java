@@ -9,5 +9,8 @@ public class Shared {
 	public static final String GAME_NAME = "Jammy Jam";
 
 	public static final String CLIENT_VERSION = "bananas17";
+	
+	public static final String EFFECTS_PATH = "assets/effects";
+	public static final String NECESSITIES_PATH = "assets/bearnecessities";
 
 }

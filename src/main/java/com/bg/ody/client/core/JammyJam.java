@@ -133,5 +133,13 @@ public class JammyJam implements Bearable {
 	public String getClientVersion() {
 		return Shared.CLIENT_VERSION;
 	}
+	
+	public String getEffectsPath() {
+		return Shared.EFFECTS_PATH;
+	}
+	
+	public String getNecessitiesPath() {
+		return Shared.NECESSITIES_PATH;
+	}
 
 }

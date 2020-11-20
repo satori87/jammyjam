@@ -21,9 +21,6 @@ public class Realm {
 
 	public static int curMap = 0;
 
-	// prototypes
-	public static IntMap<ParticleEffect> effectData = new IntMap<ParticleEffect>();
-	public static IntMap<ParticleEffectPool> effectPool = new IntMap<ParticleEffectPool>();
 
 	// instances
 	public static List<Effect> effects = new ArrayList<Effect>();
@@ -81,7 +78,7 @@ public class Realm {
 		Effect bfx = null;
 		try {
 			bfx = new Effect(effects.size(), type, i, x, y, modX, modY, scale);
-			bfx.fx = Realm.effectPool.get(type).obtain();
+			bfx.fx = Assets.effectPool.get(type).obtain();
 			bfx.fx.setPosition(x * 32 + 16 + modX, y * 32 + 16 + modY);
 			bfx.fx.scaleEffect(0.1f);
 			effects.add(bfx);
