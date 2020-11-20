@@ -6,8 +6,9 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.bg.bearplane.engine.BearTool.Position;
+import com.bg.bearplane.engine.Util.Coord;
 import com.bg.bearplane.engine.Effect;
+import com.bg.bearplane.engine.Floater;
 import com.bg.bearplane.gui.Scene;
 
 public class Realm {
@@ -16,12 +17,9 @@ public class Realm {
 
 	long tick = 0;
 
-	public static int curMap = 0;
-
-
 	// instances
-	public static List<Effect> effects = new ArrayList<Effect>();
-	public static List<Floater> floaters = new ArrayList<Floater>();
+	private static List<Effect> effects = new ArrayList<Effect>();
+	private static List<Floater> floaters = new ArrayList<Floater>();
 
 	public Realm() {		
 		realm = this;
@@ -29,7 +27,7 @@ public class Realm {
 
 	
 
-	public static void addFloater(Position e, int x, int y, String text, Color col, long aliveAt) {
+	public static void addFloater(Coord e, int x, int y, String text, Color col, long aliveAt) {
 		Floater f = new Floater(e, x, y, text, col, aliveAt);
 		floaters.add(f);
 	}
@@ -71,12 +69,12 @@ public class Realm {
 		}
 	}
 
-	public static Effect addEffect(int type, int i, int x, int y, int modX, int modY, float scale) {
+	public static Effect addEffect(int type, int i, int x, int y, float scale) {
 		Effect bfx = null;
 		try {
-			bfx = new Effect(effects.size(), type, i, x, y, modX, modY, scale);
+			bfx = new Effect(effects.size(), type, i, x, y, scale);
 			bfx.fx = Assets.effectPool.get(type).obtain();
-			bfx.fx.setPosition(x * 32 + 16 + modX, y * 32 + 16 + modY);
+			bfx.fx.setPosition(x, y);
 			bfx.fx.scaleEffect(0.1f);
 			effects.add(bfx);
 		} catch (Exception e) {

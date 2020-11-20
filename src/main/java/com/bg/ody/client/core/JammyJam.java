@@ -8,7 +8,6 @@ import com.bg.ody.client.scenes.MenuScene;
 import com.bg.ody.client.scenes.OptionsScene;
 import com.bg.ody.client.scenes.PlayScene;
 import com.bg.ody.client.scenes.UpdateScene;
-import com.bg.ody.shared.Shared;
 import com.esotericsoftware.kryo.util.IntMap;
 
 public class JammyJam implements Bearable {
@@ -31,9 +30,11 @@ public class JammyJam implements Bearable {
 
 
 	public JammyJam() {
-		super();
-		Log.info("Jammy Jam Initializing");
 		game = this;
+	}
+	
+	public void create() {
+		Log.info("Jammy Jam Initializing");
 	}
 
 	@Override
@@ -111,45 +112,49 @@ public class JammyJam implements Bearable {
 
 	@Override
 	public int getGameWidth() {
-		return Shared.GAME_WIDTH;
+		return Prefs.GAME_WIDTH;
 	}
 
 	@Override
 	public int getGameHeight() {
-		return Shared.GAME_HEIGHT;
+		return Prefs.GAME_HEIGHT;
 	}
 
 	@Override
 	public String getGameName() {
-		return Shared.GAME_NAME;
+		return Prefs.GAME_NAME;
 	}
 	
 	public String getClientVersion() {
-		return Shared.CLIENT_VERSION;
+		return Prefs.CLIENT_VERSION;
 	}
 	
 	public String getEffectsPath() {
-		return Shared.EFFECTS_PATH;
+		return Prefs.EFFECTS_PATH;
 	}
 	
-	public String getNecessitiesPath() {
-		return Shared.NECESSITIES_PATH;
-	}
+	public String getAssetsPath() {
+		return Prefs.ASSETS_PATH;
+	}	
 	
-	public boolean isFullscreen() {
-		return Shared.FULLSCREEN;
-	}
-	
-	public boolean isFauxFullscreen() {
-		return Shared.FAUX_FULLSCREEN;
+	public int getDisplayMode() {
+		return Prefs.DISPLAY_MODE;
 	}
 	
 	public boolean isResizable() {
-		return Shared.RESIZABLE;
+		return Prefs.RESIZABLE;
+	}
+	
+	public int getWindowWidth() {
+		return Prefs.WINDOW_WIDTH;
+	}
+	
+	public int getWindowHeight() {
+		return Prefs.WINDOW_HEIGHT;
 	}
 	
 	public boolean isvSync() {
-		return Shared.ISVSYNC;
+		return Prefs.ISVSYNC;
 	}
 	
 	public Assets getAssets() {
@@ -158,6 +163,10 @@ public class JammyJam implements Bearable {
 	
 	public Object getNetwork() {
 		return null;
+	}
+	
+	public boolean isRelease() {
+		return Prefs.IS_RELEASE;
 	}
 	
 }

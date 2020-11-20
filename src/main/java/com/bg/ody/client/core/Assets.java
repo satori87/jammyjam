@@ -1,13 +1,12 @@
 package com.bg.ody.client.core;
 
-import com.bg.bearplane.engine.BearEssentials;
-import com.bg.bearplane.engine.BearNecessities;
+import com.bg.bearplane.engine.StandardAssets;
 
-public class Assets extends BearNecessities implements BearEssentials {
+public class Assets extends StandardAssets {
 
 	public void preload() {		
 		//add any customer preloading here
-		loadAllPNGFromDir("assets");		
+		preloadAllPNGFromDir("assets");		
 	}
 
 	public void load() {

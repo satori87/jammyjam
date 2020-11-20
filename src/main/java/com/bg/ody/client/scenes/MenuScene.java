@@ -5,7 +5,7 @@ import com.bg.bearplane.gui.Button;
 import com.bg.bearplane.gui.Frame;
 import com.bg.bearplane.gui.Label;
 import com.bg.bearplane.gui.Scene;
-import com.bg.ody.shared.Shared;
+import com.bg.ody.client.core.Prefs;
 
 public class MenuScene extends Scene {
 
@@ -18,8 +18,8 @@ public class MenuScene extends Scene {
 
 	public void start() {
 		super.start();
-		int hw = Shared.GAME_WIDTH / 2;
-		int hh = Shared.GAME_HEIGHT / 2;
+		int hw = Prefs.GAME_WIDTH / 2;
+		int hh = Prefs.GAME_HEIGHT / 2;
 		int y = 64;
 
 		lblStatus = new Label(this, hw, hh + 256, 2f, "", Color.WHITE, true);
