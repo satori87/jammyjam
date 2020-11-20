@@ -79,7 +79,7 @@ public class Realm {
 	}
 	
 	public void load() {
-		
+		//load our world stuff here
 	}
 
 	public void render() {

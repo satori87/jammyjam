@@ -19,6 +19,7 @@ import com.bg.bearplane.net.packets.Logon;
 import com.bg.bearplane.net.packets.PingPacket;
 import com.bg.ody.client.scenes.MenuScene;
 import com.bg.ody.client.scenes.OptionsScene;
+import com.bg.ody.client.scenes.PlayScene;
 import com.bg.ody.client.scenes.UpdateScene;
 import com.bg.ody.shared.Shared;
 import com.esotericsoftware.kryo.util.IntMap;
@@ -39,6 +40,7 @@ public class JammyJam implements Bearable {
 	// scenes
 	public static OptionsScene optionsScene = new OptionsScene();
 	public static UpdateScene updateScene = new UpdateScene();
+	public static PlayScene playScene = new PlayScene();
 
 
 	public JammyJam(Assets a) {
@@ -112,6 +114,7 @@ public class JammyJam implements Bearable {
 		Scene.addScene("menu", new MenuScene());
 		Scene.addScene("update", updateScene);
 		Scene.addScene("options", optionsScene);
+		Scene.addScene("play", playScene);
 	}
 
 	@Override

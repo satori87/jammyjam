@@ -1,6 +1,8 @@
 package com.bg.ody.client.scenes;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
+import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Button;
 import com.bg.bearplane.gui.Frame;
 import com.bg.bearplane.gui.Label;
@@ -28,7 +30,7 @@ public class MenuScene extends Scene {
 
 		labels.add(new Label(this, hw, hh - 182 + y, 3f, "Jammy Jam", Color.WHITE, true));
 
-		buttons.add(new Button(this, 0, hw, hh - 96 + y, 256, 48, ""));
+		buttons.add(new Button(this, 0, hw, hh - 96 + y, 256, 48, "PLAY"));
 		buttons.add(new Button(this, 1, hw, hh - 32 + y, 256, 48, ""));
 		buttons.add(new Button(this, 2, hw, hh + 32 + y, 256, 48, "Options"));
 		buttons.add(new Button(this, 3, hw, hh + 96 + y, 256, 48, "Quit"));
@@ -48,16 +50,16 @@ public class MenuScene extends Scene {
 	public void buttonPressed(int id) {		
 		switch (id) {
 		case 0:
-			
+			Scene.change("play");
 			break;
 		case 1:
-			
+			buttons.get(1).text = "LOL";
 			break;
 		case 2:
 			Scene.change("options");
 			break;
 		case 3:
-			
+			System.exit(0);
 			break;
 		}
 	}
