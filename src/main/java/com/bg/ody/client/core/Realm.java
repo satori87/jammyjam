@@ -6,9 +6,6 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
-import com.badlogic.gdx.utils.IntMap;
 import com.bg.bearplane.engine.BearTool.Position;
 import com.bg.bearplane.engine.Effect;
 import com.bg.bearplane.gui.Scene;
