@@ -1,7 +1,5 @@
 package com.bg.ody.client.core;
 
-import java.awt.Dimension;
-
 import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Timer;
@@ -148,26 +146,12 @@ public class JammyJam implements Bearable {
 		return Shared.FULLSCREEN;
 	}
 	
+	public boolean isFauxFullscreen() {
+		return Shared.FAUX_FULLSCREEN;
+	}
+	
 	public boolean isResizable() {
 		return Shared.RESIZABLE;
-	}
-	
-	public int getWindowWidth() {
-		if(!Shared.FAUX_FULLSCREEN && !Shared.FULLSCREEN) {
-			return Shared.GAME_WIDTH;
-		} else {
-			Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();	
-			return dimension.width;
-		}
-	}
-	
-	public int getWindowHeight() {
-		if(!Shared.FAUX_FULLSCREEN && !Shared.FULLSCREEN) {
-			return Shared.GAME_HEIGHT;
-		} else {
-			Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();	
-			return dimension.height;
-		}
 	}
 	
 	public boolean isvSync() {
