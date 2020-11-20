@@ -14,7 +14,7 @@ import com.esotericsoftware.kryo.util.IntMap;
 public class JammyJam implements Bearable {
 
 	public static JammyJam game;
-	public static Assets assets;
+	public static Assets assets = new Assets();
 	public Realm realm = new Realm();
 
 	// timing
@@ -33,13 +33,7 @@ public class JammyJam implements Bearable {
 	public JammyJam() {
 		super();
 		Log.info("Jammy Jam Initializing");
-		try {
-			game = this;
-			assets = new Assets();
-		} catch (Exception e) {
-			Log.error(e);
-			System.exit(0);
-		}
+		game = this;
 	}
 
 	@Override
