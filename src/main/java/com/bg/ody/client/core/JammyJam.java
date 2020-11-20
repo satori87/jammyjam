@@ -1,5 +1,7 @@
 package com.bg.ody.client.core;
 
+import java.awt.Dimension;
+
 import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Timer;
@@ -30,12 +32,12 @@ public class JammyJam implements Bearable {
 	public static PlayScene playScene = new PlayScene();
 
 
-	public JammyJam(Assets a) {
+	public JammyJam() {
 		super();
 		Log.info("Jammy Jam Initializing");
 		try {
 			game = this;
-			assets = a;
+			assets = new Assets();
 		} catch (Exception e) {
 			Log.error(e);
 			System.exit(0);
@@ -141,5 +143,39 @@ public class JammyJam implements Bearable {
 	public String getNecessitiesPath() {
 		return Shared.NECESSITIES_PATH;
 	}
-
+	
+	public boolean isFullscreen() {
+		return Shared.FULLSCREEN;
+	}
+	
+	public boolean isResizable() {
+		return Shared.RESIZABLE;
+	}
+	
+	public int getWindowWidth() {
+		if(!Shared.FAUX_FULLSCREEN && !Shared.FULLSCREEN) {
+			return Shared.GAME_WIDTH;
+		} else {
+			Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();	
+			return dimension.width;
+		}
+	}
+	
+	public int getWindowHeight() {
+		if(!Shared.FAUX_FULLSCREEN && !Shared.FULLSCREEN) {
+			return Shared.GAME_HEIGHT;
+		} else {
+			Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();	
+			return dimension.height;
+		}
+	}
+	
+	public boolean isvSync() {
+		return Shared.ISVSYNC;
+	}
+	
+	public Assets getAssets() {
+		return assets;
+	}
+	
 }
