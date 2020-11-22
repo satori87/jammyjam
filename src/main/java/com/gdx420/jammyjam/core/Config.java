@@ -3,9 +3,9 @@ package com.gdx420.jammyjam.core;
 
 import java.io.Serializable;
 
-import com.bg.bearplane.engine.BaseConfig;
+import com.bg.bearplane.engine.DisplayConfig;
 
-public class Config extends BaseConfig implements Serializable {
+public class Config extends DisplayConfig implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public int volMusic = 60;
