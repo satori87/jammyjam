@@ -1,4 +1,4 @@
-package com.bg.ody.client.core;
+package com.gdx420.jammyjam.core;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.bg.bearplane.engine.Bearplane;

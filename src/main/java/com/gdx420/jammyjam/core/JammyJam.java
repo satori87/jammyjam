@@ -1,24 +1,32 @@
-package com.bg.ody.client.core;
+package com.gdx420.jammyjam.core;
 
 import com.bg.bearplane.engine.Bearable;
+import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
-import com.bg.bearplane.engine.Timer;
 import com.bg.bearplane.gui.Scene;
-import com.bg.ody.client.scenes.MenuScene;
-import com.bg.ody.client.scenes.OptionsScene;
-import com.bg.ody.client.scenes.PlayScene;
-import com.bg.ody.client.scenes.UpdateScene;
-import com.esotericsoftware.kryo.util.IntMap;
+import com.gdx420.jammyjam.scenes.MenuScene;
+import com.gdx420.jammyjam.scenes.OptionsScene;
+import com.gdx420.jammyjam.scenes.PlayScene;
+import com.gdx420.jammyjam.scenes.UpdateScene;
 
 public class JammyJam implements Bearable {
 
+	public static final boolean IS_RELEASE = false; // change to true for release
+	public static final int GAME_WIDTH = 1366;
+	public static final int GAME_HEIGHT = 768;
+	public static final String GAME_NAME = "Jammy Jam";
+	public static final String CLIENT_VERSION = "bananas17";
+	public static final String EFFECTS_PATH = "assets/effects";
+	public static final String ASSETS_PATH = "assets";
+	public static final String CONFIG_FILE = "config.txt";
+
 	public static JammyJam game;
 	public static Assets assets = new Assets();
-	public Realm realm = new Realm();
+	public Realm realm = new Realm(assets);
+	public Config config = new Config();
 
 	// timing
 	long tick = 0;
-	public IntMap<Timer> timers = new IntMap<Timer>();
 
 	// state variables
 	public boolean playing = false;
@@ -28,23 +36,22 @@ public class JammyJam implements Bearable {
 	public static UpdateScene updateScene = new UpdateScene();
 	public static PlayScene playScene = new PlayScene();
 
-
 	public JammyJam() {
 		game = this;
+		config = (Config)Bearplane.loadConfig(CONFIG_FILE, config);
 	}
-	
+
 	public void create() {
-		Log.info("Jammy Jam Initializing");
+		Log.info("Jammy Jam Initializing");		
 	}
 
 	@Override
 	public void addTimers() {
 		try {
-			timers.put(250, new Timer(this, 250));
-			timers.put(1000, new Timer(this, 1000));
+			Bearplane.addTimer(250);
+			Bearplane.addTimer(1000);
 		} catch (Exception e) {
 			Log.error(e);
-			System.exit(0);
 		}
 	}
 
@@ -60,7 +67,6 @@ public class JammyJam implements Bearable {
 			}
 		} catch (Exception e) {
 			Log.error(e);
-			System.exit(0);
 		}
 	}
 
@@ -69,25 +75,12 @@ public class JammyJam implements Bearable {
 	}
 
 	@Override
-	public void doTimers(long tick) {
-		try {
-			this.tick = tick;
-			for (Timer t : timers.values()) {
-				t.update(tick);
-			}
-		} catch (Exception e) {
-			Log.error(e);
-			System.exit(0);
-		}
-	}
-
-	@Override
 	public void update() {
 		try {
-			Realm.realm.update(tick);
+			//shouldnt actually need to do a whole lot here :)
+			//realm and scene have their updates called for them, there's timers, and most logic is more appropriately done in Realm or Map
 		} catch (Exception e) {
 			Log.error(e);
-			System.exit(0);
 		}
 	}
 
@@ -112,61 +105,90 @@ public class JammyJam implements Bearable {
 
 	@Override
 	public int getGameWidth() {
-		return Prefs.GAME_WIDTH;
+		return GAME_WIDTH;
 	}
 
 	@Override
 	public int getGameHeight() {
-		return Prefs.GAME_HEIGHT;
+		return GAME_HEIGHT;
 	}
 
 	@Override
 	public String getGameName() {
-		return Prefs.GAME_NAME;
+		return GAME_NAME;
 	}
-	
+
 	public String getClientVersion() {
-		return Prefs.CLIENT_VERSION;
+		return CLIENT_VERSION;
 	}
-	
+
 	public String getEffectsPath() {
-		return Prefs.EFFECTS_PATH;
+		return EFFECTS_PATH;
 	}
-	
+
 	public String getAssetsPath() {
-		return Prefs.ASSETS_PATH;
-	}	
-	
+		return ASSETS_PATH;
+	}
+
 	public int getDisplayMode() {
-		return Prefs.DISPLAY_MODE;
+		return config.DISPLAY_MODE;
 	}
-	
+
 	public boolean isResizable() {
-		return Prefs.RESIZABLE;
+		return config.RESIZABLE;
 	}
-	
+
 	public int getWindowWidth() {
-		return Prefs.WINDOW_WIDTH;
+		return config.WINDOW_WIDTH;
 	}
-	
+
 	public int getWindowHeight() {
-		return Prefs.WINDOW_HEIGHT;
+		return config.WINDOW_HEIGHT;
 	}
-	
+
 	public boolean isvSync() {
-		return Prefs.ISVSYNC;
+		return config.ISVSYNC;
 	}
-	
+
 	public Assets getAssets() {
 		return assets;
 	}
-	
+
 	public Object getNetwork() {
 		return null;
 	}
-	
+
 	public boolean isRelease() {
-		return Prefs.IS_RELEASE;
+		return IS_RELEASE;
+	}
+	
+	public Realm getRealm() {
+		return realm;
+	}
+
+	@Override
+	public void resume() {
+		
+	}
+
+	@Override
+	public void hide() {
+		
+	}
+
+	@Override
+	public void show() {
+		
+	}
+
+	@Override
+	public void pause() {
+
+		
+	}
+	
+	public void setTick(long tick) {
+		this.tick = tick;
 	}
 	
 }

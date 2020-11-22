@@ -1,0 +1,1 @@
+{"DISPLAY_MODE":0,"WINDOW_WIDTH":1366,"WINDOW_HEIGHT":768,"RESIZABLE":false,"ISVSYNC":true,"volMusic":60,"volSound":60,"name":"Gdx"}
