@@ -31,13 +31,13 @@
 	</repositories>
 
 	<dependencies>
-	<!--  
+<!--  
 		<dependency>
 		    <groupId>com.github.satori87</groupId>
 		    <artifactId>bearplane</artifactId>
 		    <version>master</version>
 		</dependency>
-	-->
+		-->
 		<dependency>
 			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-box2d</artifactId>
@@ -62,21 +62,6 @@
 			<version>1.9.12</version>
 			<classifier>natives-desktop</classifier>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.esotericsoftware/kryonet -->
-		<dependency>
-			<groupId>com.esotericsoftware</groupId>
-			<artifactId>kryonet</artifactId>
-			<version>2.22.0-RC1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.kotcrab.vis/vis-ui -->
-		<dependency>
-			<groupId>com.kotcrab.vis</groupId>
-			<artifactId>vis-ui</artifactId>
-			<version>1.4.4</version>
-		</dependency>
-
 
 	</dependencies>
 
