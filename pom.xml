@@ -22,7 +22,6 @@
 		</plugins>
 	</build>
 
-
 	<repositories>
 		<repository>
 		    <id>jitpack.io</id>
@@ -31,13 +30,12 @@
 	</repositories>
 
 	<dependencies>
-<!--  
+
 		<dependency>
-		    <groupId>com.github.satori87</groupId>
-		    <artifactId>bearplane</artifactId>
-		    <version>master</version>
+			<groupId>com.bg.bearplane</groupId>
+			<artifactId>Bearplane</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-box2d</artifactId>
@@ -62,6 +60,7 @@
 			<version>1.9.12</version>
 			<classifier>natives-desktop</classifier>
 		</dependency>
+
 
 	</dependencies>
 
