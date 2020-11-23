@@ -14,18 +14,30 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
  				<version>3.8.1</version>
-
+				<configuration>
+            		<source>1.8</source>
+            		<target>1.8</target>
+        		</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 
 	<repositories>
-
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
-
+<!--  
+		<dependency>
+		    <groupId>com.github.satori87</groupId>
+		    <artifactId>bearplane</artifactId>
+		    <version>master</version>
+		</dependency>
+		-->
 		<dependency>
 			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-box2d</artifactId>
@@ -50,21 +62,6 @@
 			<version>1.9.12</version>
 			<classifier>natives-desktop</classifier>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.esotericsoftware/kryonet -->
-		<dependency>
-			<groupId>com.esotericsoftware</groupId>
-			<artifactId>kryonet</artifactId>
-			<version>2.22.0-RC1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.kotcrab.vis/vis-ui -->
-		<dependency>
-			<groupId>com.kotcrab.vis</groupId>
-			<artifactId>vis-ui</artifactId>
-			<version>1.4.4</version>
-		</dependency>
-
 
 	</dependencies>
 
