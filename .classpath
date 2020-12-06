@@ -23,7 +23,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Bearplane"/>
 	<classpathentry kind="lib" path="C:/Users/bear/.m2/repository/com/badlogicgames/gdx/gdx-backend-lwjgl/1.9.12/gdx-backend-lwjgl-1.9.12.jar" sourcepath="C:/Users/bear/.m2/repository/com/badlogicgames/gdx/gdx-backend-lwjgl/1.9.12/gdx-backend-lwjgl-1.9.12-sources.jar">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
