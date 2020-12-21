@@ -14,7 +14,7 @@ import com.bg.bearplane.engine.DrawTask;
 import com.bg.bearplane.engine.Effect;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Scene;
-import com.bg.bearplane.gui.TextBox;
+import com.bg.bearplane.gui.Field;
 import com.gdx420.jammyjam.core.Assets;
 import com.gdx420.jammyjam.core.MapData;
 import com.gdx420.jammyjam.core.Realm;
@@ -34,12 +34,12 @@ public class LiveMapScene extends Scene {
 
 	public boolean processed = false;
 
-	TextBox text;
+	Field text;
 
 	public void start() {
 		super.start();
 		autoCenter = false;
-		text = new TextBox(this, "0",  141, 0, 0, 0, 555, true);
+		text = new Field(this, "0",  141, 0, 0, 0, 555, true);
 		text.visible = false;
 		text.allowSpecial = true;
 		fields.put("0", text);

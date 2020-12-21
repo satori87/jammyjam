@@ -8,11 +8,11 @@ import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.Button;
 import com.bg.bearplane.gui.CheckBox;
+import com.bg.bearplane.gui.Field;
 import com.bg.bearplane.gui.Frame;
 import com.bg.bearplane.gui.Label;
 import com.bg.bearplane.gui.ListBox;
 import com.bg.bearplane.gui.Scene;
-import com.bg.bearplane.gui.TextBox;
 import com.gdx420.jammyjam.core.MapData;
 import com.gdx420.jammyjam.core.Realm;
 import com.gdx420.jammyjam.core.Shared;
@@ -108,7 +108,7 @@ public class EditMapScene extends RenderEditMapScene {
 			buttons.put(ii + "", b);
 		}
 
-		TextBox t = addField("mapnum", 3, 0, 650, 700, 160, false, null);
+		Field t = addField("mapnum", 3, 0, 650, 700, 160, false, null);
 
 		fields.put("mapnum", t);
 		t.allowLetters = false;
