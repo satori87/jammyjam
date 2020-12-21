@@ -23,8 +23,8 @@ public class MenuScene extends Scene {
 
 		addLabel("title", hw, hh - 182 + y, 3f, "Jammy Jam", Color.WHITE, true);
 
-		addButton("play", hw,  hh - 96 + y, 256, 48, "PLAY");
-		addButton("lol", hw, hh - 32 + y, 256, 48, "");
+		addButton("play", hw,  hh - 96 + y, 256, 48, "Test Play");
+		addButton("lol", hw, hh - 32 + y, 256, 48, "Edit Map");
 		addButton("options", hw, hh + 32 + y, 256, 48, "Options");
 		addButton("quit", hw, hh + 96 + y, 256, 48, "Quit");
 
@@ -45,8 +45,7 @@ public class MenuScene extends Scene {
 			Scene.change("play");
 			break;
 		case "lol":
-			buttons.get("lol").text = "LOLOLOLOLOLOL";
-			status = "Welcome to Jam. I am your host, LOLOLOLOLOLOL.";
+			Scene.change("edit");
 			break;
 		case "options":
 			Scene.change("options");

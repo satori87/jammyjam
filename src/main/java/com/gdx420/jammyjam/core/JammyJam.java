@@ -4,6 +4,7 @@ import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Scene;
+import com.gdx420.jammyjam.scenes.EditMapScene;
 import com.gdx420.jammyjam.scenes.MenuScene;
 import com.gdx420.jammyjam.scenes.OptionsScene;
 import com.gdx420.jammyjam.scenes.PlayScene;
@@ -34,7 +35,8 @@ public class JammyJam implements Bearable {
 	// scenes
 	public static OptionsScene optionsScene = new OptionsScene();
 	public static UpdateScene updateScene = new UpdateScene();
-	public static PlayScene playScene = new PlayScene();
+	public static EditMapScene editMapScene = new EditMapScene();
+	public static PlayScene playScene;
 
 	public JammyJam() {
 		game = this;
@@ -42,7 +44,10 @@ public class JammyJam implements Bearable {
 	}
 
 	public void create() {
-		Log.info("Jammy Jam Initializing");		
+		Log.info("Jammy Jam Initializing");	
+		playScene = new PlayScene();
+		editMapScene = new EditMapScene();
+		
 	}
 
 	@Override
@@ -90,6 +95,7 @@ public class JammyJam implements Bearable {
 		Scene.addScene("update", updateScene);
 		Scene.addScene("options", optionsScene);
 		Scene.addScene("play", playScene);
+		Scene.addScene("edit", editMapScene);
 	}
 
 	@Override
