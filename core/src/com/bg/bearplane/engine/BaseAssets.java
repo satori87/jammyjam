@@ -139,7 +139,7 @@ public abstract class BaseAssets {
 			texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 			String n = "";
 			for (String s : textureList.keySet()) {
-				textures.put(s, manager.get(textureList.get(s)));
+				textures.put(s, (Texture)manager.get(textureList.get(s)));
 			}
 
 			if (effectnames != null) {
