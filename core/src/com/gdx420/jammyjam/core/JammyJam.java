@@ -4,10 +4,12 @@ import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Scene;
+import com.gdx420.jammyjam.scenes.AwakePlayScene;
 import com.gdx420.jammyjam.scenes.EditMapScene;
 import com.gdx420.jammyjam.scenes.MenuScene;
 import com.gdx420.jammyjam.scenes.OptionsScene;
 import com.gdx420.jammyjam.scenes.PlayScene;
+import com.gdx420.jammyjam.scenes.SleepPlayScene;
 import com.gdx420.jammyjam.scenes.UpdateScene;
 
 public class JammyJam implements Bearable {
@@ -25,9 +27,13 @@ public class JammyJam implements Bearable {
 	public static Assets assets = new Assets();
 	public Realm realm = new Realm(assets);
 	public Config config = new Config();
+	public Player player = new Player(300, 200);
 
 	// timing
 	long tick = 0;
+	public GameTimeManager awakeTimeManager = new GameTimeManager();
+	public GameTimeManager sleepTimeManager = new GameTimeManager();
+	
 
 	// state variables
 	public boolean playing = false;
@@ -36,7 +42,8 @@ public class JammyJam implements Bearable {
 	public static OptionsScene optionsScene = new OptionsScene();
 	public static UpdateScene updateScene = new UpdateScene();
 	public static EditMapScene editMapScene = new EditMapScene();
-	public static PlayScene playScene;
+	public static AwakePlayScene awakePlayScene;
+	public static SleepPlayScene sleepPlayScene;
 
 	public JammyJam() {
 		game = this;
@@ -45,8 +52,9 @@ public class JammyJam implements Bearable {
 
 	public void create() {
 		Log.info("Jammy Jam Initializing");	
-		playScene = new PlayScene();
 		editMapScene = new EditMapScene();
+		awakePlayScene = new AwakePlayScene();
+		sleepPlayScene = new SleepPlayScene();
 		
 	}
 
@@ -76,7 +84,11 @@ public class JammyJam implements Bearable {
 	}
 
 	void secondTimer() {
-
+		if(Scene.scene instanceof AwakePlayScene) {
+			awakeTimeManager.tickForward();
+		} else if(Scene.scene instanceof SleepPlayScene) {
+			sleepTimeManager.tickForward();
+		}
 	}
 
 	@Override
@@ -94,8 +106,9 @@ public class JammyJam implements Bearable {
 		Scene.addScene("menu", new MenuScene());
 		Scene.addScene("update", updateScene);
 		Scene.addScene("options", optionsScene);
-		Scene.addScene("play", playScene);
 		Scene.addScene("edit", editMapScene);
+		Scene.addScene("awakePlayScene", awakePlayScene);
+		Scene.addScene("sleepPlayScene",  sleepPlayScene);
 	}
 
 	@Override

@@ -42,7 +42,8 @@ public class MenuScene extends Scene {
 	public void buttonPressed(String id) {		
 		switch (id) {
 		case "play":
-			Scene.change("play");
+			//Scene.change("play");
+			Scene.change("sleepPlayScene");
 			break;
 		case "lol":
 			Scene.change("edit");
