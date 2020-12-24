@@ -12,11 +12,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.utils.Json;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Util {
@@ -31,43 +34,43 @@ public class Util {
 		}
 
 	}
-	
+
 	public static double distance(int x1, int y1, int x2, int y2) {
 		return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
 	}
-	
+
 	public static double distance(float x1, float y1, float x2, float y2) {
 		return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
 	}
-	
+
 	public static void exportJSON(String filename, Object o) {
 		try {
-			ObjectMapper mapper = new ObjectMapper();
-			writeFile(filename, mapper.writeValueAsString(o));
+			Json json = new Json();
+			json.toJson(o, Gdx.files.local(filename));
 		} catch (Exception e) {
 			Log.error(e);
 		}
 	}
-	
+
 	public static boolean exists(String filename) {
 		File file = new File(filename);
 		return file.exists();
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Object importJSON(String filename, Class c) {
-		String json = readFile(filename);
-		if(json.length() > 0) {
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-				return mapper.readValue(json, c);
-			} catch (Exception e) {
-				Log.error(e);
+		Json mapper = new Json();
+		try {
+			FileHandle f = Gdx.files.local(filename);
+			if(f != null && f.exists()) {
+				return mapper.fromJson(c, f);
 			}
+		} catch (Exception e) {
+			Log.error(e);
 		}
 		return null;
 	}
-	
+
 	public static void writeFile(String filename, String s) {
 		try {
 			Files.write(Paths.get(filename), s.getBytes());
@@ -75,11 +78,11 @@ public class Util {
 			Log.error(e);
 		}
 	}
-	
+
 	public static String readFile(String filename) {
 		String s = "";
 		try {
-			s = new String(Files.readAllBytes(Paths.get(filename))); 
+			s = new String(Files.readAllBytes(Paths.get(filename)));
 		} catch (Exception e) {
 			Log.warn(filename + " not found for reading");
 		}
@@ -94,7 +97,7 @@ public class Util {
 			return new String(messageDigest.digest());
 		} catch (Exception e) {
 			Log.error(e);
-			
+
 		}
 		return "";
 	}
@@ -138,7 +141,7 @@ public class Util {
 				start += chunksize;
 			}
 		} catch (Exception e) {
-			Log.error(e);			
+			Log.error(e);
 		}
 		return ret;
 	}
@@ -223,7 +226,8 @@ public class Util {
 			String p = text.substring(c, c + 1); // single letter
 			if (p.equals(" ")) { // finished a word, try to add it on
 				if (line.length() > 0) {
-					if (Bearplane.assets.getStringWidth(line + " " + word, scale, 0, 1) > width) { // wont fit, start new
+					if (Bearplane.assets.getStringWidth(line + " " + word, scale, 0, 1) > width) { // wont fit, start
+																									// new
 																									// line
 						lines.add(line);
 						line = word;
@@ -266,39 +270,40 @@ public class Util {
 		return lines;
 	}
 
-	public static void saveTexture(final String s, final int x, final int y, final int w, final int h, final Texture tex) {
-        try {
-            final FileHandle fh = new FileHandle(String.valueOf(s) + ".png");
-            final Pixmap pixmap = getPixmapRegion(x, y, w, h, false, tex);
-            PixmapIO.writePNG(fh, pixmap);
-            pixmap.dispose();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
-    }
-    
-    private static Pixmap getPixmapRegion(final int x, final int y, final int w, final int h, final boolean yDown, final Texture tex) {
-        final TextureData td = tex.getTextureData();
-        if (!td.isPrepared()) {
-            td.prepare();
-        }
-        final Pixmap pm = td.consumePixmap();
-        final Pixmap pixmap = new Pixmap(w, h, Pixmap.Format.RGBA8888);
-        pixmap.drawPixmap(pm, x, y, w, h, 0, 0, w, h);
-        if (yDown) {
-            final ByteBuffer pixels = pixmap.getPixels();
-            final int numBytes = w * h * 4;
-            final byte[] lines = new byte[numBytes];
-            final int numBytesPerLine = w * 4;
-            for (int i = 0; i < h; ++i) {
-                pixels.position((h - i - 1) * numBytesPerLine);
-                pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
-            }
-            pixels.clear();
-            pixels.put(lines);
-        }
-        return pixmap;
-    }
-	
+	public static void saveTexture(final String s, final int x, final int y, final int w, final int h,
+			final Texture tex) {
+		try {
+			final FileHandle fh = new FileHandle(String.valueOf(s) + ".png");
+			final Pixmap pixmap = getPixmapRegion(x, y, w, h, false, tex);
+			PixmapIO.writePNG(fh, pixmap);
+			pixmap.dispose();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
+	private static Pixmap getPixmapRegion(final int x, final int y, final int w, final int h, final boolean yDown,
+			final Texture tex) {
+		final TextureData td = tex.getTextureData();
+		if (!td.isPrepared()) {
+			td.prepare();
+		}
+		final Pixmap pm = td.consumePixmap();
+		final Pixmap pixmap = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+		pixmap.drawPixmap(pm, x, y, w, h, 0, 0, w, h);
+		if (yDown) {
+			final ByteBuffer pixels = pixmap.getPixels();
+			final int numBytes = w * h * 4;
+			final byte[] lines = new byte[numBytes];
+			final int numBytesPerLine = w * 4;
+			for (int i = 0; i < h; ++i) {
+				pixels.position((h - i - 1) * numBytesPerLine);
+				pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
+			}
+			pixels.clear();
+			pixels.put(lines);
+		}
+		return pixmap;
+	}
+
 }

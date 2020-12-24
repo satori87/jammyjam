@@ -394,7 +394,10 @@ public class EditMapScene extends RenderEditMapScene {
 			
 			int m = Integer.parseInt(fields.get("mapnum").text);
 			Realm.curMap = m;
-			Realm.mapData[m] = (MapData) Util.importJSON("maps/map" + m + ".map", MapData.class);
+			MapData md = (MapData) Util.importJSON("maps/map" + m + ".map", MapData.class);
+			if(md != null) {
+				Realm.mapData[m] = md;
+			}
 			
 		} catch (Exception e) {
 			Log.error(e);
