@@ -318,7 +318,7 @@ public class LiveMapScene extends Scene {
 		int my = 0;
 		int ly = 0;
 		float al = 0;
-		if (this instanceof PlayScene) {
+		//if (this instanceof PlayScene) {
 			/*
 			for (Effect f : Realm.effects) {
 				if (f.fx != null && f.visible && f.i == 1) {
@@ -385,11 +385,11 @@ public class LiveMapScene extends Scene {
 				}
 			}
 			*/
-		} else {
+		//} else {
 		//	dt = new DrawTask(i, character.set, character.sprite, character.getFrame(), character.trueX(),
 		//			character.trueY());
 		//	layerList.get(32 + character.trueY() + 16).add(dt);
-		}
+		//}
 		for (int y = 0; y < Shared.MAP_WIDTH; y++) {
 			for (int x = 0; x < Shared.MAP_WIDTH; x++) {
 				mx = x;

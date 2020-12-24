@@ -1,55 +1,51 @@
 package com.gdx420.jammyjam.scenes;
 
-import java.time.LocalTime;
-
 import com.badlogic.gdx.Input.Keys;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.core.Assets;
 import com.gdx420.jammyjam.core.JammyJam;
+import java.time.LocalTime;
 
-public class PlayScene extends LiveMapScene {
+public class AwakePlayScene extends PlayScene {
 	
-	LocalTime startSleepTime = LocalTime.of(22,  0);
-	LocalTime startAwakeTime = LocalTime.of(8,  0);
-	
-	public PlayScene() {
+	public AwakePlayScene() {
 
 	}
 
 	public void start() {
 		super.start();
 		
+		JammyJam.game.awakeTimeManager.setGameClock(LocalTime.of(8, 0));
 	}
 
 	public void update() {
-		super.checkKeys();
+		checkKeys();
+
+		if(JammyJam.game.awakeTimeManager.getCurrentGameTime().compareTo(startSleepTime) >= 0) {
+			changeToSleepScene();
+		}
 	}
 	
 	void checkKeys() {
 		super.checkKeys();
-		
-		if (input.keyDown[Keys.UP]) {
-			JammyJam.game.player.y -= 1.0f;
-		} else 
-			if(input.keyDown[Keys.DOWN]) {
-			JammyJam.game.player.y += 1.0f;
-		}
-		if(input.keyDown[Keys.LEFT]) {
-			JammyJam.game.player.x -= 1.0f;
-		} else if (input.keyDown[Keys.RIGHT]) {
-			JammyJam.game.player.x += 1.0f;
+
+		if(input.keyDown[Keys.SPACE]) {
+			int oldMultiplier = JammyJam.game.awakeTimeManager.gameTimeMultiplier;
+			JammyJam.game.awakeTimeManager.gameTimeMultiplier = 10;
+			JammyJam.game.awakeTimeManager.tickForward();
+			JammyJam.game.awakeTimeManager.gameTimeMultiplier = oldMultiplier;
 		}
 		
-		if(input.keyDown[Keys.ESCAPE]) {
-			Scene.change("menu");
-		}
-		
+	}
+	
+	void changeToSleepScene() {
+		Scene.change("sleepPlayScene");
+		JammyJam.game.sleepTimeManager.setGameClock(startSleepTime);
 	}
 
 	public void render() {
 		super.render();
-
-		draw(Assets.textures.get("sprites"), (int)JammyJam.game.player.x,(int)JammyJam.game.player.y,64,0,32,32);
+		
+		drawFont(0, JammyJam.GAME_WIDTH / 2, JammyJam.GAME_HEIGHT - 20, JammyJam.game.awakeTimeManager.getGameTimeString() + " (Awake)", true, 3f);
 	}
 
 	@Override
