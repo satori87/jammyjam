@@ -26,7 +26,6 @@ public class MapData implements Serializable {
 		for (int x = 0; x < Shared.MAP_WIDTH; x++) {
 			for (int y = 0; y < Shared.MAP_WIDTH; y++) {
 				tile[x][y] = new Tile(x, y);
-				tile[x][y].tile[0] = Util.randInt(1, 20);
 			}
 		}
 	}

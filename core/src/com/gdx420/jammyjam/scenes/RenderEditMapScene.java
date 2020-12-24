@@ -61,7 +61,7 @@ public class RenderEditMapScene extends Scene {
 	}
 
 	public MapData map() {
-		return Realm.map();
+		return Realm.mapData[Realm.curMap];
 	}
 
 

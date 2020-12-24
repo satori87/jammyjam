@@ -303,10 +303,6 @@ public class LiveMapScene extends Scene {
 		*/
 	}
 
-	public MapData map() {
-		return Realm.map();
-	}
-
 	void processMidLayer() {
 		int i = 3;
 		int aa = 0;
@@ -399,7 +395,7 @@ public class LiveMapScene extends Scene {
 				mx = x;
 				my = y;
 				if (inSight(mx, my) && MapData.inBounds(mx, my)) {
-					t = map().tile[mx][my];
+					t = Realm.mapData[Realm.curMap].tile[mx][my];
 					if (t.tile[i] > 0) {
 						dt = new DrawTask(i, t.set[i], t.tile[i], x * 32 + t.shiftX[i], y * 32 + t.shiftY[i]);
 						layerList.get(32 + y * 32 + t.shiftY[i]).add(dt);
@@ -427,7 +423,7 @@ public class LiveMapScene extends Scene {
 		DrawTask dt = null;
 		for (int y = 0; y < Shared.MAP_WIDTH; y++) {
 			for (int x = 0; x < Shared.MAP_WIDTH; x++) {
-				t = map().tile[x][y];
+				t = Realm.mapData[Realm.curMap].tile[x][y];
 				if (i < 7) {
 					if (t.tile[i] > 0) {
 						dt = new DrawTask(i, t.set[i], t.tile[i], x * 32 + t.shiftX[i], y * 32 + t.shiftY[i]);

@@ -9,6 +9,7 @@ public class Assets extends BaseAssets {
 		preloadAllPNGFromDir("assets");
 		preloadAllPNGFromDir("assets/tiles");
 		preloadAllPNGFromDir("assets/editor");
+		preloadAllPNGFromDir("assets/sprites");
 		
 		
 	}

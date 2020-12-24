@@ -13,6 +13,8 @@ public class Realm extends BaseRealm {
 	
 	public static int curMap = 0;
 	
+	public Map map;
+	
 	public Realm(Assets assets) {
 		super(assets);
 		realm = this;
@@ -23,11 +25,6 @@ public class Realm extends BaseRealm {
 			//mapData[i] = new MapData();
 		}
 	}
-
-	public static MapData map() {
-		return mapData[curMap];
-	}
-
 	
 	@Override
 	public void update() {
@@ -47,10 +44,13 @@ public class Realm extends BaseRealm {
 	public static void loadMap(int i) {
 		try {
 			mapData[i] = (MapData) Util.importJSON("maps/map" + i + ".map", MapData.class);
+			if(mapData[i] != null) {
+				return;
+			}
 		} catch (Exception e) {
-			Log.error(e);
-			mapData[i] = new MapData();
+			Log.error(e);			
 		}
+		mapData[i] = new MapData();
 	}
 	
 	public static MapData getNeighbor(int m, int d) {
