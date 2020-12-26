@@ -3,6 +3,7 @@ package com.gdx420.jammyjam.scenes;
 import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.bg.bearplane.engine.DrawTask;
+import com.bg.bearplane.gui.Field;
 import com.bg.bearplane.gui.Label;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
@@ -40,11 +41,10 @@ public class RenderEditMapScene extends Scene {
 	public int scrollX = 0;
 	public int scrollY = 0;
 	public Label lblTileSet;
-	Label lblName;
 	int curSet = 0;
 	int[] recentTiles = new int[12];
 	int[] recentSets = new int[12];
-
+	Label lblName;
 	ArrayList<DrawTask> drawList = new ArrayList<DrawTask>();
 
 

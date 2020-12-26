@@ -21,6 +21,8 @@ public class MapData implements Serializable {
 	int[] corner = new int[4];
 	
 	public int exit[] = new int[4];
+	
+	public String name = "Unnamed map";
 
 	public MapData() {
 		for (int x = 0; x < Shared.MAP_WIDTH; x++) {

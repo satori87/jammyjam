@@ -36,6 +36,9 @@ public class EditMapScene extends RenderEditMapScene {
 	int lastWarpY = 0;
 	int lastWarpMap = 0;
 
+	
+	Field mapName;
+	
 	void startWarp() {
 		int i = 0;
 		int s = 36;
@@ -120,6 +123,13 @@ public class EditMapScene extends RenderEditMapScene {
 		labels.put("tileset", lblTileSet);
 		lblName = new Label(this, "name", 276, 20, 2f, "", Color.WHITE, true);
 		labels.put("name", lblName);
+		
+
+		mapName = addField("mapName", 30,1, 210,650,400,true);
+		labels.put("mapnamelbl", new Label(this, "mapnamelbl", 100,650,1f,"Map Name:" , Color.WHITE, true));
+		addButton("205", 530,690,96,32,"Rename");
+		fields.put("mapName", mapName);
+		
 		setupAttPanels();
 
 	}
@@ -146,12 +156,7 @@ public class EditMapScene extends RenderEditMapScene {
 			}
 
 			mapList = new ListBox(this, "maplist", 1104, 35, 256, 530);
-			mapList.sel = 0;
-			for (int i = 0; i < Shared.NUM_MAPS; i++) {
-				if (Realm.mapData[i] != null) {
-					// mapList.list.put(i + ": " + Realm.mapData[i].options.name);
-				}
-			}
+			updateMapList();
 			mapList.sel = Realm.curMap;
 			mapList.visible = false;
 			listBoxes.put("maplist", mapList);
@@ -164,6 +169,17 @@ public class EditMapScene extends RenderEditMapScene {
 			Log.error(e);
 		}
 	}
+	
+	void updateMapList() {
+		mapList.list.clear();
+		mapList.sel = 0;
+		for (int i = 0; i < Shared.NUM_MAPS; i++) {
+			if (Realm.mapData[i] != null) {
+				mapList.list.add(i + ": " + Realm.mapData[i].name);
+			}
+		}
+		mapList.sel = Realm.curMap;
+	}
 
 	void setupAttPanels() {
 		startWarp();
@@ -172,17 +188,11 @@ public class EditMapScene extends RenderEditMapScene {
 	@Override
 	public void listChanged(String id, int sel) {
 		switch (id) {
-		case "0": // tileset
+		case "setlist": // tileset
 			break;
-		case "1": // map
+		case "maplist": // map
 			attData[0] = sel;
 			lastWarpMap = sel;
-			break;
-		case "2": // monster
-			// attData[0] = sel;
-			// lastSpawnType = sel;
-			break;
-		case "3": // fx
 			break;
 		}
 	}
@@ -253,8 +263,9 @@ public class EditMapScene extends RenderEditMapScene {
 		case 204:
 			// discard();
 			break;
-		case 205: // commit
-			// commit();
+		case 205: // update name
+			map().name = mapName.text;
+			updateMapList();
 			break;
 
 		}
@@ -398,6 +409,7 @@ public class EditMapScene extends RenderEditMapScene {
 			if(md != null) {
 				Realm.mapData[m] = md;
 			}
+			updateMapList();
 			
 		} catch (Exception e) {
 			Log.error(e);
@@ -445,8 +457,7 @@ public class EditMapScene extends RenderEditMapScene {
 		switch (att) {
 
 		case 3: // warp
-			lblWarpMap.text = "Map " + attData[0] + ": ";
-			// + Realm.mapData[attData[0]].options.name;
+			lblWarpMap.text = "Map " + attData[0] + ": " + Realm.mapData[attData[0]].name;
 			lblWarpX.text = "X: " + attData[1] + "";
 			lblWarpY.text = "Y: " + attData[2] + "";
 			break;
@@ -466,7 +477,7 @@ public class EditMapScene extends RenderEditMapScene {
 		curSet = setList.sel;
 		int sx = input.mouseX;
 		int sy = input.mouseY;
-		// lblName.text = map().options.name;
+		lblName.text = map().name;
 		int mx = ((sx - 20) / 32);
 		int my = ((sy - 40) / 32);
 		mapMouseX = sx - 20;
