@@ -20,7 +20,7 @@ public class SleepPlayScene extends PlayScene {
 	}
 
 	public void update() {
-		
+		super.update();
 		checkKeys();
 		
 		if(JammyJam.game.sleepTimeManager.getCurrentGameTime().compareTo(startSleepTime) < 0 
@@ -31,7 +31,7 @@ public class SleepPlayScene extends PlayScene {
 	
 	void checkKeys() {
 		super.checkKeys();
-						
+								
 		if(input.keyDown[Keys.SPACE]) {
 			int oldMultiplier = JammyJam.game.sleepTimeManager.gameTimeMultiplier;
 			JammyJam.game.sleepTimeManager.gameTimeMultiplier = 10;

@@ -18,6 +18,7 @@ public class AwakePlayScene extends PlayScene {
 	}
 
 	public void update() {
+		super.update();
 		checkKeys();
 
 		if(JammyJam.game.awakeTimeManager.getCurrentGameTime().compareTo(startSleepTime) >= 0) {

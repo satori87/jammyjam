@@ -1,5 +1,8 @@
 package com.gdx420.jammyjam.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
@@ -28,6 +31,7 @@ public class JammyJam implements Bearable {
 	public Realm realm = new Realm(assets);
 	public Config config = new Config();
 	public Player player = new Player(300, 200);
+	public List<NonPlayableCharacter> npcList = new ArrayList<NonPlayableCharacter>();
 
 	// timing
 	long tick = 0;
