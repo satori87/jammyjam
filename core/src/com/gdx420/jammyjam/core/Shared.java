@@ -8,6 +8,19 @@ public class Shared {
 	public static final int GAME_HEIGHT = 768;
 	public static final int NUM_MAPS = 30;
 
+	public static enum Attributes {
+		NO_ATTRIBUTE,
+		WALL,
+		MONSTER,
+		WARP,
+		DOOR,
+		EFFECT,
+		LIGHT,
+		NPC_SPAWN,
+		STORYPOINT,
+		ITEM		
+	}
+
 	public static String[] layerName = new String[] { "Ground", "BG1", "BG2", "Mid", "FG1", "FG2", "Ceiling", "Wall",
 			"Shadow", "Att" };
 	public static String[] panelName = new String[] { "Load", "Save" };

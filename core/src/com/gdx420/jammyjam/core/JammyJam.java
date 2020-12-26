@@ -3,6 +3,7 @@ package com.gdx420.jammyjam.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g3d.Attribute;
 import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
@@ -60,6 +61,8 @@ public class JammyJam implements Bearable {
 		awakePlayScene = new AwakePlayScene();
 		sleepPlayScene = new SleepPlayScene();
 		
+		// TODO DELETE
+		npcList.add(new NonPlayableCharacter());				
 	}
 
 	@Override
@@ -126,6 +129,23 @@ public class JammyJam implements Bearable {
 		assets.dispose();
 	}
 
+	public void spawnNPCs(int currentMap) {
+		
+		for (NonPlayableCharacter npc : npcList) {
+			npc.onScreen = false;
+		}
+		
+		for(int x = 0; x < Shared.MAP_WIDTH; x++)
+			for(int y = 0; y < Shared.MAP_HEIGHT; y++)
+				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.NPC_SPAWN.ordinal() 
+					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.NPC_SPAWN.ordinal())
+				{
+					npcList.get(0).onScreen = true;
+					npcList.get(0).x = x * 32;
+					npcList.get(0).y = y * 32;
+				}
+	}
+	
 	@Override
 	public int getGameWidth() {
 		return GAME_WIDTH;

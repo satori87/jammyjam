@@ -15,6 +15,7 @@ public class Realm extends BaseRealm {
 	public static MapData[] mapData = new MapData[Shared.NUM_MAPS];
 
 	public static int curMap = 0;
+	public static int loadedMapsCount = 0;
 
 	public Map map;
 
@@ -36,6 +37,7 @@ public class Realm extends BaseRealm {
 			f = Gdx.files.local("maps/map" + i + ".map");
 			if(f != null && f.exists()) {
 				loadMap(i);
+				loadedMapsCount++;
 			} else {
 				mapData[i] = new MapData();
 			}

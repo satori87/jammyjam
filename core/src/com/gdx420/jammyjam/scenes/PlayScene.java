@@ -10,6 +10,7 @@ import com.gdx420.jammyjam.core.MapData;
 import com.gdx420.jammyjam.core.NonPlayableCharacter;
 import com.gdx420.jammyjam.core.PlotEngine;
 import com.gdx420.jammyjam.core.Realm;
+import com.gdx420.jammyjam.core.Shared;
 import com.gdx420.jammyjam.core.Tile;
 
 public class PlayScene extends LiveMapScene {
@@ -17,18 +18,6 @@ public class PlayScene extends LiveMapScene {
 	LocalTime startSleepTime = LocalTime.of(22,  0);
 	LocalTime startAwakeTime = LocalTime.of(8,  0);
 	
-	enum Attributes {
-		NO_ATTRIBUTE,
-		WALL,
-		MONSTER,
-		WARP,
-		DOOR,
-		EFFECT,
-		LIGHT,
-		NPC_SPAWN,
-		STORYPOINT,
-		ITEM		
-	}
 	
 	public PlayScene() {
 
@@ -36,6 +25,7 @@ public class PlayScene extends LiveMapScene {
 
 	public void start() {
 		super.start();
+		JammyJam.game.spawnNPCs(Realm.curMap);
 		
 	}
 
@@ -48,8 +38,7 @@ public class PlayScene extends LiveMapScene {
 		}
 		if(currentTile != null) {
 			// on an item
-			if(currentTile.att[0] == Attributes.ITEM.ordinal() || currentTile.att[1] == Attributes.ITEM.ordinal()){
-				System.out.println("obtain item");
+			if(currentTile.att[0] == Shared.Attributes.ITEM.ordinal() || currentTile.att[1] == Shared.Attributes.ITEM.ordinal()){
 				PlotEngine.obtainItem(currentTile);
 			}
 			
@@ -57,8 +46,7 @@ public class PlayScene extends LiveMapScene {
 			for(int dir = 0; dir < 8; dir++) {
 				Tile neighbor = Realm.mapData[Realm.curMap].getNeighbor(playerTilePositionX, playerTilePositionY, dir);
 				if(neighbor != null) {			
-					if(neighbor.att[0] == Attributes.STORYPOINT.ordinal() || neighbor.att[1] == Attributes.STORYPOINT.ordinal()){
-						System.out.println("trigger plot");
+					if(neighbor.att[0] == Shared.Attributes.STORYPOINT.ordinal() || neighbor.att[1] == Shared.Attributes.STORYPOINT.ordinal()){
 						PlotEngine.triggerPlot(neighbor);
 					}
 				}
@@ -70,7 +58,8 @@ public class PlayScene extends LiveMapScene {
 		checkVerticalMovement();
 		checkHorizontalMovement();
 		
-		
+		checkMapChange();
+				
 		if(input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
 		}		
@@ -85,7 +74,7 @@ public class PlayScene extends LiveMapScene {
 			if(input.keyDown[Keys.DOWN]) {
 			JammyJam.game.player.y += 1.0f;
 		}
-		if(checkWallCollision())
+		if(checkCollision())
 			JammyJam.game.player.y = oldY;		
 	}
 	
@@ -97,27 +86,82 @@ public class PlayScene extends LiveMapScene {
 		} else if (input.keyDown[Keys.RIGHT]) {
 			JammyJam.game.player.x += 1.0f;
 		}
-		if(checkWallCollision())
+		if(checkCollision())
 			JammyJam.game.player.x = oldX;
 	}
 	
-	boolean checkWallCollision() {
+	boolean checkCollision() {
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
-		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;		
+		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
+		
+		return (checkWallCollision(playerTilePositionX, playerTilePositionY) || checkNpcCollision(playerTilePositionX, playerTilePositionY));
+	}
+	
+	boolean checkWallCollision(int playerTilePositionX, int playerTilePositionY) {		
 		Tile currentTile = null;
 		if(MapData.inBounds(playerTilePositionX, playerTilePositionY)) {
 			currentTile = Realm.mapData[Realm.curMap].tile[playerTilePositionX][playerTilePositionY];
 		}
-		if(currentTile != null && currentTile.att[0] == Attributes.WALL.ordinal() || currentTile.att[1] == Attributes.WALL.ordinal()){
+		if(currentTile != null 
+				&& (currentTile.att[0] == Shared.Attributes.WALL.ordinal() || currentTile.att[1] == Shared.Attributes.WALL.ordinal())){
 			return true;
 		}
 		return false;
+	} 
+	
+	boolean checkNpcCollision(int playerTilePositionX, int playerTilePositionY) {
+		boolean result = false;
+		for (NonPlayableCharacter npc : JammyJam.game.npcList) {
+			if(npc.onScreen) {
+				int npcTilePositionX = (npc.x + 16) / 32;
+				int npcTilePositionY = (npc.y + 16) / 32;
+				if(npcTilePositionX == playerTilePositionX && npcTilePositionY == playerTilePositionY) {
+					PlotEngine.npcInteraction(npc);
+					result = true;
+				}
+			}
+		}
+		return result;
+	}
+	
+	void checkMapChange() {
+		
+		if(JammyJam.game.player.x < 0) {
+			changeMap(0);
+			JammyJam.game.player.x = Shared.GAME_WIDTH - 5;
+		}
+		if(JammyJam.game.player.x > Shared.GAME_WIDTH) {
+			changeMap(2);
+			JammyJam.game.player.x = 5;
+		}
+		if(JammyJam.game.player.y < 0) {
+			changeMap(1);			
+			JammyJam.game.player.y = Shared.GAME_HEIGHT - 5;
+		}
+		if(JammyJam.game.player.y > Shared.GAME_HEIGHT) {
+			changeMap(3);
+			JammyJam.game.player.y = 5;
+		}
+	}
+	
+	void changeMap(int direction) {
+		Realm.curMap++;
+		if(Realm.curMap >= Realm.loadedMapsCount)
+			Realm.curMap = 0;
+		super.processed = false; // forces redraw
+		
+		JammyJam.game.spawnNPCs(Realm.curMap);
 	}
 
 	public void render() {
 		super.render();
+		
+		for (NonPlayableCharacter npc : JammyJam.game.npcList) {
+			if(npc.onScreen)
+				draw(Assets.textures.get("sprites"), npc.x,npc.y,128,0,32,32);
+		}
 
-		draw(Assets.textures.get("sprites"), (int)JammyJam.game.player.x,(int)JammyJam.game.player.y,64,0,32,32);
+		draw(Assets.textures.get("sprites"), JammyJam.game.player.x,JammyJam.game.player.y,64,0,32,32);
 	}
 
 	@Override

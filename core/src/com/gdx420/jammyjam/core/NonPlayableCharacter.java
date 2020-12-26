@@ -2,7 +2,7 @@ package com.gdx420.jammyjam.core;
 
 public class NonPlayableCharacter extends Character {
 	
-	
+	public boolean onScreen = false;
 
 	public boolean checkCollision(Character character, int radius) {
 		float xVector = character.x - x;
