@@ -36,9 +36,19 @@ public class EditMapScene extends RenderEditMapScene {
 	int lastWarpY = 0;
 	int lastWarpMap = 0;
 
+	Frame frmNPC = null;
+	Field fieldNPC;
 	
+	Frame frmStory = null;
+	Field fieldStory;
+	
+	Frame frmItem = null;
+	Field fieldItem;
+	
+	
+
 	Field mapName;
-	
+
 	void startWarp() {
 		int i = 0;
 		int s = 36;
@@ -71,7 +81,30 @@ public class EditMapScene extends RenderEditMapScene {
 		for (Button b : frmWarp.buttons.values()) {
 			b.interval = 10;
 		}
+	}
 
+	void startNPC() {		
+		frmNPC = new Frame(this, "npcf", 584, 284, 384, 262, false, false, true);
+		frames.put("npcf", frmNPC);
+		frmNPC.visible = false;
+		frmNPC.labels.put("npctile", new Label(this, "npc0", 776, 310, 2f, "npc Tile", Color.WHITE, true));
+		fieldNPC = frmNPC.addField("npc", 15, 2, 630, 360, 300);
+	}
+	
+	void startStory() {		
+		frmStory = new Frame(this, "Storyf", 584, 284, 384, 262, false, false, true);
+		frames.put("Storyf", frmStory);
+		frmStory.visible = false;
+		frmStory.labels.put("Storytile", new Label(this, "Story0", 776, 310, 2f, "Story Tile", Color.WHITE, true));
+		fieldStory = frmStory.addField("Story", 15, 3, 630, 360, 300);
+	}
+	
+	void startItem() {		
+		frmItem = new Frame(this, "Itemf", 584, 284, 384, 262, false, false, true);
+		frames.put("Itemf", frmItem);
+		frmItem.visible = false;
+		frmItem.labels.put("Itemtile", new Label(this, "Item0", 776, 310, 2f, "Item Tile", Color.WHITE, true));
+		fieldItem = frmItem.addField("Item", 15, 4, 630, 360, 300);
 	}
 
 	public void start() {
@@ -123,13 +156,12 @@ public class EditMapScene extends RenderEditMapScene {
 		labels.put("tileset", lblTileSet);
 		lblName = new Label(this, "name", 276, 20, 2f, "", Color.WHITE, true);
 		labels.put("name", lblName);
-		
 
-		mapName = addField("mapName", 30,1, 210,650,400,true);
-		labels.put("mapnamelbl", new Label(this, "mapnamelbl", 100,650,1f,"Map Name:" , Color.WHITE, true));
-		addButton("205", 530,690,96,32,"Rename");
+		mapName = addField("mapName", 30, 1, 210, 650, 400, true);
+		labels.put("mapnamelbl", new Label(this, "mapnamelbl", 100, 650, 1f, "Map Name:", Color.WHITE, true));
+		addButton("205", 530, 690, 96, 32, "Rename");
 		fields.put("mapName", mapName);
-		
+
 		setupAttPanels();
 
 	}
@@ -169,7 +201,7 @@ public class EditMapScene extends RenderEditMapScene {
 			Log.error(e);
 		}
 	}
-	
+
 	void updateMapList() {
 		mapList.list.clear();
 		mapList.sel = 0;
@@ -183,6 +215,9 @@ public class EditMapScene extends RenderEditMapScene {
 
 	void setupAttPanels() {
 		startWarp();
+		startNPC();
+		startStory();
+		startItem();
 	}
 
 	@Override
@@ -252,7 +287,7 @@ public class EditMapScene extends RenderEditMapScene {
 			break;
 		case 201:
 			exportMap();
-			//importMap();
+			// importMap();
 			break;
 		case 202:
 			// export();
@@ -402,15 +437,15 @@ public class EditMapScene extends RenderEditMapScene {
 
 	void importMap() {
 		try {
-			
+
 			int m = Integer.parseInt(fields.get("mapnum").text);
 			Realm.curMap = m;
 			MapData md = (MapData) Util.importJSON("maps/map" + m + ".map", MapData.class);
-			if(md != null) {
+			if (md != null) {
 				Realm.mapData[m] = md;
 			}
 			updateMapList();
-			
+
 		} catch (Exception e) {
 			Log.error(e);
 		}
@@ -418,14 +453,14 @@ public class EditMapScene extends RenderEditMapScene {
 
 	void exportMap() {
 		try {
-			int m = Integer.parseInt(fields.get("mapnum").text);			
-			Util.exportJSON("maps/map"+ m + ".map", map());
+			int m = Integer.parseInt(fields.get("mapnum").text);
+			Util.exportJSON("maps/map" + m + ".map", map());
 			importMap();
 		} catch (Exception e) {
 			Log.error(e);
 		}
 	}
-	
+
 	void checkKeys() {
 		for (Integer a : Scene.input.keyPress) {
 			switch (a) {
@@ -616,7 +651,15 @@ public class EditMapScene extends RenderEditMapScene {
 
 										break;
 									case 6: // light
-
+										break;
+									case 7: // npc
+										fieldNPC.text = map().tile[msx][msy].attStr[i];
+										break;
+									case 8: // story
+										fieldStory.text = map().tile[msx][msy].attStr[i];
+										break;
+									case 9: // item
+										fieldItem.text = map().tile[msx][msy].attStr[i];
 										break;
 									}
 									switchAtt(att);
@@ -626,6 +669,17 @@ public class EditMapScene extends RenderEditMapScene {
 									map().tile[msx][msy].att[i] = att;
 									for (int c = 0; c < 10; c++) {
 										map().tile[msx][msy].attData[i][c] = attData[c];
+									}
+									switch(att) {
+									case 7:
+										map().tile[msx][msy].attStr[i] = fieldNPC.text;
+										break;
+									case 8:
+										map().tile[msx][msy].attStr[i] = fieldStory.text;
+										break;
+									case 9:
+										map().tile[msx][msy].attStr[i] = fieldItem.text;
+										break;
 									}
 								}
 							}
@@ -957,7 +1011,17 @@ public class EditMapScene extends RenderEditMapScene {
 
 			break;
 		case 5: // fx
-
+			break;
+		case 6: // light
+			break;
+		case 7: // NPC
+			frmNPC.visible = true;
+			break;
+		case 8: //story
+			frmStory.visible = true;
+			break;
+		case 9:
+			frmItem.visible = true;
 			break;
 		}
 	}
@@ -974,6 +1038,9 @@ public class EditMapScene extends RenderEditMapScene {
 		mapList.visible = false;
 		setList.visible = false;
 		frmWarp.visible = false;
+		frmNPC.visible = false;
+		frmStory.visible = false;
+		frmItem.visible = false;
 	}
 
 	public void checkBox(int id) {

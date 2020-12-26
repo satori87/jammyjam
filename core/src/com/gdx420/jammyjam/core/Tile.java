@@ -13,7 +13,7 @@ public class Tile implements Serializable {
 	public int[] att = new int[2];
 	public int[][] attData = new int[2][10];
 	public boolean[] wall = new boolean[4];
-
+	public String[] attStr = new String[2];
 	public Tile() {
 
 	}

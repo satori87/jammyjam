@@ -92,9 +92,13 @@ public class Frame extends Component {
 
 	public Field addField(String id, int max, int tab, int x, int y, int width, boolean centered,
 			Frame frame) {
-		Field f = new Field((Scene)this, id, max, tab, x, y, width, centered, frame);
+		Scene s = scene;
+		if(this instanceof Scene) {
+			s = (Scene) this;
+		}
+		Field f = new Field(s, id, max, tab, x, y, width, centered, frame);
 		fields.put(id,  f);
-		((Scene)this).registerTab(f);
+		s.registerTab(f);
 		return f;
 	}
 
