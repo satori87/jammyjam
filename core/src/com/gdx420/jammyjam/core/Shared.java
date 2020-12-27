@@ -2,11 +2,12 @@ package com.gdx420.jammyjam.core;
 
 public class Shared {
 
-	public static final int MAP_WIDTH = 36;
-	public static final int MAP_HEIGHT = 36;
+	public static final int MAP_WIDTH = 48;
 	public static final int GAME_WIDTH = 1366;
 	public static final int GAME_HEIGHT = 768;
-	public static final int NUM_MAPS = 30;
+	public static final int NUM_MAPS = 100;
+	public static final int MOVE_TIME = 500;
+	public static final int BOUNDING_BOX = 5;
 
 	public static enum Attributes {
 		NO_ATTRIBUTE,

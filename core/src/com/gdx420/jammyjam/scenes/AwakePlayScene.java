@@ -1,6 +1,7 @@
 package com.gdx420.jammyjam.scenes;
 
 import com.badlogic.gdx.Input.Keys;
+import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.JammyJam;
 import java.time.LocalTime;
@@ -11,9 +12,9 @@ public class AwakePlayScene extends PlayScene {
 
 	}
 
+	
 	public void start() {
 		super.start();
-		
 		JammyJam.game.awakeTimeManager.setGameClock(LocalTime.of(8, 0));
 	}
 
@@ -45,7 +46,6 @@ public class AwakePlayScene extends PlayScene {
 
 	public void render() {
 		super.render();
-		
 		drawFont(0, JammyJam.GAME_WIDTH / 2, JammyJam.GAME_HEIGHT - 20, JammyJam.game.awakeTimeManager.getGameTimeString() + " (Awake)", true, 3f);
 	}
 

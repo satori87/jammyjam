@@ -46,7 +46,6 @@ public class JammyJam implements Bearable {
 	long tick = 0;
 	public GameTimeManager awakeTimeManager = new GameTimeManager();
 	public GameTimeManager sleepTimeManager = new GameTimeManager();
-	
 
 	// state variables
 	public boolean playing = false;
@@ -60,15 +59,16 @@ public class JammyJam implements Bearable {
 
 	public JammyJam() {
 		game = this;
-		//config = (Config)Bearplane.loadConfig(CONFIG_FILE, config); this broke somehow
+		// config = (Config)Bearplane.loadConfig(CONFIG_FILE, config); this broke
+		// somehow
 	}
 
 	public void create() {
-		Log.info("Jammy Jam Initializing");	
+		Log.info("Jammy Jam Initializing");
 		editMapScene = new EditMapScene();
 		awakePlayScene = new AwakePlayScene();
 		sleepPlayScene = new SleepPlayScene();
-							
+
 	}
 
 	@Override
@@ -97,9 +97,9 @@ public class JammyJam implements Bearable {
 	}
 
 	void secondTimer() {
-		if(Scene.scene instanceof AwakePlayScene) {
+		if (Scene.scene instanceof AwakePlayScene) {
 			awakeTimeManager.tickForward();
-		} else if(Scene.scene instanceof SleepPlayScene) {
+		} else if (Scene.scene instanceof SleepPlayScene) {
 			sleepTimeManager.tickForward();
 		}
 	}
@@ -107,8 +107,9 @@ public class JammyJam implements Bearable {
 	@Override
 	public void update() {
 		try {
-			//shouldnt actually need to do a whole lot here :)
-			//realm and scene have their updates called for them, there's timers, and most logic is more appropriately done in Realm or Map
+			// shouldnt actually need to do a whole lot here :)
+			// realm and scene have their updates called for them, there's timers, and most
+			// logic is more appropriately done in Realm or Map
 		} catch (Exception e) {
 			Log.error(e);
 		}
@@ -121,41 +122,42 @@ public class JammyJam implements Bearable {
 		Scene.addScene("options", optionsScene);
 		Scene.addScene("edit", editMapScene);
 		Scene.addScene("awakePlayScene", awakePlayScene);
-		Scene.addScene("sleepPlayScene",  sleepPlayScene);
+		Scene.addScene("sleepPlayScene", sleepPlayScene);
 	}
 
 	@Override
 	public void loaded() {
 		realm.load();
 		Scene.change("menu");
-		
+
 		loadItems();
 		spawnItems(Realm.curMap);
-		
-		loadNPCs();		
-		spawnNPCs(Realm.curMap);		
-		
+
+		loadNPCs();
+		spawnNPCs(Realm.curMap);
+
 	}
-	
+
 	public void loadNPCs() {
 		Path dir = Paths.get(new File("").getAbsolutePath() + "/scripts/NPCs/");
-		
+
 		DirectoryStream<Path> stream;
 		try {
 			stream = Files.newDirectoryStream(dir);
-			for (Path file: stream) {
-		        System.out.println("Loading NPC: " + file.getFileName());
-				npcList.add((NonPlayableCharacter) Util.importJSON("/scripts/NPCs/" + file.getFileName(), NonPlayableCharacter.class));
-		    }
+			for (Path file : stream) {
+				System.out.println("Loading NPC: " + file.getFileName());
+				npcList.add((NonPlayableCharacter) Util.importJSON("/scripts/NPCs/" + file.getFileName(),
+						NonPlayableCharacter.class));
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}				
+		}
 	}
-	
+
 	public void loadItems() {
 		Path dir = Paths.get(new File("").getAbsolutePath() + "/scripts/Items/");
-		
+
 		DirectoryStream<Path> stream;
 		try {
 			stream = Files.newDirectoryStream(dir);
@@ -175,16 +177,15 @@ public class JammyJam implements Bearable {
 	}
 
 	public void spawnNPCs(int currentMap) {
-		
+
 		for (NonPlayableCharacter npc : npcList) {
 			npc.onScreen = false;
 		}
-		
-		for(int x = 0; x < Shared.MAP_WIDTH; x++)
-			for(int y = 0; y < Shared.MAP_HEIGHT; y++)
-				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.NPC_SPAWN.ordinal() 
-					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.NPC_SPAWN.ordinal())
-				{
+
+		for (int x = 0; x < Shared.MAP_WIDTH; x++)
+			for (int y = 0; y < Shared.MAP_WIDTH; y++)
+				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.NPC_SPAWN.ordinal()
+						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.NPC_SPAWN.ordinal()) {
 					npcList.get(0).onScreen = true;
 					npcList.get(0).x = x * 32;
 					npcList.get(0).y = y * 32;
@@ -192,13 +193,23 @@ public class JammyJam implements Bearable {
 	}
 
 	public void spawnItems(int currentMap) {
-		
+
 		for (Item item : loadedItems) {
 			item.onScreen = false;
 		}
+
+		for (int x = 0; x < Shared.MAP_WIDTH; x++)
+			for (int y = 0; y < Shared.MAP_WIDTH; y++)
+				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal()
+						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal()) {
+					loadedItems.get(0).onScreen = true;
+					loadedItems.get(0).x = x * 32;
+					loadedItems.get(0).y = y * 32;
+				}
+				
 		
 		for(int x = 0; x < Shared.MAP_WIDTH; x++)
-			for(int y = 0; y < Shared.MAP_HEIGHT; y++)
+			for(int y = 0; y < Shared.MAP_WIDTH; y++)
 				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal() 
 					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal())
 				{
@@ -214,7 +225,7 @@ public class JammyJam implements Bearable {
 					}				
 				}
 	}
-	
+
 	@Override
 	public int getGameWidth() {
 		return GAME_WIDTH;
@@ -273,34 +284,33 @@ public class JammyJam implements Bearable {
 	public boolean isRelease() {
 		return IS_RELEASE;
 	}
-	
+
 	public Realm getRealm() {
 		return realm;
 	}
 
 	@Override
 	public void resume() {
-		
+
 	}
 
 	@Override
 	public void hide() {
-		
+
 	}
 
 	@Override
 	public void show() {
-		
+
 	}
 
 	@Override
 	public void pause() {
 
-		
 	}
-	
+
 	public void setTick(long tick) {
 		this.tick = tick;
 	}
-	
+
 }
