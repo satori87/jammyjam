@@ -161,10 +161,10 @@ public class JammyJam implements Bearable {
 		DirectoryStream<Path> stream;
 		try {
 			stream = Files.newDirectoryStream(dir);
-			for (Path file : stream) {
-				System.out.println("Item NPC: " + file.getFileName());
-				loadedItems.add((Item) Util.importJSON("scripts/Items/" + file.getFileName(), Item.class));
-			}
+			for (Path file: stream) {
+		        System.out.println("Item Item: " + file.getFileName());
+		        loadedItems.add((Item) Util.importJSON("scripts/Items/" + file.getFileName(), Item.class));
+		    }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -218,11 +218,9 @@ public class JammyJam implements Bearable {
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
 							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
-							System.out.println(Realm.mapData[currentMap].tile[x][y].attStr[0]);
-							System.out.println(Realm.mapData[currentMap].tile[x][y].attStr[1]);
 							item.onScreen = true;
-							loadedItems.get(0).x = x * 32;
-							loadedItems.get(0).y = y * 32;
+							item.x = x * 32;
+							item.y = y * 32;
 						}
 					}				
 				}

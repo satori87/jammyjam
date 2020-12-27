@@ -44,9 +44,13 @@ public class PlayScene extends LiveMapScene {
 		}
 		if (currentTile != null) {
 			// on an item
-			if (currentTile.att[0] == Shared.Attributes.ITEM.ordinal()
-					|| currentTile.att[1] == Shared.Attributes.ITEM.ordinal()) {
-				PlotEngine.obtainItem(currentTile);
+			if(currentTile.att[0] == Shared.Attributes.ITEM.ordinal() || currentTile.att[1] == Shared.Attributes.ITEM.ordinal()){
+				for(Item item : JammyJam.game.loadedItems) {
+					if((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0) 
+							|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(item.name) == 0)) {
+						PlotEngine.obtainItem(item);
+					}
+				}
 			}
 
 			// next to a plot point
