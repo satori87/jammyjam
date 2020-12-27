@@ -53,7 +53,7 @@ public class SleepPlayScene extends PlayScene {
 
 	@Override
 	public void buttonPressed(String id) {		
-		
+		super.buttonPressed(id);
 	}
 
 	@Override

@@ -11,16 +11,7 @@ public class Shared {
 	public static final int NUM_ITEMS_PER_DIALOG = 10;
 
 	public static enum Attributes {
-		NO_ATTRIBUTE,
-		WALL,
-		MONSTER,
-		WARP,
-		DOOR,
-		EFFECT,
-		LIGHT,
-		NPC_SPAWN,
-		STORYPOINT,
-		ITEM		
+		NO_ATTRIBUTE, WALL, MONSTER, WARP, DOOR, EFFECT, LIGHT, NPC_SPAWN, STORYPOINT, ITEM
 	}
 
 	public static String[] layerName = new String[] { "Ground", "BG1", "BG2", "Mid", "FG1", "FG2", "Ceiling", "Wall",
@@ -38,5 +29,7 @@ public class Shared {
 			"Outdoor_Ground_Water_1", "Outdoor_Lights", "Outdoor_Path_1", "Outdoor_Path_2", "Outdoor_Path_3",
 			"Outdoor_Path_4", "Outdoor_Trees_1", "Outdoor_Trees_2", "Outdoor_Trees_3", "Outdoor_Vegetation_1",
 			"Outdoor_Vegetation_2", "Outdoor_Walls", "Roof_1", "Wall_Doors", "Wall_Outdoor_Decor",
-			"Wall_Outdoor_Fences_Decor", "Wall_Outdoor_Windows","cars_bear","cars_crane","cars_gold", "cars_police", "cars_silver", "cars_white", "road_markings_white",  "road_markings_yellow", "road_signs_de", "street_dark", "street_light", "street_misc"};
+			"Wall_Outdoor_Fences_Decor", "Wall_Outdoor_Windows", "cars_bear", "cars_crane", "cars_gold", "cars_police",
+			"cars_silver", "cars_white", "road_markings_white", "road_markings_yellow", "road_signs_de", "street_dark",
+			"street_light", "street_misc", "Outdoor_Trees_4", "dungeonex", "markings" };
 }

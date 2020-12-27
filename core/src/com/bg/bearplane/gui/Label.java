@@ -11,6 +11,8 @@ public class Label extends Component {
 	public int blinkterval = 300;
 	public long blinkStamp = 0;
 	
+	public boolean useAbsDraw = false;
+	
 	public boolean wrap = false;
 	public int wrapw = 0;
 
@@ -37,14 +39,31 @@ public class Label extends Component {
 		if (blinking && blink) {
 			c = blinkCol;
 		}
-		if (wrap) {
-			int u = 0;
-			for (String b : Util.wrapText(2, wrapw, text)) {
-				scene.drawFont(0, x, y + u * 30, b, false, scale, Color.WHITE);
-				u++;
+		
+		if(useAbsDraw) {
+			
+			if (wrap) {
+				int u = 0;
+				for (String b : Util.wrapText(2, wrapw, text)) {
+					scene.drawFontAbs(0, x, y + u * 30, b, false, scale, Color.WHITE);
+					u++;
+				}
+			} else {
+				scene.drawFontAbs(0, x, y, text, centered, scale, c);
 			}
+			
 		} else {
-			scene.drawFont(0, x, y, text, centered, scale, c);
+		
+			if (wrap) {
+				int u = 0;
+				for (String b : Util.wrapText(2, wrapw, text)) {
+					scene.drawFont(0, x, y + u * 30, b, false, scale, Color.WHITE);
+					u++;
+				}
+			} else {
+				scene.drawFont(0, x, y, text, centered, scale, c);
+			}
+		
 		}
 
 	}
