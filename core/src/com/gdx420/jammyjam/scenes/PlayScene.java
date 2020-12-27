@@ -97,9 +97,17 @@ public class PlayScene extends LiveMapScene {
 
 	void checkWarp() {
 		int x = (JammyJam.game.player.x + 16) / 32;
+		if(x >= Shared.MAP_WIDTH)
+			x = Shared.MAP_WIDTH - 1;
+		if(x < 0)
+			x = 0;
 		int y = (JammyJam.game.player.y + 16) / 32;
+		if(y >= Shared.MAP_WIDTH)
+			y = Shared.MAP_WIDTH - 1;
+		if(y < 0)
+			y = 0;
 		MapData data = Realm.mapData[Realm.curMap];
-		if (data.tile[x][y].att[0] == Shared.Attributes.WARP.ordinal()) {
+		if (data.tile[x][y] != null && data.tile[x][y].att[0] == Shared.Attributes.WARP.ordinal()) {
 			changeMap(data.tile[x][y].attData[0][0]);
 			JammyJam.game.player.x = data.tile[x][y].attData[0][1] * 32 - 16;
 			JammyJam.game.player.y = data.tile[x][y].attData[0][2] * 32 - 16;

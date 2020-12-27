@@ -182,7 +182,7 @@ public class JammyJam implements Bearable {
 		try {
 			stream = Files.newDirectoryStream(dir);
 			for (Path file: stream) {
-		        System.out.println("Loaded StoryPoint: " + file.getFileName());
+		        //System.out.println("Loaded StoryPoint: " + file.getFileName());
 		        storyPoints.add((StoryPoint) Util.importJSON("scripts/StoryPoints/" + file.getFileName(), StoryPoint.class));
 		    }
 		} catch (IOException e) {
