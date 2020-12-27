@@ -9,6 +9,8 @@ public class MapData implements Serializable {
 	private static final long serialVersionUID = -1260740057557047017L;
 	public int version = 0;
 	public Tile[][] tile = new Tile[Shared.MAP_WIDTH][Shared.MAP_WIDTH];
+	
+	public int[] exits = new int[4];
 
 	int mmx = 0;
 	int mmy = 0;

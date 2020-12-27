@@ -283,20 +283,19 @@ public class EditMapScene extends RenderEditMapScene {
 			break;
 		case 200:
 			importMap();
-			// change("mapOptions");
+
 			break;
 		case 201:
 			exportMap();
-			// importMap();
 			break;
 		case 202:
-			// export();
+
 			break;
 		case 203:
-			// test();
+
 			break;
 		case 204:
-			// discard();
+
 			break;
 		case 205: // update name
 			map().name = mapName.text;

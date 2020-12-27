@@ -8,7 +8,7 @@ public class PlotEngine {
 		if(!JammyJam.game.player.obtainedItems.contains(item)) {
 			JammyJam.game.player.obtainedItems.add(item);
 			System.out.println("Found " + item.name);
-			if(!item.text.isBlank())
+			if(!item.text.isEmpty())
 				System.out.println("It reads: " + item.text);
 		}
 	}

@@ -49,8 +49,8 @@ public abstract class Scene extends Frame {
 	public TreeMap<Integer, Focusable> focusList = new TreeMap<Integer, Focusable>();
 	Focusable focus;
 
-	//Lifecyle
-	
+	// Lifecyle
+
 	public static void init() {
 		try {
 			input = new InputHandler();
@@ -61,7 +61,7 @@ public abstract class Scene extends Frame {
 
 		}
 	}
-		
+
 	public static void updateScene() {
 		if (scene != null) {
 			if (!locked) {
@@ -86,7 +86,7 @@ public abstract class Scene extends Frame {
 		}
 		input.keyPress.clear();
 	}
-	
+
 	public void updateBase() {
 		try {
 			tick = System.currentTimeMillis();
@@ -123,7 +123,7 @@ public abstract class Scene extends Frame {
 	}
 
 	public abstract void update();
-	
+
 	public void renderBase() {
 		try {
 			// overload only in some scenes
@@ -154,7 +154,7 @@ public abstract class Scene extends Frame {
 		}
 		render();
 	}
-	
+
 	public abstract void render();
 
 	public static void renderScene() {
@@ -186,10 +186,11 @@ public abstract class Scene extends Frame {
 		}
 	}
 
-	//Scene management
-	
+	// Scene management
+
 	public static void change(String to) {
 		try {
+			moveCameraTo(gameWidth / 2, gameHeight / 2);
 			input.wasMouseJustClicked[0] = false;
 			Scene s = scenes.get(to);
 			if (s != null) {
@@ -251,8 +252,8 @@ public abstract class Scene extends Frame {
 		}
 	}
 
-	//Component management
-	
+	// Component management
+
 	public void msgBox(String s) {
 		msgBoxMsgs.add(s);
 		lock();
@@ -266,35 +267,35 @@ public abstract class Scene extends Frame {
 	}
 
 	void nextFocus() {
-		if(focus == null) {
-			if(!focusList.isEmpty()) {
+		if (focus == null) {
+			if (!focusList.isEmpty()) {
 				setFocus(focusList.firstKey());
 			}
 		} else {
-			if(focusList.size() > 1) {
+			if (focusList.size() > 1) {
 				boolean found = false;
-				if(shifting) {
-					for(int i = focus.getTabIndex() - 1; i >= focusList.firstKey(); i--) {
-						if(!found && setFocus(i)) {
+				if (shifting) {
+					for (int i = focus.getTabIndex() - 1; i >= focusList.firstKey(); i--) {
+						if (!found && setFocus(i)) {
 							found = true;
 						}
 					}
-					if(!found) {
-						for(int i = focusList.lastKey(); i > focus.getTabIndex(); i--) {
-							if(!found && setFocus(i)) {
+					if (!found) {
+						for (int i = focusList.lastKey(); i > focus.getTabIndex(); i--) {
+							if (!found && setFocus(i)) {
 								found = true;
 							}
 						}
 					}
 				} else {
-					for(int i = focus.getTabIndex() + 1; i <= focusList.lastKey(); i++) {
-						if(!found && setFocus(i)) {
+					for (int i = focus.getTabIndex() + 1; i <= focusList.lastKey(); i++) {
+						if (!found && setFocus(i)) {
 							found = true;
 						}
 					}
-					if(!found) {
-						for(int i = focusList.firstKey(); i < focus.getTabIndex(); i++) {
-							if(!found && setFocus(i)) {
+					if (!found) {
+						for (int i = focusList.firstKey(); i < focus.getTabIndex(); i++) {
+							if (!found && setFocus(i)) {
 								found = true;
 							}
 						}
@@ -307,12 +308,12 @@ public abstract class Scene extends Frame {
 	public Focusable getFocus() {
 		return focus;
 	}
-	
+
 	public boolean setFocus(int tab) {
 		Focusable f = focusList.get(tab);
-		if(f != null) {
-			if(f.canFocus()) {
-				if(focus != null) {
+		if (f != null) {
+			if (f.canFocus()) {
+				if (focus != null) {
 					focus.loseFocus();
 				}
 				focus = f;
@@ -324,7 +325,7 @@ public abstract class Scene extends Frame {
 	}
 
 	public void registerTab(Focusable f) {
-		if(focusList.get(f.getTabIndex()) != null) {
+		if (focusList.get(f.getTabIndex()) != null) {
 			Log.error("Duplicate tabIndex: " + id);
 		}
 		focusList.put(f.getTabIndex(), f);
@@ -340,8 +341,8 @@ public abstract class Scene extends Frame {
 		}
 	}
 
-	//Graphical
-	
+	// Graphical
+
 	public void clip(int x, int y, int width, int height) {
 		try {
 			batcher.flush();
@@ -616,28 +617,33 @@ public abstract class Scene extends Frame {
 		}
 	}
 
-	public static void setupScreen(float gameWidth, float gameHeight) {
+	public static int gameWidth;
+	public static int gameHeight;
+
+	public static void setupScreen(float _gameWidth, float _gameHeight) {
 		try {
+			gameWidth = (int) _gameWidth;
+			gameHeight = (int) _gameHeight;
 			Log.debug("Set screen");
 			screenWidth = Gdx.graphics.getWidth();
 			screenHeight = Gdx.graphics.getHeight();
 			float screenR = (float) screenWidth / (float) screenHeight;
-			float gameR = gameWidth / gameHeight;
+			float gameR = _gameWidth / _gameHeight;
 			if (screenR == gameR) {
 				originX = 0;
 				originY = 0;
-				viewWidth = gameWidth;
-				viewHeight = gameHeight;
+				viewWidth = _gameWidth;
+				viewHeight = _gameHeight;
 			} else if (screenR > gameR) {
-				viewWidth = gameHeight * screenR;
-				viewHeight = gameHeight;
-				originX = (int) ((viewWidth - gameWidth) / 2.0f);
+				viewWidth = _gameHeight * screenR;
+				viewHeight = _gameHeight;
+				originX = (int) ((viewWidth - _gameWidth) / 2.0f);
 				originY = 0;
 			} else if (screenR < gameR) {
-				viewWidth = gameWidth;
-				viewHeight = gameWidth / screenR;
+				viewWidth = _gameWidth;
+				viewHeight = _gameWidth / screenR;
 				originX = 0;
-				originY = (int) ((viewHeight - gameHeight) / 2.0f);
+				originY = (int) ((viewHeight - _gameHeight) / 2.0f);
 			}
 			// input.ratio = screenR / gameR;
 			// Set up our camera, which handles the screen scaling, use viewWidth to
@@ -656,20 +662,20 @@ public abstract class Scene extends Frame {
 		}
 	}
 
-	//Input
-	
+	// Input
+
 	public abstract void enterPressedInList(String id);
 
 	public abstract void listChanged(String id, int sel);
-	
+
 	public abstract void buttonPressed(String id);
-	
+
 	public abstract void enterPressedInField(String id);
 
 	public abstract void mouseDown(int x, int y, int button);
 
 	public abstract void mouseUp(int x, int y, int button);
-	
+
 	public abstract void checkBox(String id);
 
 }
