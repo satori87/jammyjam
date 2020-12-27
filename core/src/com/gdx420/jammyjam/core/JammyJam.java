@@ -202,9 +202,18 @@ public class JammyJam implements Bearable {
 				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal() 
 					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal())
 				{
-					loadedItems.get(0).onScreen = true;
-					loadedItems.get(0).x = x * 32;
-					loadedItems.get(0).y = y * 32;
+					for (Item item : loadedItems) {
+						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
+								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
+							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
+								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
+							System.out.println(Realm.mapData[currentMap].tile[x][y].attStr[0]);
+							System.out.println(Realm.mapData[currentMap].tile[x][y].attStr[1]);
+							item.onScreen = true;
+							loadedItems.get(0).x = x * 32;
+							loadedItems.get(0).y = y * 32;
+						}
+					}				
 				}
 	}
 	

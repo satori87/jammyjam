@@ -12,6 +12,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
+import com.gdx420.jammyjam.core.Item;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.MapData;
 import com.gdx420.jammyjam.core.NonPlayableCharacter;
@@ -163,7 +164,12 @@ public class PlayScene extends LiveMapScene {
 		
 		for (NonPlayableCharacter npc : JammyJam.game.npcList) {
 			if(npc.onScreen)
-				draw(Assets.textures.get("sprites"), npc.x,npc.y,128,0,32,32);
+				draw(Assets.textures.get(npc.tile_sheet), npc.x,npc.y, npc.source_x,npc.source_y,npc.width,npc.height);
+		}
+		
+		for (Item item : JammyJam.game.loadedItems) {
+			if(item.onScreen)
+				draw(Assets.textures.get(item.tile_sheet), item.x,item.y, item.source_x, item.source_y, item.width, item.height);
 		}
 
 		draw(Assets.textures.get("sprites"), JammyJam.game.player.x,JammyJam.game.player.y,64,0,32,32);
