@@ -1,0 +1,24 @@
+{
+    "name": "Thomas",
+	"tile_sheet" : "sprites",
+	"source_x" : 128,
+	"source_y" : 192,
+	"width" : 32,
+	"height" : 32,
+	"active_awake" : true,
+	
+    "dialogs": [
+		{
+			"name": "nothing to say - Thomas",
+			"items_required": [ ],
+			"dialog": "You're not a cop, I don't need an alibi.",
+			"item_given": ""
+		},
+		{
+			"name": "caught with evidence",
+			"items_required": [ "BloodyBook" ],
+			"dialog": "You caught me. I'll turn myself in.",
+			"item_given": ""
+		}		
+	]
+}

@@ -1,0 +1,18 @@
+{
+    "name": "Morpheus",
+	"tile_sheet" : "sprites",
+	"source_x" : 128,
+	"source_y" : 0,
+	"width" : 32,
+	"height" : 32,
+	"active_sleep" : true,	
+	
+    "dialogs": [
+		{
+			"name": "I am you",
+			"items_required": [ ],
+			"dialog": "What you see in dreams is influenced by your psychic powers. Follow the clues.",
+			"item_given": ""
+		}
+	]
+}

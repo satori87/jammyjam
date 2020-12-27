@@ -1,0 +1,24 @@
+{
+    "name": "Maria",
+	"tile_sheet" : "sprites",
+	"source_x" : 128,
+	"source_y" : 128,
+	"width" : 32,
+	"height" : 32,
+	"active_awake" : true,
+	
+    "dialogs": [
+		{
+			"name": "nothing to say - maria",
+			"items_required": [ ],
+			"dialog": "Please let me be, I have nothing to say.",
+			"item_given": ""
+		},
+		{
+			"name": "caught with book",
+			"items_required": [ "BloodyBook" ],
+			"dialog": "I didn't get the blood on there. I lent it to Thomas...",
+			"item_given": ""
+		}		
+	]
+}
