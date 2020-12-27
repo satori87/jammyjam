@@ -145,7 +145,7 @@ public class JammyJam implements Bearable {
 		try {
 			stream = Files.newDirectoryStream(dir);
 			for (Path file : stream) {
-				System.out.println("Loading NPC: " + file.getFileName());
+				//System.out.println("Loading NPC: " + file.getFileName());
 				npcList.add((NonPlayableCharacter) Util.importJSON("/scripts/NPCs/" + file.getFileName(),
 						NonPlayableCharacter.class));
 			}
@@ -162,7 +162,7 @@ public class JammyJam implements Bearable {
 		try {
 			stream = Files.newDirectoryStream(dir);
 			for (Path file: stream) {
-		        System.out.println("Item Item: " + file.getFileName());
+		       // System.out.println("Loaded Item: " + file.getFileName());
 		        loadedItems.add((Item) Util.importJSON("scripts/Items/" + file.getFileName(), Item.class));
 		    }
 		} catch (IOException e) {
@@ -186,9 +186,16 @@ public class JammyJam implements Bearable {
 			for (int y = 0; y < Shared.MAP_WIDTH; y++)
 				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.NPC_SPAWN.ordinal()
 						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.NPC_SPAWN.ordinal()) {
-					npcList.get(0).onScreen = true;
-					npcList.get(0).x = x * 32;
-					npcList.get(0).y = y * 32;
+					for(NonPlayableCharacter npc : npcList) {
+						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
+								&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0) 
+							|| (Realm.mapData[currentMap].tile[x][y].attStr[1] != null
+									&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {							
+							npc.onScreen = true;
+							npc.x = x * 32;
+							npc.y = y * 32;
+						}
+					}
 				}
 	}
 
@@ -198,16 +205,6 @@ public class JammyJam implements Bearable {
 			item.onScreen = false;
 		}
 
-		for (int x = 0; x < Shared.MAP_WIDTH; x++)
-			for (int y = 0; y < Shared.MAP_WIDTH; y++)
-				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal()
-						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal()) {
-					loadedItems.get(0).onScreen = true;
-					loadedItems.get(0).x = x * 32;
-					loadedItems.get(0).y = y * 32;
-				}
-				
-		
 		for(int x = 0; x < Shared.MAP_WIDTH; x++)
 			for(int y = 0; y < Shared.MAP_WIDTH; y++)
 				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal() 

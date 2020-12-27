@@ -162,6 +162,7 @@ public class PlayScene extends LiveMapScene {
 		super.processed = false; // forces redraw
 		
 		JammyJam.game.spawnNPCs(Realm.curMap);
+		JammyJam.game.spawnItems(Realm.curMap);
 	}
 
 	public void render() {
