@@ -38,14 +38,12 @@ public class EditMapScene extends RenderEditMapScene {
 
 	Frame frmNPC = null;
 	Field fieldNPC;
-	
+
 	Frame frmStory = null;
 	Field fieldStory;
-	
+
 	Frame frmItem = null;
 	Field fieldItem;
-	
-	
 
 	Field mapName;
 
@@ -83,23 +81,23 @@ public class EditMapScene extends RenderEditMapScene {
 		}
 	}
 
-	void startNPC() {		
+	void startNPC() {
 		frmNPC = new Frame(this, "npcf", 584, 284, 384, 262, false, false, true);
 		frames.put("npcf", frmNPC);
 		frmNPC.visible = false;
 		frmNPC.labels.put("npctile", new Label(this, "npc0", 776, 310, 2f, "npc Tile", Color.WHITE, true));
 		fieldNPC = frmNPC.addField("npc", 15, 2, 630, 360, 300);
 	}
-	
-	void startStory() {		
+
+	void startStory() {
 		frmStory = new Frame(this, "Storyf", 584, 284, 384, 262, false, false, true);
 		frames.put("Storyf", frmStory);
 		frmStory.visible = false;
 		frmStory.labels.put("Storytile", new Label(this, "Story0", 776, 310, 2f, "Story Tile", Color.WHITE, true));
 		fieldStory = frmStory.addField("Story", 15, 3, 630, 360, 300);
 	}
-	
-	void startItem() {		
+
+	void startItem() {
 		frmItem = new Frame(this, "Itemf", 584, 284, 384, 262, false, false, true);
 		frames.put("Itemf", frmItem);
 		frmItem.visible = false;
@@ -600,8 +598,12 @@ public class EditMapScene extends RenderEditMapScene {
 							placeBox(mx, my, editMode, dmx, dmy);
 						} else if (!halting) {
 							if (alting) {
-								changeTile(map().tile[mx + scrollX][my + scrollY].set[editMode],
-										map().tile[mx + scrollX][my + scrollY].tile[editMode]);
+								int mmx = mx + scrollX;
+								int mmy = my + scrollY;
+								if (inBounds(mmx, mmy)) {
+									changeTile(map().tile[mx + scrollX][my + scrollY].set[editMode],
+											map().tile[mx + scrollX][my + scrollY].tile[editMode]);
+								}
 							} else {
 								int mmx = mx + scrollX;
 								int mmy = my + scrollY;
@@ -669,7 +671,7 @@ public class EditMapScene extends RenderEditMapScene {
 									for (int c = 0; c < 10; c++) {
 										map().tile[msx][msy].attData[i][c] = attData[c];
 									}
-									switch(att) {
+									switch (att) {
 									case 7:
 										map().tile[msx][msy].attStr[i] = fieldNPC.text;
 										break;
@@ -1016,7 +1018,7 @@ public class EditMapScene extends RenderEditMapScene {
 		case 7: // NPC
 			frmNPC.visible = true;
 			break;
-		case 8: //story
+		case 8: // story
 			frmStory.visible = true;
 			break;
 		case 9:

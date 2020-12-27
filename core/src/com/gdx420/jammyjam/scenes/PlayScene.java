@@ -44,9 +44,10 @@ public class PlayScene extends LiveMapScene {
 		}
 		if (currentTile != null) {
 			// on an item
-			if(currentTile.att[0] == Shared.Attributes.ITEM.ordinal() || currentTile.att[1] == Shared.Attributes.ITEM.ordinal()){
-				for(Item item : JammyJam.game.loadedItems) {
-					if((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0) 
+			if (currentTile.att[0] == Shared.Attributes.ITEM.ordinal()
+					|| currentTile.att[1] == Shared.Attributes.ITEM.ordinal()) {
+				for (Item item : JammyJam.game.loadedItems) {
+					if ((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0)
 							|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(item.name) == 0)) {
 						PlotEngine.obtainItem(item);
 					}
@@ -71,25 +72,37 @@ public class PlayScene extends LiveMapScene {
 		checkHorizontalMovement();
 
 		checkMapChange();
-		
-		if(JammyJam.game.player.x < 5)
+
+		if (JammyJam.game.player.x < 5)
 			JammyJam.game.player.x = 5;
-		if(JammyJam.game.player.y < 5)
+		if (JammyJam.game.player.y < 5)
 			JammyJam.game.player.y = 5;
-		if(JammyJam.game.player.x >= Shared.MAP_WIDTH * 32 - 5)
+		if (JammyJam.game.player.x >= Shared.MAP_WIDTH * 32 - 5)
 			JammyJam.game.player.x = Shared.MAP_WIDTH * 32 - 5;
-		if(JammyJam.game.player.y >= Shared.MAP_WIDTH * 32 - 5)
+		if (JammyJam.game.player.y >= Shared.MAP_WIDTH * 32 - 5)
 			JammyJam.game.player.y = Shared.MAP_WIDTH * 32 - 5;
-		
+
+		checkWarp();
 
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
 		}
 	}
-	
+
+	void checkWarp() {
+		int x = (JammyJam.game.player.x + 16) / 32;
+		int y = (JammyJam.game.player.y + 16) / 32;
+		MapData data = Realm.mapData[Realm.curMap];
+		if (data.tile[x][y].att[0] == Shared.Attributes.WARP.ordinal()) {
+			changeMap(data.tile[x][y].attData[0][0]);
+			JammyJam.game.player.x = data.tile[x][y].attData[0][1] * 32 - 16;
+			JammyJam.game.player.y = data.tile[x][y].attData[0][2] * 32 - 16;
+		}
+	}
+
 	int oldY = 0;
 	int oldX = 0;
-	
+
 	void checkVerticalMovement() {
 		oldY = JammyJam.game.player.y;
 		if (input.keyDown[Keys.UP]) {
@@ -151,25 +164,25 @@ public class PlayScene extends LiveMapScene {
 	boolean checkMapChange() {
 
 		if (JammyJam.game.player.x < 5) {
-			if (changeMap(2)) {
+			if (exitMap(2)) {
 				JammyJam.game.player.x = Shared.MAP_WIDTH * 32 - 5;
 				return true;
 			}
 		}
 		if (JammyJam.game.player.x > Shared.MAP_WIDTH * 32 - 5) {
-			if (changeMap(3)) {
+			if (exitMap(3)) {
 				JammyJam.game.player.x = 5;
 				return true;
 			}
 		}
 		if (JammyJam.game.player.y < 5) {
-			if (changeMap(0)) {
+			if (exitMap(0)) {
 				JammyJam.game.player.y = Shared.MAP_WIDTH * 32 - 5;
 				return true;
 			}
 		}
 		if (JammyJam.game.player.y > Shared.MAP_WIDTH * 32 - 5) {
-			if (changeMap(1)) {
+			if (exitMap(1)) {
 				JammyJam.game.player.y = 5;
 				return true;
 			}
@@ -177,16 +190,19 @@ public class PlayScene extends LiveMapScene {
 		return false;
 	}
 
-	boolean changeMap(int direction) {
+	void changeMap(int mapTo) {
+		Realm.curMap = mapTo;
+		JammyJam.game.spawnNPCs(Realm.curMap);
+		JammyJam.game.spawnItems(Realm.curMap);
+		processed = false; // forces redraw
+	}
+
+	boolean exitMap(int direction) {
 		MapData data = Realm.mapData[Realm.curMap];
 		if (data.exit[direction] > 0) {
-			Log.debug(data.exit[direction]);
-			Realm.curMap = data.exit[direction];
-			JammyJam.game.spawnNPCs(Realm.curMap);
-			JammyJam.game.spawnItems(Realm.curMap);
-			processed = false; // forces redraw
+			changeMap(data.exit[direction]);
 			return true;
-		}		
+		}
 		return false;
 
 	}
