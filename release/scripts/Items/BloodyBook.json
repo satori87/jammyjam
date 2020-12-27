@@ -1,0 +1,9 @@
+{
+    "name": "Bloody Book",
+	"tile_sheet" : "Indoor_Decor_3",
+	"source_x" : 76,
+	"source_y" : 208,
+	"width" : 24,
+	"height" : 24,	
+	"text" : "This book has blood all over it! I wonder if it's Jan's blood. The index card says the last person to check this out was Maria."
+}

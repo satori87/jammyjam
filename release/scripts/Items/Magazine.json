@@ -1,0 +1,9 @@
+{
+    "name": "Magazine",
+	"tile_sheet" : "Indoor_Decor_2",
+	"source_x" : 260,
+	"source_y" : 100,
+	"width" : 32,
+	"height" : 32,	
+	"text" : "'Local husband exonerated. Cops say no clues in missing woman case.'"
+}

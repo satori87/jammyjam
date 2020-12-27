@@ -1,0 +1,9 @@
+{
+    "name": "Newspaper",
+	"tile_sheet" : "Indoor_Decor_2",
+	"source_x" : 260,
+	"source_y" : 100,
+	"width" : 32,
+	"height" : 32,	
+	"text" : "Headline reads 'Local woman missing 3 weeks'... My neighbor Jan, that poor woman. I wonder how her husband Slater is holding up..."
+}

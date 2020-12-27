@@ -1,0 +1,32 @@
+{
+    "name": "Harold",
+	"tile_sheet" : "sprites",
+	"source_x" : 128,
+	"source_y" : 64,
+	"width" : 32,
+	"height" : 32,
+	"active_sleep" : true,
+	"active_awake" : false	
+	
+    "dialogs": [
+		{
+			"name": "nothing to say",
+			"items_required": [ "Magazine", "Newspaper" ]
+			"dialog": "I don't want to talk about such horrible things.",
+			"item_given": ""
+		},
+		{
+			"name": "newspaper talk",
+			"items_required": [ "Newspaper" ]
+			"dialog": "Oh such terrible news. Here take this, I can't read any more",
+			"item_given": "Magazine"
+		},
+		{
+			"name": "intro msg",
+			"items_required": []
+			"dialog": "Hey Morpheus, what a wonderful day. Everything is perfect, never any bad news.",
+			"item_given": ""
+		}
+		
+	]
+}

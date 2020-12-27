@@ -1,0 +1,30 @@
+{
+    "name": "Guy",
+	"tile_sheet" : "sprites",
+	"source_x" : 128,
+	"source_y" : 64,
+	"width" : 32,
+	"height" : 32,	
+	
+    "dialogs": [
+		{
+			"name": "nothing to say",
+			"items_required": [ "Magazine", "Newspaper" ]
+			"dialog": "I don't want to talk about it.",
+			"item_given": ""
+		},
+		{
+			"name": "newspaper talk",
+			"items_required": [ "Newspaper" ]
+			"dialog": "Oh such terrible news. Here take this, I can't read any more",
+			"item_given": "Magazine"
+		},
+		{
+			"name": "intro msg",
+			"items_required": []
+			"dialog": "Well hello stranger.",
+			"item_given": ""
+		}
+		
+	]
+}
