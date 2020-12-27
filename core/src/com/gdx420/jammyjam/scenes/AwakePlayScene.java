@@ -32,7 +32,7 @@ public class AwakePlayScene extends PlayScene {
 	void checkKeys() {
 		super.checkKeys();
 
-		if(input.keyDown[Keys.SPACE]) {
+		if(input.keyDown[Keys.TAB]) {
 			int oldMultiplier = JammyJam.game.awakeTimeManager.gameTimeMultiplier;
 			JammyJam.game.awakeTimeManager.gameTimeMultiplier = 10;
 			JammyJam.game.awakeTimeManager.tickForward();
@@ -46,7 +46,7 @@ public class AwakePlayScene extends PlayScene {
 		JammyJam.game.sleepTimeManager.setGameClock(startSleepTime);
 		JammyJam.game.spawnNPCs(Realm.curMap);
 		JammyJam.game.spawnItems(Realm.curMap);
-		JammyJam.game.spawnStoryPoints(Realm.curMap);
+		JammyJam.game.spawnStoryPoints(Realm.curMap);		
 	}
 
 	public void render() {

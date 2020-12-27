@@ -28,6 +28,7 @@ public class PlayScene extends LiveMapScene {
 	
 
 	public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
+	public static boolean isSpaceBarPressed = false;
 
 	public PlayScene() {
 
@@ -60,7 +61,8 @@ public class PlayScene extends LiveMapScene {
 					
 					if ((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0)
 							|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(item.name) == 0)) {
-						PlotEngine.obtainItem(item);
+						//if(isSpaceBarPressed)
+							PlotEngine.obtainItem(item);
 					}
 				}
 			}
@@ -77,7 +79,8 @@ public class PlayScene extends LiveMapScene {
 							
 							if((neighbor.attStr[0] != null && neighbor.attStr[0].compareTo(sp.name) == 0) 
 									|| (neighbor.attStr[1] != null && neighbor.attStr[1].compareTo(sp.name) == 0)) {
-								PlotEngine.triggerPlot(sp);
+								if(isSpaceBarPressed == true)
+									PlotEngine.triggerStoryPoint(sp);
 							}
 						}
 					}
@@ -130,10 +133,16 @@ public class PlayScene extends LiveMapScene {
 			Scene.change("menu");
 		}
 		
+		/*
 		if(input.keyDown[Keys.B]) {
 			dialogToDisplay = new Dialog(this, "hey", 400, "heyy", new String[]{"Hmmm..."},new String[]{"0"});
 			dialogToDisplay.start(tick);
-		}
+		}*/
+		
+		if(input.keyDown(Keys.SPACE))
+			isSpaceBarPressed = true;
+		else
+			isSpaceBarPressed = false;
 	}
 
 	void checkWarp() {
@@ -198,6 +207,11 @@ public class PlayScene extends LiveMapScene {
 				|| currentTile.att[1] == Shared.Attributes.WALL.ordinal())) {
 			return true;
 		}
+		if (currentTile != null && (currentTile.att[0] == Shared.Attributes.DOOR.ordinal()
+				|| currentTile.att[1] == Shared.Attributes.DOOR.ordinal())) {
+			// TODO warp to inside, possibly lock / unlock
+			return true;
+		}
 		return false;
 	}
 
@@ -208,8 +222,10 @@ public class PlayScene extends LiveMapScene {
 				int npcTilePositionX = (npc.x + 16) / 32;
 				int npcTilePositionY = (npc.y + 16) / 32;
 				if (npcTilePositionX == playerTilePositionX && npcTilePositionY == playerTilePositionY) {
-					PlotEngine.npcInteraction(npc);
-					result = true;
+					//if(isSpaceBarPressed) {
+						PlotEngine.npcInteraction(npc);
+						result = true;
+					//}
 				}
 			}
 		}

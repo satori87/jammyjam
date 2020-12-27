@@ -1,12 +1,22 @@
 package com.gdx420.jammyjam.core;
 
 import com.bg.bearplane.gui.Scene;
+
 import com.gdx420.jammyjam.scenes.AwakePlayScene;
 import com.gdx420.jammyjam.scenes.PlayScene;
 import com.gdx420.jammyjam.scenes.SleepPlayScene;
 
 public class PlotEngine {
-	public static void triggerPlot(StoryPoint sp) {
+	public static long lastStoryPointTimestamp = System.currentTimeMillis(); 
+	
+	public static void triggerStoryPoint(StoryPoint sp) {
+		
+		// prevent multiple times in a row
+		if(System.currentTimeMillis() - lastStoryPointTimestamp < 3000)
+			return;
+		
+		lastStoryPointTimestamp = System.currentTimeMillis();
+		
 		if( ( sp.active_sleep && Scene.scene instanceof SleepPlayScene)
 				|| (sp.active_awake && Scene.scene instanceof AwakePlayScene)) {
 			for(DialogData dlg : sp.dialogs) {				

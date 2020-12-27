@@ -33,7 +33,7 @@ public class SleepPlayScene extends PlayScene {
 	void checkKeys() {
 		super.checkKeys();
 								
-		if(input.keyDown[Keys.SPACE]) {
+		if(input.keyDown[Keys.TAB]) {
 			int oldMultiplier = JammyJam.game.sleepTimeManager.gameTimeMultiplier;
 			JammyJam.game.sleepTimeManager.gameTimeMultiplier = 10;
 			JammyJam.game.sleepTimeManager.tickForward();
