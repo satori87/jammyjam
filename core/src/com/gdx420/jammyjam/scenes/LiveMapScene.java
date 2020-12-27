@@ -16,6 +16,7 @@ import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Scene;
 import com.bg.bearplane.gui.Field;
 import com.gdx420.jammyjam.core.Assets;
+import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.MapData;
 import com.gdx420.jammyjam.core.Realm;
 import com.gdx420.jammyjam.core.Shared;
@@ -108,21 +109,21 @@ public class LiveMapScene extends Scene {
 	}
 
 	public void updateCamera() {
-		//int cx = character.trueX();
-		//int cy = character.trueY() + 16;
-		//int ncx = (int) cam.position.x;
-		//int ncy = (int) cam.position.y;
-		//if (cx - ncx > Shared.BOUNDING_BOX * 32) {
-		//	ncx = cx - Shared.BOUNDING_BOX * 32;
-		//} else if (ncx - cx > (Shared.BOUNDING_BOX + 1) * 32) {
-		//	ncx = cx + (Shared.BOUNDING_BOX + 1) * 32;
-		//}
-		//if (cy - ncy > Shared.BOUNDING_BOX * 32) {
-		//	ncy = cy - Shared.BOUNDING_BOX * 32;
-		//} else if (ncy - cy > Shared.BOUNDING_BOX * 32) {
-		//	ncy = cy + Shared.BOUNDING_BOX * 32;
-		//}
-		//moveCameraTo(ncx, ncy);
+		int cx = JammyJam.game.player.x;
+		int cy = JammyJam.game.player.y;
+		int ncx = (int) cam.position.x;
+		int ncy = (int) cam.position.y;
+		if (cx - ncx > Shared.BOUNDING_BOX * 32) {
+			ncx = cx - Shared.BOUNDING_BOX * 32;
+		} else if (ncx - cx > (Shared.BOUNDING_BOX + 1) * 32) {
+			ncx = cx + (Shared.BOUNDING_BOX + 1) * 32;
+		}
+		if (cy - ncy > Shared.BOUNDING_BOX * 32) {
+			ncy = cy - Shared.BOUNDING_BOX * 32;
+		} else if (ncy - cy > Shared.BOUNDING_BOX * 32) {
+			ncy = cy + Shared.BOUNDING_BOX * 32;
+		}
+		moveCameraTo(ncx, ncy);
 	}
 
 	void drawMapLayer(int i) {
@@ -453,9 +454,9 @@ public class LiveMapScene extends Scene {
 
 	public void switchTo() {
 		super.switchTo();
-		/*
-		int cx = character.trueX() + 16;
-		int cy = character.trueY() + 16;
+		
+		int cx = JammyJam.game.player.x + 16;
+		int cy = JammyJam.game.player.y + 16;
 		if (cx < Shared.GAME_WIDTH / 2) {
 			cx = Shared.GAME_WIDTH / 2;
 		}
@@ -469,7 +470,7 @@ public class LiveMapScene extends Scene {
 			cy = Shared.MAP_WIDTH * 32 - Shared.GAME_HEIGHT / 2;
 		}
 		moveCameraTo(cx, cy);
-		*/
+		
 	}
 
 	@Override

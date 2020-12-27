@@ -9,8 +9,7 @@ public class Character {
 	long moveStamp;
 	boolean moving = false;
 	
-	public final int MOVETIME = 500;
-	
+
 	public Character() {
 		
 	}

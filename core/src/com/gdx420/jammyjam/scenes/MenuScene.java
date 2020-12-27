@@ -1,6 +1,7 @@
 package com.gdx420.jammyjam.scenes;
 
 import com.badlogic.gdx.graphics.Color;
+import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.JammyJam;
 
@@ -8,6 +9,8 @@ public class MenuScene extends Scene {
 
 	public static String status = "";
 
+	//Dialog d;
+	
 	public MenuScene() {
 
 	}
@@ -17,7 +20,8 @@ public class MenuScene extends Scene {
 		int hw = JammyJam.GAME_WIDTH / 2;
 		int hh = JammyJam.GAME_HEIGHT / 2;
 		int y = 64;
-
+		//d = new Dialog(this, "test", 400,"woah man", new String[]{"Good, good","I dun lik it","Woah no way bruh"},new String[]{"0","1","2"});
+		//d.start(tick);
 		addLabel("status", hw, hh + 256, 2f, "", Color.WHITE, true);
 		addFrame("frame", hw, hh - 60 + y, 288, 392, true, true);
 
@@ -32,9 +36,11 @@ public class MenuScene extends Scene {
 	}
 
 	public void update() {
+		//d.update(tick);
 	}
 
 	public void render() {
+		//d.render();
 		getLabel("status").text = status;
 	}
 

@@ -8,5 +8,8 @@ public class Player extends Character {
 		x = _x;
 		y = _y;
 	}
+	
+
+
 
 }

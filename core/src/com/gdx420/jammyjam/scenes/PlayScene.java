@@ -133,17 +133,17 @@ public class PlayScene extends LiveMapScene {
 		
 		if(JammyJam.game.player.x < 0) {
 			changeMap(0);
-			JammyJam.game.player.x = Shared.GAME_WIDTH - 5;
+			JammyJam.game.player.x = Shared.MAP_WIDTH * 32 - 5;
 		}
-		if(JammyJam.game.player.x > Shared.GAME_WIDTH) {
+		if(JammyJam.game.player.x > Shared.MAP_WIDTH * 32) {
 			changeMap(2);
 			JammyJam.game.player.x = 5;
 		}
 		if(JammyJam.game.player.y < 0) {
 			changeMap(1);			
-			JammyJam.game.player.y = Shared.GAME_HEIGHT - 5;
+			JammyJam.game.player.y = Shared.MAP_WIDTH * 32 - 5;
 		}
-		if(JammyJam.game.player.y > Shared.GAME_HEIGHT) {
+		if(JammyJam.game.player.y > Shared.MAP_WIDTH * 32 - 5) {
 			changeMap(3);
 			JammyJam.game.player.y = 5;
 		}
