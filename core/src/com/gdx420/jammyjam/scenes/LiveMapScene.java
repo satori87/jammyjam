@@ -238,9 +238,6 @@ public class LiveMapScene extends Scene {
 
 	}
 
-	boolean inSight(int mx, int my) {
-		return Math.abs(mx - cam.position.x / 32) < 17 && Math.abs(my - cam.position.y / 32) < 21;
-	}
 
 	void processTextLayer() {
 		/*
@@ -395,7 +392,7 @@ public class LiveMapScene extends Scene {
 			for (int x = 0; x < Shared.MAP_WIDTH; x++) {
 				mx = x;
 				my = y;
-				if (inSight(mx, my) && MapData.inBounds(mx, my)) {
+				if (MapData.inBounds(mx, my)) {
 					t = Realm.mapData[Realm.curMap].tile[mx][my];
 					if (t.tile[i] > 0) {
 						dt = new DrawTask(i, t.set[i], t.tile[i], x * 32 + t.shiftX[i], y * 32 + t.shiftY[i]);
