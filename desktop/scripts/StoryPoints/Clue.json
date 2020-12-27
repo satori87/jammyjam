@@ -15,7 +15,7 @@
 			"items_required": [ "Magazine" ]
 			"dialog": "I will warp you there.",
 			"item_given": "",
-			"warp": ""
+			"warp": "Map3"
 		}
 	]
 }

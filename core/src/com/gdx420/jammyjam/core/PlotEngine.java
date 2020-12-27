@@ -1,5 +1,7 @@
 package com.gdx420.jammyjam.core;
 
+import com.gdx420.jammyjam.scenes.PlayScene;
+
 public class PlotEngine {
 	public static void triggerPlot(StoryPoint sp) {
 		
@@ -8,9 +10,11 @@ public class PlotEngine {
 	public static void obtainItem(Item item) {
 		if(!JammyJam.game.player.obtainedItems.contains(item)) {
 			JammyJam.game.player.obtainedItems.add(item);
-			System.out.println("Found " + item.name);
-			if(!item.text.isEmpty())
-				System.out.println("It reads: " + item.text);
+			item.onScreen = false;
+			
+			DialogData data = new DialogData(item.name, item.text);
+			data.itemParent = item;
+			PlayScene.dialogQueue.add(data);
 		}
 	}
 		
@@ -37,12 +41,27 @@ public class PlotEngine {
 		}
 	}
 	
+	private static NonPlayableCharacter lastNpc = null;
+	private static DialogData lastDlg = null;
 	private static boolean foundNpcDialog(NonPlayableCharacter npc, DialogData dlg) {
-		if(dlg.wasDisplayed)
+		if(dlg.wasDisplayed) {
+			if(lastNpc != null && lastDlg != null) {
+				doNpcActions(npc, dlg);
+				return true;
+			}
 			return false;
+		}
 		dlg.wasDisplayed = true;
+		lastNpc = npc;
+		lastDlg = dlg;
 		
-		System.out.println(npc.name + ": " + dlg.dialog);
+		doNpcActions(npc, dlg);		
+		return true;
+	}
+	
+	private static void doNpcActions(NonPlayableCharacter npc, DialogData dlg) {
+		dlg.npcParent = npc;
+		PlayScene.dialogQueue.add(dlg);
 		
 		if(!dlg.item_given.isEmpty()) {
 			for(Item item : JammyJam.game.loadedItems) {
@@ -51,7 +70,5 @@ public class PlotEngine {
 				}
 			}
 		}
-			
-		return true;
 	}
 }

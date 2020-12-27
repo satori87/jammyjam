@@ -1,18 +1,15 @@
 package com.gdx420.jammyjam.scenes;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.time.LocalTime;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import com.badlogic.gdx.Input.Keys;
-import com.bg.bearplane.engine.Log;
-import com.bg.bearplane.engine.Util;
+import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
+import com.gdx420.jammyjam.core.DialogData;
 import com.gdx420.jammyjam.core.Item;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.MapData;
@@ -27,6 +24,9 @@ public class PlayScene extends LiveMapScene {
 
 	LocalTime startSleepTime = LocalTime.of(22, 0);
 	LocalTime startAwakeTime = LocalTime.of(8, 0);
+	
+	public static Dialog dialogToDisplay = null;
+	public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
 
 	public PlayScene() {
 
@@ -35,8 +35,14 @@ public class PlayScene extends LiveMapScene {
 	public void start() {
 		super.start();
 	}
-
 	public void update() {
+		if(dialogToDisplay != null || dialogQueue.size() > 0)
+			updateDialog();
+		else
+			updatePlay();
+	}
+	
+	public void updatePlay() {
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
 		Tile currentTile = null;
@@ -72,24 +78,49 @@ public class PlayScene extends LiveMapScene {
 			}
 		}
 	}
+	
+	// CREATE DIALOG HERE (and update)
+	public void updateDialog() {
+		if(dialogToDisplay != null) {
+			dialogToDisplay.update(tick);
+		}else if(dialogQueue.size() > 0) {
+			DialogData data = dialogQueue.poll();
+			String words = data.dialog;
+			if(data.npcParent != null)
+				words = data.npcParent.name + ": " + words;
+			if(data.itemParent != null)
+				words = data.itemParent.name + " Found!  " + words;
+			dialogToDisplay = new Dialog(this, data.name, 400, words, new String[]{"Hmmm..."},new String[]{"0"});
+			dialogToDisplay.start(tick);
+		}		
+	}
 
+	private static boolean pressedEnter = false;
 	void checkKeys() {
-		checkVerticalMovement();
-		checkHorizontalMovement();
-
-		checkMapChange();
-
-		if (JammyJam.game.player.x < 5)
-			JammyJam.game.player.x = 5;
-		if (JammyJam.game.player.y < 5)
-			JammyJam.game.player.y = 5;
-		if (JammyJam.game.player.x >= Shared.MAP_WIDTH * 32 - 5)
-			JammyJam.game.player.x = Shared.MAP_WIDTH * 32 - 5;
-		if (JammyJam.game.player.y >= Shared.MAP_WIDTH * 32 - 5)
-			JammyJam.game.player.y = Shared.MAP_WIDTH * 32 - 5;
-
-		checkWarp();
-
+		if(dialogToDisplay != null) {
+			if (input.keyDown[Keys.ENTER]) {	
+				pressedEnter = true;
+			}
+			else if(pressedEnter){
+				dialogToDisplay.choose(dialogToDisplay.choices.get(0));
+				dialogToDisplay = null;
+				pressedEnter = false;
+			}
+		}else {
+			checkVerticalMovement();
+			checkHorizontalMovement();
+			checkMapChange();
+			if (JammyJam.game.player.x < 5)
+				JammyJam.game.player.x = 5;
+			if (JammyJam.game.player.y < 5)
+				JammyJam.game.player.y = 5;
+			if (JammyJam.game.player.x >= Shared.MAP_WIDTH * 32 - 5)
+				JammyJam.game.player.x = Shared.MAP_WIDTH * 32 - 5;
+			if (JammyJam.game.player.y >= Shared.MAP_WIDTH * 32 - 5)
+				JammyJam.game.player.y = Shared.MAP_WIDTH * 32 - 5;
+			checkWarp();
+		}
+		
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
 		}
@@ -220,7 +251,7 @@ public class PlayScene extends LiveMapScene {
 		return false;
 
 	}
-
+	
 	public void render() {
 		super.render();
 
@@ -237,11 +268,14 @@ public class PlayScene extends LiveMapScene {
 		}
 
 		draw(Assets.textures.get("sprites"), JammyJam.game.player.x, JammyJam.game.player.y, 64, 0, 32, 32);
+		
+		if(dialogToDisplay != null)
+			dialogToDisplay.render();
 	}
 
 	@Override
 	public void buttonPressed(String id) {
-
+		System.out.println("Button: " + id);
 	}
 
 	@Override
@@ -264,6 +298,7 @@ public class PlayScene extends LiveMapScene {
 	@Override
 	public void mouseDown(int x, int y, int button) {
 		// TODO Auto-generated method stub
+		System.out.println("Mouse: " + x + ", " + y + ", Button: " + id);
 
 	}
 

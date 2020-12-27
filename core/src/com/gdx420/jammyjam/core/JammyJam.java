@@ -236,9 +236,12 @@ public class JammyJam implements Bearable {
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
 							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
-							item.onScreen = true;
-							item.x = x * 32;
-							item.y = y * 32;
+							if(!player.obtainedItems.contains(item))
+							{
+								item.onScreen = true;
+								item.x = x * 32;
+								item.y = y * 32;
+							}
 						}
 					}				
 				}
