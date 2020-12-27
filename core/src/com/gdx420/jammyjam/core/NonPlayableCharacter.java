@@ -9,7 +9,7 @@ public class NonPlayableCharacter extends Character {
 	public int width = -1;
 	public int height = -1;
 	
-	public Dialog[] dialogs;
+	public DialogData[] dialogs;
 	
 	public boolean onScreen = false;	
 }

@@ -9,19 +9,19 @@
     "dialogs": [
 		{
 			"name": "nothing to say",
-			"item_required": "Magazine",
+			"items_required": [ "Magazine", "Newspaper" ]
 			"dialog": "I don't want to talk about it.",
 			"item_given": ""
 		},
 		{
 			"name": "newspaper talk",
-			"item_required": "Newspaper",
+			"items_required": [ "Newspaper" ]
 			"dialog": "Oh such terrible news. Here take this, I can't read any more",
 			"item_given": "Magazine"
 		},
 		{
 			"name": "intro msg",
-			"item_required": "",
+			"items_required": []
 			"dialog": "Well hello stranger.",
 			"item_given": ""
 		}

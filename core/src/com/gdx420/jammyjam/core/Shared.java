@@ -8,6 +8,7 @@ public class Shared {
 	public static final int NUM_MAPS = 201;
 	public static final int MOVE_TIME = 500;
 	public static final int BOUNDING_BOX = 5;
+	public static final int NUM_ITEMS_PER_DIALOG = 10;
 
 	public static enum Attributes {
 		NO_ATTRIBUTE,
