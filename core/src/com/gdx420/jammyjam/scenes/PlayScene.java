@@ -1,8 +1,15 @@
 package com.gdx420.jammyjam.scenes;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 
 import com.badlogic.gdx.Input.Keys;
+import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
 import com.gdx420.jammyjam.core.JammyJam;
@@ -24,9 +31,7 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	public void start() {
-		super.start();
-		JammyJam.game.spawnNPCs(Realm.curMap);
-		
+		super.start();		
 	}
 
 	public void update() {

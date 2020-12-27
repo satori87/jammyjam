@@ -8,6 +8,6 @@ public class PlotEngine {
 		System.out.println("Item obtained: " + tile.att[0] + ", " + tile.att[1]);
 	}
 	public static void npcInteraction(NonPlayableCharacter npc) {
-		System.out.println("NPC interaction: " + npc.toString());
+		System.out.println("NPC interaction: " + npc.name);
 	}
 }

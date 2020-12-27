@@ -1,0 +1,24 @@
+{
+    "name": "Guy",
+	
+    "dialogs": [
+		{
+			"name": "intro msg",
+			"item_required": "",
+			"dialog": "Well hello stranger.",
+			"item_given": ""
+		},
+		{
+			"name": "newspaper talk",
+			"item_required": "newspaper",
+			"dialog": "Oh such terrible news. Here take this, I can't read any more",
+			"item_given": "magazine"
+		},
+		{
+			"name": "nothing to say",
+			"item_required": "magazine",
+			"dialog": "I don't want to talk about it.",
+			"item_given": ""
+		}
+	]
+}
