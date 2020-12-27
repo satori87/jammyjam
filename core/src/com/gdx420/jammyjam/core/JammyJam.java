@@ -211,10 +211,13 @@ public class JammyJam implements Bearable {
 						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
 								&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0) 
 							|| (Realm.mapData[currentMap].tile[x][y].attStr[1] != null
-									&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {							
-							npc.onScreen = true;
-							npc.x = x * 32;
-							npc.y = y * 32;
+									&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
+							if( ( npc.active_sleep && Scene.scene instanceof SleepPlayScene)
+									|| (npc.active_awake && Scene.scene instanceof AwakePlayScene)) {									
+								npc.onScreen = true;
+								npc.x = x * 32;
+								npc.y = y * 32;
+							}
 						}
 					}
 				}
@@ -238,11 +241,13 @@ public class JammyJam implements Bearable {
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
 							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
-							if(!player.obtainedItems.contains(item))
-							{
-								item.onScreen = true;
-								item.x = x * 32;
-								item.y = y * 32;
+							if(!player.obtainedItems.contains(item)) {
+								if( ( item.active_sleep && Scene.scene instanceof SleepPlayScene)
+										|| (item.active_awake && Scene.scene instanceof AwakePlayScene)) {
+									item.onScreen = true;
+									item.x = x * 32;
+									item.y = y * 32;
+								}
 							}
 						}
 					}				
@@ -256,17 +261,21 @@ public class JammyJam implements Bearable {
 
 		for(int x = 0; x < Shared.MAP_WIDTH; x++)
 			for(int y = 0; y < Shared.MAP_WIDTH; y++)
-				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal() 
-					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal())
+				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.STORYPOINT.ordinal() 
+					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.STORYPOINT.ordinal())
 				{
 					for (StoryPoint sp : storyPoints) {
 						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
 								&& sp.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
 							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
 								&& sp.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
-							sp.onScreen = true;
-							sp.x = x * 32;
-							sp.y = y * 32;
+							if( ( sp.active_sleep && Scene.scene instanceof SleepPlayScene)
+									|| (sp.active_awake && Scene.scene instanceof AwakePlayScene)) {
+								//System.out.println("Spawning story point: " + sp.name);
+								sp.onScreen = true;
+								sp.x = x * 32;
+								sp.y = y * 32;
+							}
 						}
 					}				
 				}

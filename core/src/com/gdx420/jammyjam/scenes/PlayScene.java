@@ -54,6 +54,9 @@ public class PlayScene extends LiveMapScene {
 			if (currentTile.att[0] == Shared.Attributes.ITEM.ordinal()
 					|| currentTile.att[1] == Shared.Attributes.ITEM.ordinal()) {
 				for (Item item : JammyJam.game.loadedItems) {
+					if(!item.onScreen)
+						continue;
+					
 					if ((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0)
 							|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(item.name) == 0)) {
 						PlotEngine.obtainItem(item);
@@ -68,8 +71,11 @@ public class PlayScene extends LiveMapScene {
 					if (neighbor.att[0] == Shared.Attributes.STORYPOINT.ordinal()
 							|| neighbor.att[1] == Shared.Attributes.STORYPOINT.ordinal()) {
 						for(StoryPoint sp : JammyJam.game.storyPoints) {
-							if((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(sp.name) == 0) 
-									|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(sp.name) == 0)) {
+							if(!sp.onScreen)
+								continue;
+							
+							if((neighbor.attStr[0] != null && neighbor.attStr[0].compareTo(sp.name) == 0) 
+									|| (neighbor.attStr[1] != null && neighbor.attStr[1].compareTo(sp.name) == 0)) {
 								PlotEngine.triggerPlot(sp);
 							}
 						}
@@ -239,6 +245,7 @@ public class PlayScene extends LiveMapScene {
 		Realm.curMap = mapTo;
 		JammyJam.game.spawnNPCs(Realm.curMap);
 		JammyJam.game.spawnItems(Realm.curMap);
+		JammyJam.game.spawnStoryPoints(Realm.curMap);
 		processed = false; // forces redraw
 	}
 

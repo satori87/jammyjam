@@ -4,6 +4,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.JammyJam;
+import com.gdx420.jammyjam.core.Realm;
+
 import java.time.LocalTime;
 
 public class AwakePlayScene extends PlayScene {
@@ -42,6 +44,9 @@ public class AwakePlayScene extends PlayScene {
 	void changeToSleepScene() {
 		Scene.change("sleepPlayScene");
 		JammyJam.game.sleepTimeManager.setGameClock(startSleepTime);
+		JammyJam.game.spawnNPCs(Realm.curMap);
+		JammyJam.game.spawnItems(Realm.curMap);
+		JammyJam.game.spawnStoryPoints(Realm.curMap);
 	}
 
 	public void render() {

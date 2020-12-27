@@ -1,6 +1,5 @@
 {
-    "name": "Neighbor Yard Axe",
-	"active_sleep" : false,
+    "name": "YardAxe",
 	"active_awake" : true	
 	
     "dialogs": [

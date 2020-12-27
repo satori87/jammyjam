@@ -5,8 +5,7 @@
 	"source_y" : 64,
 	"width" : 32,
 	"height" : 32,
-	"active_sleep" : true,
-	"active_awake" : false	
+	"active_awake" : true	
 	
     "dialogs": [
 		{

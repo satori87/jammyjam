@@ -1,6 +1,5 @@
 {
-    "name": "Neighbor Front Steps",
-	"active_sleep" : false,
+    "name": "NeighborSteps",
 	"active_awake" : true	
 	
     "dialogs": [
