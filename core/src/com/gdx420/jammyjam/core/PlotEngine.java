@@ -11,10 +11,12 @@ public class PlotEngine {
 		if(!JammyJam.game.player.obtainedItems.contains(item)) {
 			JammyJam.game.player.obtainedItems.add(item);
 			item.onScreen = false;
-			
-			DialogData data = new DialogData(item.name, item.text);
-			data.itemParent = item;
-			PlayScene.dialogQueue.add(data);
+			if(!item.text.isEmpty())
+			{
+				DialogData data = new DialogData(item.name, item.text);
+				data.itemParent = item;
+				PlayScene.dialogQueue.add(data);
+			}
 		}
 	}
 		
