@@ -3,7 +3,9 @@ package com.bg.bearplane.gui;
 import java.util.LinkedList;
 import java.util.List;
 import com.badlogic.gdx.graphics.Color;
+import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
+import com.gdx420.jammyjam.core.Shared;
 
 public class Dialog {
 
@@ -12,8 +14,8 @@ public class Dialog {
 	public int width = 0;
 	public int height = 0;
 	
-	public int y = 360;
-	public int x = 540;
+	public int x = Shared.GAME_WIDTH/2;
+	public int y = Shared.GAME_HEIGHT/2;
 	
 	public boolean done = false;
 	public boolean active = false;
@@ -52,10 +54,7 @@ public class Dialog {
 	}
 
 	public void choose(Button b) {
-		//TODO next line
-		//scene.activeDialog = null;
 		active = false;
-		scene.buttonPressed(b.id);
 		done = true;	
 	}
 	
@@ -70,19 +69,23 @@ public class Dialog {
 		}
 		height = textHeight + choicetext.length * 60;
 		frame = new Frame(scene,"f", x, y, width, height - 2, true, true);
+		frame.useAbsDraw = true;
 		msg = new Label(scene, "l", x - (width / 2) + 8 + xO, y - (height / 2) + 8 + 8+yO, 2, text, Color.WHITE, false);
 		msg.wrapw = width - 32 - xO;
 		msg.wrap = true;
+		msg.useAbsDraw = true;
 		choices = new LinkedList<Button>();
 		Button b;
 		for (int i = 0; i < choicetext.length; i++) {
 			b = new Button(scene, "dialog" + i, x, y - height / 2 + textHeight + 24 + 60*i, width - 16, 48, choicetext[i]);
-			b.dialog = true;
 			choices.add(b);
+			b.useAbsDraw = true;
+			
 		}
 	}
 
 	public void update(long tick) {	
+		
 		if(active) {
 			for (Button b : choices) {
 				b.update();

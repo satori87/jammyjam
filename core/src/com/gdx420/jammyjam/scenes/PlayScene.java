@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import com.badlogic.gdx.Input.Keys;
+import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
@@ -25,7 +26,7 @@ public class PlayScene extends LiveMapScene {
 	LocalTime startSleepTime = LocalTime.of(22, 0);
 	LocalTime startAwakeTime = LocalTime.of(8, 0);
 	
-	public static Dialog dialogToDisplay = null;
+
 	public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
 
 	public PlayScene() {
@@ -87,9 +88,7 @@ public class PlayScene extends LiveMapScene {
 	
 	// CREATE DIALOG HERE (and update)
 	public void updateDialog() {
-		if(dialogToDisplay != null) {
-			dialogToDisplay.update(tick);
-		}else if(dialogQueue.size() > 0) {
+		if(dialogQueue.size() > 0) {
 			DialogData data = dialogQueue.poll();
 			String words = data.dialog;
 			if(data.npcParent != null)
@@ -129,6 +128,11 @@ public class PlayScene extends LiveMapScene {
 		
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
+		}
+		
+		if(input.keyDown[Keys.B]) {
+			dialogToDisplay = new Dialog(this, "hey", 400, "heyy", new String[]{"Hmmm..."},new String[]{"0"});
+			dialogToDisplay.start(tick);
 		}
 	}
 
@@ -276,13 +280,18 @@ public class PlayScene extends LiveMapScene {
 
 		draw(Assets.textures.get("sprites"), JammyJam.game.player.x, JammyJam.game.player.y, 64, 0, 32, 32);
 		
-		if(dialogToDisplay != null)
-			dialogToDisplay.render();
+		
 	}
 
 	@Override
 	public void buttonPressed(String id) {
-		System.out.println("Button: " + id);
+		switch(id) {
+		case "dialog0":
+			dialogToDisplay.choose(dialogToDisplay.choices.get(0));
+			dialogToDisplay = null;
+			pressedEnter = false;			
+			break;
+		}
 	}
 
 	@Override

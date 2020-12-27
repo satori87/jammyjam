@@ -17,10 +17,10 @@ public class Button extends Component {
 	public boolean toggle = false;
 	public boolean toggled = false;
 
-	public boolean dialog = false;
-
 	public float fontSize = 32f / 24f;
 
+	public boolean useAbsDraw = false;
+	
 	public Button() {
 
 	}
@@ -48,9 +48,11 @@ public class Button extends Component {
 				return;
 			}
 			if (Scene.input.mouseDown[0]) {
+
 				if (Util.inCenteredBox(mX, mY, x, y, width, height)) {
+
 					if (Scene.input.wasMouseJustClicked[0]) {
-						Scene.input.wasMouseJustClicked[0] = false;
+						Scene.input.wasMouseJustClicked[0] = false;				
 						click();
 						stamp = tick + 500;
 					} else {
@@ -119,33 +121,69 @@ public class Button extends Component {
 			} else {
 				p = 0;
 			}
-			for (int a = 8; a < height - 8; a += 8) {
-				scene.draw(Bearplane.assets.bg[p == 1 ? 3 : 4], x + 4, y + 4, 0, 0, width - 8, height - 8);
-			}
-			// draw top left
-			scene.drawRegion(button[p][0], x, y, false, 0, 1);
-			// top right
-			scene.drawRegion(button[p][1], x + width - 8, y, false, 0, 1);
-			// bottom left
-			scene.drawRegion(button[p][2], x, y + height - 8, false, 0, 1);
-			// bottom right
-			scene.drawRegion(button[p][3], x + width - 8, y + height - 8, false, 0, 1);
-
-			// left side
-			for (int b = 8; b < height - 8; b += 8) {
-				scene.drawRegion(button[p][4], x, y + b, false, 0, 1);
-			}
-			// right side
-			for (int b = 8; b < height - 8; b += 8) {
-				scene.drawRegion(button[p][5], x + width - 8, y + b, false, 0, 1);
-			}
-			// top side
-			for (int b = 8; b < width - 8; b += 8) {
-				scene.drawRegion(button[p][6], x + b, y, false, 0, 1);
-			}
-			// bottom side
-			for (int b = 8; b < width - 8; b += 8) {
-				scene.drawRegion(button[p][7], x + b, y + height - 8, false, 0, 1);
+			
+			if(useAbsDraw) {
+				
+				for (int a = 8; a < height - 8; a += 8) {
+					scene.drawAbs(Bearplane.assets.bg[p == 1 ? 3 : 4], x + 4, y + 4, 0, 0, width - 8, height - 8);
+				}
+				// draw top left
+				scene.drawRegionAbs(button[p][0], x, y, false, 0, 1);
+				// top right
+				scene.drawRegionAbs(button[p][1], x + width - 8, y, false, 0, 1);
+				// bottom left
+				scene.drawRegionAbs(button[p][2], x, y + height - 8, false, 0, 1);
+				// bottom right
+				scene.drawRegionAbs(button[p][3], x + width - 8, y + height - 8, false, 0, 1);
+	
+				// left side
+				for (int b = 8; b < height - 8; b += 8) {
+					scene.drawRegionAbs(button[p][4], x, y + b, false, 0, 1);
+				}
+				// right side
+				for (int b = 8; b < height - 8; b += 8) {
+					scene.drawRegionAbs(button[p][5], x + width - 8, y + b, false, 0, 1);
+				}
+				// top side
+				for (int b = 8; b < width - 8; b += 8) {
+					scene.drawRegionAbs(button[p][6], x + b, y, false, 0, 1);
+				}
+				// bottom side
+				for (int b = 8; b < width - 8; b += 8) {
+					scene.drawRegionAbs(button[p][7], x + b, y + height - 8, false, 0, 1);
+				}
+				
+			} else {
+			
+				for (int a = 8; a < height - 8; a += 8) {
+					scene.draw(Bearplane.assets.bg[p == 1 ? 3 : 4], x + 4, y + 4, 0, 0, width - 8, height - 8);
+				}
+				// draw top left
+				scene.drawRegion(button[p][0], x, y, false, 0, 1);
+				// top right
+				scene.drawRegion(button[p][1], x + width - 8, y, false, 0, 1);
+				// bottom left
+				scene.drawRegion(button[p][2], x, y + height - 8, false, 0, 1);
+				// bottom right
+				scene.drawRegion(button[p][3], x + width - 8, y + height - 8, false, 0, 1);
+	
+				// left side
+				for (int b = 8; b < height - 8; b += 8) {
+					scene.drawRegion(button[p][4], x, y + b, false, 0, 1);
+				}
+				// right side
+				for (int b = 8; b < height - 8; b += 8) {
+					scene.drawRegion(button[p][5], x + width - 8, y + b, false, 0, 1);
+				}
+				// top side
+				for (int b = 8; b < width - 8; b += 8) {
+					scene.drawRegion(button[p][6], x + b, y, false, 0, 1);
+				}
+				// bottom side
+				for (int b = 8; b < width - 8; b += 8) {
+					scene.drawRegion(button[p][7], x + b, y + height - 8, false, 0, 1);
+				}
+				
 			}
 
 			x += (width / 2);
@@ -155,7 +193,13 @@ public class Button extends Component {
 			if (disabled) {
 				c = Color.GRAY;
 			}
-			scene.drawFont(0, x, y + 1, text, true, fontSize, c);
+			if(useAbsDraw) {
+				scene.drawFontAbs(0, x, y + 1, text, true, fontSize, c);				
+			} else {
+				scene.drawFont(0, x, y + 1, text, true, fontSize, c);
+			}
+			
+			
 		} catch (Exception e) {
 			Log.error(e);
 			

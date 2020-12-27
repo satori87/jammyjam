@@ -1,6 +1,7 @@
 package com.gdx420.jammyjam.scenes;
 
 import com.badlogic.gdx.graphics.Color;
+import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.JammyJam;
@@ -45,7 +46,8 @@ public class MenuScene extends Scene {
 	}
 
 	@Override
-	public void buttonPressed(String id) {		
+	public void buttonPressed(String id) {	
+		Log.debug("pressed " + id);
 		switch (id) {
 		case "play":
 			//Scene.change("play");

@@ -947,6 +947,7 @@ public class EditMapScene extends RenderEditMapScene {
 					}
 				}
 			} else if (Util.inBox(x, y, 559, 559 + 512, 40, 40 + 512)) {
+				clearFocus();
 				int tx = (x - 559) / 32;
 				int ty = (y - 40) / 32;
 				if (editMode < 7) {

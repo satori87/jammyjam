@@ -49,6 +49,16 @@ public abstract class Scene extends Frame {
 	public TreeMap<Integer, Focusable> focusList = new TreeMap<Integer, Focusable>();
 	Focusable focus;
 
+	public void clearFocus() {
+		
+		for(Field f : fields.values()) {
+			f.focus = false;
+		}
+		focus = null;
+	}
+	
+	public static Dialog dialogToDisplay = null;
+	
 	// Lifecyle
 
 	public static void init() {
@@ -105,6 +115,8 @@ public abstract class Scene extends Frame {
 			for (ListBox l : listBoxes.values()) {
 				l.updateComponent(tick);
 			}
+			if(dialogToDisplay != null)
+				dialogToDisplay.update(tick);
 			for (int i = 0; i < 10; i++) {
 				if (input.wasMouseJustClicked[i]) { // none of the scene objects caught this
 					mouseDown(input.mouseDownX[i], input.mouseDownY[i], i);
@@ -145,6 +157,7 @@ public abstract class Scene extends Frame {
 			for (ListBox l : listBoxes.values()) {
 				l.renderComponent();
 			}
+			
 		} catch (Exception e) {
 			Log.error(e);
 
@@ -153,6 +166,8 @@ public abstract class Scene extends Frame {
 			moveCameraTo(Bearplane.game.getGameWidth() / 2, Bearplane.game.getGameHeight() / 2);
 		}
 		render();
+		if(dialogToDisplay != null)
+			dialogToDisplay.render();
 	}
 
 	public abstract void render();
@@ -403,6 +418,40 @@ public abstract class Scene extends Frame {
 
 		}
 	}
+	
+	public void drawRegionAbs(TextureRegion region, float X, float Y, boolean centered, float rotation, float scale) {
+		try {
+			if (region == null) {
+				return;
+			}
+			int width = region.getRegionWidth();
+			int height = region.getRegionHeight();
+			float eX = 0;
+			float eY = 0;
+			// if (gameState == 3) {
+			// eX = X + originX;
+			// eY = Y + originY;
+			// } else {
+			eX = X;
+			eY = Y;
+			// }
+			if (centered) {
+				eX -= (width / 2);
+				eY -= (height / 2);
+			}
+			// we gotta round the floats
+			int dX = Math.round(eX);
+			int dY = Math.round(eY);
+			if (centered) {
+				batcher.draw(region, dX + curCam.position.x - Bearplane.game.getGameWidth() / 2, dY+ curCam.position.y - Bearplane.game.getGameHeight() / 2, width / 2, height / 2, width, height, scale, scale, rotation);
+			} else {
+				batcher.draw(region, dX + curCam.position.x - Bearplane.game.getGameWidth() / 2, dY+ curCam.position.y - Bearplane.game.getGameHeight() / 2, 0, 0, width, height, scale, scale, rotation);
+			}
+		} catch (Exception e) {
+			Log.error(e);
+
+		}
+	}
 
 	public void drawRegion(TextureRegion region, float X, float Y, boolean centered, float rotation, float scale) {
 		try {
@@ -624,7 +673,6 @@ public abstract class Scene extends Frame {
 		try {
 			gameWidth = (int) _gameWidth;
 			gameHeight = (int) _gameHeight;
-			Log.debug("Set screen");
 			screenWidth = Gdx.graphics.getWidth();
 			screenHeight = Gdx.graphics.getHeight();
 			float screenR = (float) screenWidth / (float) screenHeight;
