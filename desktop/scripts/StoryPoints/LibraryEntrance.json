@@ -1,0 +1,14 @@
+{
+    "name": "Library Entrance",
+	"active_sleep" : false,
+	"active_awake" : true	
+	
+    "dialogs": [
+		{
+			"name": "library closed",
+			"items_required": []
+			"dialog": "The library is currently closed... I should find another way in.",
+			"item_given": ""
+		}
+	]
+}

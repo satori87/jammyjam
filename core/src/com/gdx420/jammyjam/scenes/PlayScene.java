@@ -262,7 +262,7 @@ public class PlayScene extends LiveMapScene {
 		}
 
 		for (Item item : JammyJam.game.loadedItems) {
-			if (item.onScreen)
+			if (item.onScreen && !item.tile_sheet.isEmpty())
 				draw(Assets.textures.get(item.tile_sheet), item.x, item.y, item.source_x, item.source_y, item.width,
 						item.height);
 		}

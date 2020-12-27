@@ -232,6 +232,8 @@ public class JammyJam implements Bearable {
 					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal())
 				{
 					for (Item item : loadedItems) {
+						if(item.tile_sheet.isEmpty())
+							continue;
 						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
 							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
