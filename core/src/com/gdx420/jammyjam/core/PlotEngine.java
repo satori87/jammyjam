@@ -1,8 +1,9 @@
 package com.gdx420.jammyjam.core;
 
 public class PlotEngine {
-	public static void triggerPlot(Tile tile) {
-		//System.out.println("StoryPoint triggered: " + tile.att[0] + ", " + tile.att[1]);
+	public static void triggerPlot(StoryPoint sp) {
+		
+		System.out.println("StoryPoint triggered: " + sp.name);
 	}
 	public static void obtainItem(Item item) {
 		if(!JammyJam.game.player.obtainedItems.contains(item)) {

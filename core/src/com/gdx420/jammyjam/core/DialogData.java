@@ -5,6 +5,7 @@ public class DialogData {
 	public String []items_required = new String[Shared.NUM_ITEMS_PER_DIALOG];
 	public String dialog = new String();
 	public String item_given = new String();
+	public String warp = new String();
 	
 	public boolean wasDisplayed = false;
 }

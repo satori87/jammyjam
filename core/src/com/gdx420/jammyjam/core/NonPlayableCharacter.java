@@ -8,6 +8,8 @@ public class NonPlayableCharacter extends Character {
 	public int source_y = -1;
 	public int width = -1;
 	public int height = -1;
+	public boolean active_sleep = false;
+	public boolean active_awake = false;
 	
 	public DialogData[] dialogs;
 	

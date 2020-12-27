@@ -41,6 +41,7 @@ public class JammyJam implements Bearable {
 	public Player player = new Player(300, 200);
 	public List<NonPlayableCharacter> npcList = new ArrayList<NonPlayableCharacter>();
 	public List<Item> loadedItems = new ArrayList<Item>();
+	public List<StoryPoint> storyPoints = new ArrayList<StoryPoint>();
 
 	// timing
 	long tick = 0;
@@ -135,6 +136,9 @@ public class JammyJam implements Bearable {
 
 		loadNPCs();
 		spawnNPCs(Realm.curMap);
+		
+		loadStoryPoints();
+		spawnStoryPoints(Realm.curMap);
 
 	}
 
@@ -170,6 +174,23 @@ public class JammyJam implements Bearable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void loadStoryPoints() {
+		Path dir = Paths.get(new File("").getAbsolutePath() + "/scripts/StoryPoints/");
+		
+		DirectoryStream<Path> stream;
+		try {
+			stream = Files.newDirectoryStream(dir);
+			for (Path file: stream) {
+		        System.out.println("Loaded StoryPoint: " + file.getFileName());
+		        storyPoints.add((StoryPoint) Util.importJSON("scripts/StoryPoints/" + file.getFileName(), StoryPoint.class));
+		    }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	@Override
 	public void dispose() {
@@ -218,6 +239,29 @@ public class JammyJam implements Bearable {
 							item.onScreen = true;
 							item.x = x * 32;
 							item.y = y * 32;
+						}
+					}				
+				}
+	}
+	
+	public void spawnStoryPoints(int currentMap) {
+		for (StoryPoint sp : storyPoints) {
+			sp.onScreen = false;
+		}
+
+		for(int x = 0; x < Shared.MAP_WIDTH; x++)
+			for(int y = 0; y < Shared.MAP_WIDTH; y++)
+				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal() 
+					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal())
+				{
+					for (StoryPoint sp : storyPoints) {
+						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
+								&& sp.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
+							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
+								&& sp.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
+							sp.onScreen = true;
+							sp.x = x * 32;
+							sp.y = y * 32;
 						}
 					}				
 				}

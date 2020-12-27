@@ -20,6 +20,7 @@ import com.gdx420.jammyjam.core.NonPlayableCharacter;
 import com.gdx420.jammyjam.core.PlotEngine;
 import com.gdx420.jammyjam.core.Realm;
 import com.gdx420.jammyjam.core.Shared;
+import com.gdx420.jammyjam.core.StoryPoint;
 import com.gdx420.jammyjam.core.Tile;
 
 public class PlayScene extends LiveMapScene {
@@ -59,7 +60,12 @@ public class PlayScene extends LiveMapScene {
 				if (neighbor != null) {
 					if (neighbor.att[0] == Shared.Attributes.STORYPOINT.ordinal()
 							|| neighbor.att[1] == Shared.Attributes.STORYPOINT.ordinal()) {
-						PlotEngine.triggerPlot(neighbor);
+						for(StoryPoint sp : JammyJam.game.storyPoints) {
+							if((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(sp.name) == 0) 
+									|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(sp.name) == 0)) {
+								PlotEngine.triggerPlot(sp);
+							}
+						}
 					}
 				}
 			}
