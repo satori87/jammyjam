@@ -8,22 +8,23 @@
 	
     "dialogs": [
 		{
-			"name": "intro msg",
-			"item_required": "",
-			"dialog": "Well hello stranger.",
+			"name": "nothing to say",
+			"item_required": "Magazine",
+			"dialog": "I don't want to talk about it.",
 			"item_given": ""
 		},
 		{
 			"name": "newspaper talk",
-			"item_required": "newspaper",
+			"item_required": "Newspaper",
 			"dialog": "Oh such terrible news. Here take this, I can't read any more",
-			"item_given": "magazine"
+			"item_given": "Magazine"
 		},
 		{
-			"name": "nothing to say",
-			"item_required": "magazine",
-			"dialog": "I don't want to talk about it.",
+			"name": "intro msg",
+			"item_required": "",
+			"dialog": "Well hello stranger.",
 			"item_given": ""
 		}
+		
 	]
 }
