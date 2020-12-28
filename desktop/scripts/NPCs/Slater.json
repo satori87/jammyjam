@@ -1,0 +1,18 @@
+{
+    "name": "Slater",
+	"tile_sheet" : "sprites",
+	"source_x" : 128,
+	"source_y" : 256,
+	"width" : 32,
+	"height" : 32,
+	"active_awake" : true,
+	
+    "dialogs": [
+		{
+			"name": "slater intro",
+			"items_required": [ ],
+			"dialog": "Oh my oh my where could she be?",
+			"item_given": ""
+		}		
+	]
+}

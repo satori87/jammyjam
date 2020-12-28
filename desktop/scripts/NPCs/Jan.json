@@ -1,0 +1,31 @@
+{
+    "name": "Jan",
+	"tile_sheet" : "Indoor_Decor_2",
+	"source_x" : 445,
+	"source_y" : 230,
+	"width" : 32,
+	"height" : 32,
+	"active_sleep" : true,	
+	
+    "dialogs": [
+		{
+			"name": "help me",
+			"items_required": [ ],
+			"dialog": "Help me Morpheus, you're my only hope.",
+			"item_given": ""
+		},
+		{
+			"name": "not dead",
+			"items_required": [ "Newspaper" ],
+			"dialog": "I'm not just missing... I'm dead.",
+			"item_given": ""
+		},
+		{
+			"name": "husband innocent",
+			"items_required": ["Magazine"],
+			"dialog": "My husband didn't do it...",
+			"item_given": ""
+		}
+		
+	]
+}
