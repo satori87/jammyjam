@@ -40,7 +40,7 @@ public class JammyJam implements Bearable {
 	public static Assets assets = new Assets();
 	public Realm realm = new Realm(assets);
 	public Config config = new Config();
-	public Player player = new Player(320, 320);
+	public Player player = new Player(300, 200);
 	public List<NonPlayableCharacter> npcList = new ArrayList<NonPlayableCharacter>();
 	public List<Item> loadedItems = new ArrayList<Item>();
 	public List<StoryPoint> storyPoints = new ArrayList<StoryPoint>();
@@ -206,7 +206,7 @@ public class JammyJam implements Bearable {
 		}
 		for (int x = 0; x < Shared.MAP_WIDTH; x++) {
 			for (int y = 0; y < Shared.MAP_WIDTH; y++) {
-				
+
 				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.NPC_SPAWN.ordinal()
 						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.NPC_SPAWN.ordinal()) {
 					for (NonPlayableCharacter npc : npcList) {
@@ -262,8 +262,8 @@ public class JammyJam implements Bearable {
 			sp.onScreen = false;
 		}
 
-		for (int x = 0; x < Shared.MAP_WIDTH; x++)
-			for (int y = 0; y < Shared.MAP_WIDTH; y++)
+		for (int x = 0; x < Shared.MAP_WIDTH; x++) {
+			for (int y = 0; y < Shared.MAP_WIDTH; y++) {
 				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.STORYPOINT.ordinal()
 						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.STORYPOINT.ordinal()) {
 					for (StoryPoint sp : storyPoints) {
@@ -281,6 +281,8 @@ public class JammyJam implements Bearable {
 						}
 					}
 				}
+			}
+		}
 	}
 
 	@Override
