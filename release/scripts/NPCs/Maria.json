@@ -3,17 +3,17 @@
 	"tile_sheet" : "Girl_2",
 	"active_awake" : true,
 	
-    "dialogs": [
-		{
-			"name": "nothing to say - maria",
-			"items_required": [ ],
-			"dialog": "Please let me be, I have nothing to say.",
-			"item_given": ""
-		},
+    "dialogs": [		
 		{
 			"name": "caught with book",
 			"items_required": [ "BloodyBook" ],
 			"dialog": "I didn't get the blood on there. I lent it to Thomas...",
+			"item_given": ""
+		},
+		{
+			"name": "nothing to say - maria",
+			"items_required": [ ],
+			"dialog": "Please let me be, I have nothing to say.",
 			"item_given": ""
 		}		
 	]

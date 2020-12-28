@@ -1,0 +1,15 @@
+{
+    "name": "HaroldDream",
+	"tile_sheet" : "Guy_4",
+	"active_sleep" : true,	
+	
+    "dialogs": [		
+		{
+			"name": "dream cop",
+			"items_required": [],
+			"dialog": "Help Officer! There's so much blood!",
+			"item_given": ""
+		}
+		
+	]
+}
