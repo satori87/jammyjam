@@ -1,6 +1,6 @@
 {
     "name": "LibraryDoor",
-	"active_sleep" : false,
+	"active_sleep":  true,
 	"active_awake" : true,	
 	
     "dialogs": [
