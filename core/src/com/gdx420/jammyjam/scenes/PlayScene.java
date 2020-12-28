@@ -48,6 +48,9 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	public void updatePlay() {
+		if(JammyJam.gameIsWon)
+			Scene.change("menu");
+		
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
 		Tile currentTile = null;
@@ -92,8 +95,16 @@ public class PlayScene extends LiveMapScene {
 		}
 	}
 
+	public static long lastDialogUpdate = System.currentTimeMillis(); 
 	// CREATE DIALOG HERE (and update)
 	public void updateDialog() {
+
+		// prevent multiple times in a row
+		if(System.currentTimeMillis() - lastDialogUpdate < 3000)
+			return;
+		
+		lastDialogUpdate = System.currentTimeMillis();
+		
 		if (dialogQueue.size() > 0) {
 			DialogData data = dialogQueue.poll();
 			String words = data.dialog;

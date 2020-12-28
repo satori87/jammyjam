@@ -35,6 +35,8 @@ public class JammyJam implements Bearable {
 	public static final String EFFECTS_PATH = "assets/effects";
 	public static final String ASSETS_PATH = "assets";
 	public static final String CONFIG_FILE = "config.txt";
+	
+	public static boolean gameIsWon = false;
 
 	public static JammyJam game;
 	public static Assets assets = new Assets();

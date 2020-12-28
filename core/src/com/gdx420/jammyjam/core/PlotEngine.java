@@ -114,6 +114,7 @@ public class PlotEngine {
 		if(dlg.win_game) {
 			DialogData data = new DialogData("Won Game", "Congrats kid, you snagged the baddie and saved the day. Keep an eye out for the full version of this game someday.");
 			PlayScene.dialogQueue.add(data);
+			JammyJam.gameIsWon = true;
 		}
 	}
 	
