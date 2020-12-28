@@ -6,8 +6,6 @@
 	"width" : 32,
 	"height" : 32,
 	"active_awake" : true,
-	"active_sleep" : true,
-	
 	
     "dialogs": [
 		{

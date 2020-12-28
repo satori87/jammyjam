@@ -204,7 +204,7 @@ public class JammyJam implements Bearable {
 		}
 		for (int x = 0; x < Shared.MAP_WIDTH; x++) {
 			for (int y = 0; y < Shared.MAP_WIDTH; y++) {
-				
+
 				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.NPC_SPAWN.ordinal()
 						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.NPC_SPAWN.ordinal()) {
 					for (NonPlayableCharacter npc : npcList) {
@@ -260,8 +260,8 @@ public class JammyJam implements Bearable {
 			sp.onScreen = false;
 		}
 
-		for (int x = 0; x < Shared.MAP_WIDTH; x++)
-			for (int y = 0; y < Shared.MAP_WIDTH; y++)
+		for (int x = 0; x < Shared.MAP_WIDTH; x++) {
+			for (int y = 0; y < Shared.MAP_WIDTH; y++) {
 				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.STORYPOINT.ordinal()
 						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.STORYPOINT.ordinal()) {
 					for (StoryPoint sp : storyPoints) {
@@ -279,6 +279,8 @@ public class JammyJam implements Bearable {
 						}
 					}
 				}
+			} 
+		}
 	}
 
 	@Override
