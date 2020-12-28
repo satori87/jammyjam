@@ -23,7 +23,7 @@ public class Assets extends BaseAssets {
 	}
 
 	public void load() {
-		File f = new File("sfx");
+		File f = new File("assets/sfx");
 
         // Populates the array with names of files and directories
         //pathnames = f.list();
