@@ -58,7 +58,7 @@ public class MenuScene extends Scene {
 		switch (id) {
 		case "play":
 			//Scene.change("play");
-			Scene.change("awakePlayScene");
+			Scene.change("sleepPlayScene");
 			if(JammyJam.musicLoop != null)
 				JammyJam.musicLoop.stop();
 			JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");

@@ -35,7 +35,8 @@ public class PlayScene extends LiveMapScene {
 
 	public void start() {
 		super.start();
-		changeMap(1);
+		changeMap(111);
+		JammyJam.game.player.dir = 2;
 	}
 
 	public void update() {

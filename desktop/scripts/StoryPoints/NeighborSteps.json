@@ -1,17 +1,17 @@
 {
     "name": "NeighborSteps",
-	"active_awake" : true	
+	"active_awake" : true,	
 	
     "dialogs": [
 		{
 			"name": "look for steps clue",
-			"items_required": []
+			"items_required": [],
 			"dialog": "No blood on the steps. Better check the neighbor's car out front as well.",
 			"item_given": "NeighborStepsClue_invisible"
 		},
 		{
 			"name": "check car",
-			"items_required": [ "NeighborStepsClue_invisible" ]
+			"items_required": [ "NeighborStepsClue_invisible" ],
 			"dialog": "I should definitely check for more blood. Maybe Jan's car will have a clue.",
 		}
 	]
