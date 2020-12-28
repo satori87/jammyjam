@@ -101,9 +101,12 @@ public class PlayScene extends LiveMapScene {
 	public static long lastDialogUpdate = System.currentTimeMillis(); 
 	// CREATE DIALOG HERE (and update)
 	public void updateDialog() {
+		
+		if(dialogToDisplay != null)
+			return;
 
 		// prevent multiple times in a row
-		if(System.currentTimeMillis() - lastDialogUpdate < 3000)
+		if(System.currentTimeMillis() - lastDialogUpdate < 2000)
 			return;
 		
 		lastDialogUpdate = System.currentTimeMillis();
