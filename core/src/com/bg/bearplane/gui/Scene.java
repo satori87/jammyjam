@@ -383,7 +383,8 @@ public abstract class Scene extends Frame {
 
 	public void draw(Texture t, int x, int y, int w, int h, int srcX, int srcY, int srcW, int srcH) {
 		try {
-			batcher.draw(t, x, y, w, h, srcX, srcY, srcW, srcH, false, true);
+			if(t != null)
+				batcher.draw(t, x, y, w, h, srcX, srcY, srcW, srcH, false, true);
 		} catch (Exception e) {
 			Log.error(e);
 
