@@ -2,9 +2,9 @@
     "name": "BloodyBook",
 	"tile_sheet" : "Indoor_Decor_2",
 	"source_x" : 0,
-	"source_y" : 320,
-	"width" : 24,
-	"height" : 24,	
+	"source_y" : 300,
+	"width" : 32,
+	"height" : 32,	
 	"text" : "This book has blood all over it! I wonder if it's Jan's blood. The index card says the last person to check this out was Maria.",
 	"active_awake" : true
 }
