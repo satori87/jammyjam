@@ -1,8 +1,10 @@
 package com.gdx420.jammyjam.scenes;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
+import com.gdx420.jammyjam.core.Assets;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.Realm;
 
@@ -46,7 +48,11 @@ public class AwakePlayScene extends PlayScene {
 		JammyJam.game.sleepTimeManager.setGameClock(startSleepTime);
 		JammyJam.game.spawnNPCs(Realm.curMap);
 		JammyJam.game.spawnItems(Realm.curMap);
-		JammyJam.game.spawnStoryPoints(Realm.curMap);		
+		JammyJam.game.spawnStoryPoints(Realm.curMap);
+		if(JammyJam.musicLoop != null)
+			JammyJam.musicLoop.stop();
+		JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");
+		JammyJam.musicLoop.loop();		
 	}
 
 	public void render() {

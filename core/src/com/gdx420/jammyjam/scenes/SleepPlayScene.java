@@ -1,14 +1,18 @@
 package com.gdx420.jammyjam.scenes;
 
 import java.time.LocalTime;
+import com.gdx420.jammyjam.core.Assets;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.Realm;
 import com.badlogic.gdx.graphics.Color;
 
 public class SleepPlayScene extends PlayScene {
+	
+	public static Sound musicLoop = null;
 	
 	public SleepPlayScene() {
 
@@ -47,6 +51,10 @@ public class SleepPlayScene extends PlayScene {
 		JammyJam.game.spawnNPCs(Realm.curMap);
 		JammyJam.game.spawnItems(Realm.curMap);
 		JammyJam.game.spawnStoryPoints(Realm.curMap);
+		if(JammyJam.musicLoop != null)
+			JammyJam.musicLoop.stop();
+		JammyJam.musicLoop = Assets.sounds.get("Pursuit_seamless");
+		JammyJam.musicLoop.loop();
 	}
 
 	public void render() {

@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g3d.Attribute;
 import com.bg.bearplane.engine.Bearable;
 import com.bg.bearplane.engine.Bearplane;
@@ -24,6 +25,7 @@ import com.gdx420.jammyjam.scenes.SleepPlayScene;
 import com.gdx420.jammyjam.scenes.UpdateScene;
 
 public class JammyJam implements Bearable {
+	public static Sound musicLoop = null;
 
 	public static final boolean IS_RELEASE = false; // change to true for release
 	public static final int GAME_WIDTH = 1366;

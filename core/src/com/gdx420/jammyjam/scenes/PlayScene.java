@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
@@ -131,6 +132,11 @@ public class PlayScene extends LiveMapScene {
 
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
+
+			if(JammyJam.musicLoop != null)
+				JammyJam.musicLoop.stop();
+			JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
+			JammyJam.musicLoop.loop();
 		}
 
 		if (input.keyDown(Keys.SPACE))

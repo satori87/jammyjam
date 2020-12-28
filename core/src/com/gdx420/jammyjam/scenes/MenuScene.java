@@ -1,12 +1,15 @@
 package com.gdx420.jammyjam.scenes;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
+import com.gdx420.jammyjam.core.Assets;
 import com.gdx420.jammyjam.core.JammyJam;
 
 public class MenuScene extends Scene {
+	
 
 	public static String status = "";
 
@@ -32,6 +35,10 @@ public class MenuScene extends Scene {
 		addButton("lol", hw, hh - 32 + y, 256, 48, "Edit Map");
 		addButton("options", hw, hh + 32 + y, 256, 48, "Options");
 		addButton("quit", hw, hh + 96 + y, 256, 48, "Quit");
+		if(JammyJam.musicLoop != null)
+			JammyJam.musicLoop.stop();
+		JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
+		JammyJam.musicLoop.loop();
 
 		
 	}
@@ -52,6 +59,10 @@ public class MenuScene extends Scene {
 		case "play":
 			//Scene.change("play");
 			Scene.change("awakePlayScene");
+			if(JammyJam.musicLoop != null)
+				JammyJam.musicLoop.stop();
+			JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");
+			JammyJam.musicLoop.loop();		
 			break;
 		case "lol":
 			Scene.change("edit");
