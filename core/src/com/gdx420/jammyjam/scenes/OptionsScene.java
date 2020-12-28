@@ -18,6 +18,15 @@ public class OptionsScene extends Scene {
 		addLabel("Time", JammyJam.GAME_WIDTH / 2, 192, 2f, "Fast Forward Time: Tab", Color.WHITE, true);
 		addLabel("Menu", JammyJam.GAME_WIDTH / 2, 256, 2f, "Escape: Menu", Color.WHITE, true);
 		
+		
+		addLabel("Credits:", JammyJam.GAME_WIDTH / 2, 384, 2f, "Credits:", Color.WHITE, true);
+		addLabel("Bear", JammyJam.GAME_WIDTH / 2, 448, 2f, "Michael Whitlock (Bearable Games)", Color.WHITE, true);
+		addLabel("Joker", JammyJam.GAME_WIDTH / 2, 512, 2f, "Christian Vanderbeck (Bearable Games)", Color.WHITE, true);
+		addLabel("Mac", JammyJam.GAME_WIDTH / 2, 575, 2f, "Mac Canepi (Bearable Games)", Color.WHITE, true);
+		addLabel("Infinite", JammyJam.GAME_WIDTH / 2, 640, 2f, "Faris (Wheeler Games)", Color.WHITE, true);
+		addLabel("Santorno", JammyJam.GAME_WIDTH / 2, 704, 2f, "Ahmed Moustafa", Color.WHITE, true);
+		
+		
 		//addFrame("topframe", )
 		
 		//addFrame(this)
