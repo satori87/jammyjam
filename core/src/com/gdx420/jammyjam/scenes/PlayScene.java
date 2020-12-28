@@ -7,6 +7,7 @@ import java.util.Queue;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.engine.Log;
+import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
@@ -107,7 +108,9 @@ public class PlayScene extends LiveMapScene {
 
 	private static boolean pressedEnter = false;
 
+
 	void checkKeys() {
+		warp = false;
 		if (dialogToDisplay != null) {
 			if (input.keyDown[Keys.ENTER]) {
 				pressedEnter = true;
@@ -133,8 +136,7 @@ public class PlayScene extends LiveMapScene {
 
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
-
-			if(JammyJam.musicLoop != null)
+if(JammyJam.musicLoop != null)
 				JammyJam.musicLoop.stop();
 			JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
 			JammyJam.musicLoop.loop();
@@ -146,25 +148,14 @@ public class PlayScene extends LiveMapScene {
 			isSpaceBarPressed = false;
 	}
 
-	boolean checkWarp() {
-		int x = (JammyJam.game.player.x + 16) / 32;
-		if (x >= Shared.MAP_WIDTH)
-			x = Shared.MAP_WIDTH - 1;
-		if (x < 0)
-			x = 0;
-		int y = (JammyJam.game.player.y + 16) / 32;
-		if (y >= Shared.MAP_WIDTH)
-			y = Shared.MAP_WIDTH - 1;
-		if (y < 0)
-			y = 0;
+	void warp(int x, int y) {
+
 		MapData data = Realm.mapData[Realm.curMap];
 		if (data.tile[x][y] != null && data.tile[x][y].att[0] == Shared.Attributes.WARP.ordinal()) {
 			changeMap(data.tile[x][y].attData[0][0]);
 			JammyJam.game.player.x = data.tile[x][y].attData[0][1] * 32 - 16;
 			JammyJam.game.player.y = data.tile[x][y].attData[0][2] * 32 - 16;
-			return true;
 		}
-		return false;
 	}
 
 	int oldY = 0;
@@ -174,6 +165,7 @@ public class PlayScene extends LiveMapScene {
 	boolean movedHor;
 
 	void checkVerticalMovement() {
+		
 		movedVert = false;
 		oldY = JammyJam.game.player.y;
 		if (input.keyDown[Keys.UP]) {
@@ -185,7 +177,7 @@ public class PlayScene extends LiveMapScene {
 			JammyJam.game.player.dir = 2;
 			movedVert = true;
 		}
-		if (checkCollision()) {
+		if (checkCollision() && !warp) {
 			movedVert = false;
 			JammyJam.game.player.y = oldY;
 		}
@@ -206,19 +198,38 @@ public class PlayScene extends LiveMapScene {
 			JammyJam.game.player.dir = 3;
 			movedHor = true;
 		}
-		if (checkCollision()) {
+		if (checkCollision() && !warp) {
 			movedHor = false;
+
 			JammyJam.game.player.x = oldX;
 		}
 	}
 
+	boolean warp = false;
+
 	boolean checkCollision() {
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
+		Tile t;
 
-		if (checkWarp()) {
-			return false;
+		for (int x = playerTilePositionX - 1; x <= playerTilePositionX + 1; x++) {
+			for (int y = playerTilePositionY - 1; y <= playerTilePositionY + 1; y++) {
+				if (MapData.inBounds(x, y)) {
+					t = Realm.mapData[Realm.curMap].tile[x][y];
+					if (t.att[0] == 3) {
+						if (Util.distance(x * 32 + 16, y * 32 + 16, JammyJam.game.player.x,
+								JammyJam.game.player.y + 32) <= 40) {
+							warp(x, y);
+							Log.debug("WARP");
+							warp = true;
+							return false;
+						}
+					}
+
+				}
+			}
 		}
+
 		boolean b1 = checkWallCollision(playerTilePositionX, playerTilePositionY)
 				|| checkNpcCollision(playerTilePositionX, playerTilePositionY);
 		playerTilePositionX = (JammyJam.game.player.x - 16) / 32;
@@ -288,7 +299,6 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	void changeMap(int mapTo) {
-		Log.debug("aa");
 		Realm.curMap = mapTo;
 		JammyJam.game.spawnNPCs(Realm.curMap);
 		JammyJam.game.spawnItems(Realm.curMap);
