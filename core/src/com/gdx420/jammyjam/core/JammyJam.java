@@ -30,7 +30,7 @@ public class JammyJam implements Bearable {
 	public static final boolean IS_RELEASE = false; // change to true for release
 	public static final int GAME_WIDTH = 1366;
 	public static final int GAME_HEIGHT = 768;
-	public static final String GAME_NAME = "Jammy Jam";
+	public static final String GAME_NAME = "Detective Morpheus";
 	public static final String CLIENT_VERSION = "bananas17";
 	public static final String EFFECTS_PATH = "assets/effects";
 	public static final String ASSETS_PATH = "assets";
