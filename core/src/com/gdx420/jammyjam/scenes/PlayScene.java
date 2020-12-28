@@ -16,6 +16,7 @@ import com.gdx420.jammyjam.core.Item;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.MapData;
 import com.gdx420.jammyjam.core.NonPlayableCharacter;
+import com.gdx420.jammyjam.core.Player;
 import com.gdx420.jammyjam.core.PlotEngine;
 import com.gdx420.jammyjam.core.Realm;
 import com.gdx420.jammyjam.core.Shared;
@@ -117,6 +118,10 @@ public class PlayScene extends LiveMapScene {
 		}
 	}
 
+	public Player player() {
+		return JammyJam.game.player;
+	}
+	
 	private static boolean pressedEnter = false;
 
 	void checkKeys() {
@@ -132,6 +137,12 @@ public class PlayScene extends LiveMapScene {
 		} else {
 			checkVerticalMovement();
 			checkHorizontalMovement();
+			if(player().x != oldX || player().y != oldY) {
+				player().walkStep++;
+				if(player().walkStep >= Player.MAX_FRAMES) {
+					player().walkStep = 0;
+				}
+			}
 			checkMapChange();
 			if (JammyJam.game.player.x < 5)
 				JammyJam.game.player.x = 5;
@@ -179,11 +190,11 @@ public class PlayScene extends LiveMapScene {
 		movedVert = false;
 		oldY = JammyJam.game.player.y;
 		if (input.keyDown[Keys.UP]) {
-			JammyJam.game.player.y -= 5;
+			JammyJam.game.player.y -= Player.MOVE_STEP;
 			JammyJam.game.player.dir = 0;
 			movedVert = true;
 		} else if (input.keyDown[Keys.DOWN]) {
-			JammyJam.game.player.y += 5;
+			JammyJam.game.player.y += Player.MOVE_STEP;
 			JammyJam.game.player.dir = 2;
 			movedVert = true;
 		}
@@ -200,11 +211,11 @@ public class PlayScene extends LiveMapScene {
 		oldX = JammyJam.game.player.x;
 
 		if (input.keyDown[Keys.LEFT]) {
-			JammyJam.game.player.x -= 5;
+			JammyJam.game.player.x -= Player.MOVE_STEP;
 			JammyJam.game.player.dir = 1;
 			movedHor = true;
 		} else if (input.keyDown[Keys.RIGHT]) {
-			JammyJam.game.player.x += 5;
+			JammyJam.game.player.x += Player.MOVE_STEP;
 			JammyJam.game.player.dir = 3;
 			movedHor = true;
 		}
