@@ -33,7 +33,7 @@ public class MenuScene extends Scene {
 
 		addButton("play", hw,  hh - 96 + y, 256, 48, "Test Play");
 		addButton("lol", hw, hh - 32 + y, 256, 48, "Edit Map");
-		addButton("options", hw, hh + 32 + y, 256, 48, "Options");
+		addButton("options", hw, hh + 32 + y, 256, 48, "Controls");
 		addButton("quit", hw, hh + 96 + y, 256, 48, "Quit");
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();
