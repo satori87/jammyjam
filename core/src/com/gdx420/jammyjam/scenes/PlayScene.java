@@ -31,6 +31,8 @@ public class PlayScene extends LiveMapScene {
 	public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
 	public static boolean isSpaceBarPressed = false;
 
+	long lastMapChange = 0;
+
 	public PlayScene() {
 
 	}
@@ -49,11 +51,11 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	public void updatePlay() {
-		if(JammyJam.gameIsWon) {
+		if (JammyJam.gameIsWon) {
 			Scene.change("menu");
 			return;
 		}
-		
+
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
 		Tile currentTile = null;
@@ -98,16 +100,17 @@ public class PlayScene extends LiveMapScene {
 		}
 	}
 
-	public static long lastDialogUpdate = System.currentTimeMillis(); 
+	public static long lastDialogUpdate = System.currentTimeMillis();
+
 	// CREATE DIALOG HERE (and update)
 	public void updateDialog() {
 
 		// prevent multiple times in a row
-		if(System.currentTimeMillis() - lastDialogUpdate < 3000)
+		if (System.currentTimeMillis() - lastDialogUpdate < 3000)
 			return;
-		
+
 		lastDialogUpdate = System.currentTimeMillis();
-		
+
 		if (dialogQueue.size() > 0) {
 			DialogData data = dialogQueue.poll();
 			String words = data.dialog;
@@ -123,7 +126,7 @@ public class PlayScene extends LiveMapScene {
 	public Player player() {
 		return JammyJam.game.player;
 	}
-	
+
 	private static boolean pressedEnter = false;
 
 	void checkKeys() {
@@ -139,9 +142,9 @@ public class PlayScene extends LiveMapScene {
 		} else {
 			checkVerticalMovement();
 			checkHorizontalMovement();
-			if(player().x != oldX || player().y != oldY) {
+			if (player().x != oldX || player().y != oldY) {
 				player().walkStep++;
-				if(player().walkStep >= Player.MAX_FRAMES) {
+				if (player().walkStep >= Player.MAX_FRAMES) {
 					player().walkStep = 0;
 				}
 			}
@@ -235,20 +238,22 @@ public class PlayScene extends LiveMapScene {
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
 		Tile t;
 
-		for (int x = playerTilePositionX - 1; x <= playerTilePositionX + 1; x++) {
-			for (int y = playerTilePositionY - 1; y <= playerTilePositionY + 1; y++) {
-				if (MapData.inBounds(x, y)) {
-					t = Realm.mapData[Realm.curMap].tile[x][y];
-					if (t.att[0] == 3) {
-						if (Util.distance(x * 32 + 16, y * 32 + 16, JammyJam.game.player.x,
-								JammyJam.game.player.y + 32) <= 40) {
-							warp(x, y);
-							Log.debug("WARP");
-							warp = true;
-							return false;
+		if (tick > lastMapChange + 1000) {
+			for (int x = playerTilePositionX - 1; x <= playerTilePositionX + 1; x++) {
+				for (int y = playerTilePositionY - 1; y <= playerTilePositionY + 1; y++) {
+					if (MapData.inBounds(x, y)) {
+						t = Realm.mapData[Realm.curMap].tile[x][y];
+						if (t.att[0] == 3) {
+							if (Util.distance(x * 32 + 16, y * 32 + 16, JammyJam.game.player.x,
+									JammyJam.game.player.y + 32) <= 36) {
+								warp(x, y);
+								Log.debug("WARP");
+								warp = true;
+								return false;
+							}
 						}
-					}
 
+					}
 				}
 			}
 		}
@@ -322,6 +327,7 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	void changeMap(int mapTo) {
+		lastMapChange = tick;
 		Realm.curMap = mapTo;
 		JammyJam.game.spawnNPCs(Realm.curMap);
 		JammyJam.game.spawnItems(Realm.curMap);
