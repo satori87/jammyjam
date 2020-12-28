@@ -31,9 +31,9 @@ public class MenuScene extends Scene {
 
 		addLabel("title", hw, hh - 200, 4f, JammyJam.game.getGameName(), Color.WHITE, true);
 
-		addButton("play", hw,  hh - 96 + y, 256, 48, "Test Play");
+		addButton("play", hw,  hh - 96 + y, 256, 48, "Play Demo");
 		addButton("lol", hw, hh - 32 + y, 256, 48, "Edit Map");
-		addButton("options", hw, hh + 32 + y, 256, 48, "Options");
+		addButton("options", hw, hh + 32 + y, 256, 48, "Controls");
 		addButton("quit", hw, hh + 96 + y, 256, 48, "Quit");
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();

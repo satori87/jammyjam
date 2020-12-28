@@ -11,12 +11,12 @@ public class OptionsScene extends Scene {
 	@Override
 	public void start() {
 		super.start();
-		addLabel("title", JammyJam.GAME_WIDTH / 2, 64, 2f, "Options", Color.WHITE, true);
-		addFrame("f",400,500,200,200,false,false);
-		addButton("oops", 200, 200, 256, 48, "OOPS");
-		addField("text1", 5, 0, 100, 100, 80);
-		addField("text2", 5, 1, 400, 100, 80);
-		addField("text3", 5, 2, 400, 200, 80);
+		addLabel("title", JammyJam.GAME_WIDTH / 2, 64, 2f, "Controls", Color.WHITE, true);
+		//addFrame("f",400,500,200,200,false,false);
+		//addButton("oops", 200, 200, 256, 48, "OOPS");
+		addLabel("Movement", JammyJam.GAME_WIDTH / 2, 128, 2f, "Movement: Arrow Keys", Color.WHITE, true);
+		addLabel("Time", JammyJam.GAME_WIDTH / 2, 192, 2f, "Fast Forward Time: Tab", Color.WHITE, true);
+		addLabel("Menu", JammyJam.GAME_WIDTH / 2, 256, 2f, "Escape: Menu", Color.WHITE, true);
 		
 		//addFrame("topframe", )
 		
