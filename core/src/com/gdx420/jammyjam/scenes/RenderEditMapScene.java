@@ -516,7 +516,7 @@ public class RenderEditMapScene extends Scene {
 		clip(20, 40, 512, 512);
 		drawMap();
 		endClip();
-		// draw(Assets.textures.get("tilebar"), 690, 2, 0, 0, 320, 32);
+	
 		// draw(Assets.textures.get("sel"), 690 + curSet * 32, 2, 0, 0, 32, 32);
 		String options = "Shift: " + (shift ? "On" : "Off");
 		drawFont(0, 560, 562, options, false, 1);

@@ -468,12 +468,14 @@ public class EditMapScene extends RenderEditMapScene {
 				// }
 				// }
 				break;
+
 			case Keys.SHIFT_LEFT:
 			case Keys.SHIFT_RIGHT:
 				shift = !shift;
 				break;
 			case Keys.F4:
-				// test();
+				Log.debug("F4");
+				Scene.change("playScene");
 				break;
 			case Keys.F5:
 				// commit();

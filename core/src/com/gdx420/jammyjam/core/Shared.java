@@ -32,4 +32,8 @@ public class Shared {
 			"Wall_Outdoor_Fences_Decor", "Wall_Outdoor_Windows", "cars_bear", "cars_crane", "cars_gold", "cars_police",
 			"cars_silver", "cars_white", "road_markings_white", "road_markings_yellow", "road_signs_de", "street_dark",
 			"street_light", "street_misc", "Outdoor_Trees_4", "dungeonex", "markings" };
+
+	public static String[] spritesets = new String[] { "Girl_1", "Girl_2", "Guy_1", "Guy_2", "Guy_3", "Guy_4", "Guy_5",
+			"Guy_6", "Guy_Detective", "Guy_Police" };
+
 }

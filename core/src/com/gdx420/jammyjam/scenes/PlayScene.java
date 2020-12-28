@@ -1,6 +1,5 @@
 package com.gdx420.jammyjam.scenes;
 
-
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -25,7 +24,6 @@ public class PlayScene extends LiveMapScene {
 
 	LocalTime startSleepTime = LocalTime.of(22, 0);
 	LocalTime startAwakeTime = LocalTime.of(8, 0);
-	
 
 	public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
 
@@ -36,13 +34,14 @@ public class PlayScene extends LiveMapScene {
 	public void start() {
 		super.start();
 	}
+
 	public void update() {
-		if(dialogToDisplay != null || dialogQueue.size() > 0)
+		if (dialogToDisplay != null || dialogQueue.size() > 0)
 			updateDialog();
 		else
 			updatePlay();
 	}
-	
+
 	public void updatePlay() {
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
@@ -55,9 +54,9 @@ public class PlayScene extends LiveMapScene {
 			if (currentTile.att[0] == Shared.Attributes.ITEM.ordinal()
 					|| currentTile.att[1] == Shared.Attributes.ITEM.ordinal()) {
 				for (Item item : JammyJam.game.loadedItems) {
-					if(!item.onScreen)
+					if (!item.onScreen)
 						continue;
-					
+
 					if ((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0)
 							|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(item.name) == 0)) {
 						PlotEngine.obtainItem(item);
@@ -71,11 +70,11 @@ public class PlayScene extends LiveMapScene {
 				if (neighbor != null) {
 					if (neighbor.att[0] == Shared.Attributes.STORYPOINT.ordinal()
 							|| neighbor.att[1] == Shared.Attributes.STORYPOINT.ordinal()) {
-						for(StoryPoint sp : JammyJam.game.storyPoints) {
-							if(!sp.onScreen)
+						for (StoryPoint sp : JammyJam.game.storyPoints) {
+							if (!sp.onScreen)
 								continue;
-							
-							if((neighbor.attStr[0] != null && neighbor.attStr[0].compareTo(sp.name) == 0) 
+
+							if ((neighbor.attStr[0] != null && neighbor.attStr[0].compareTo(sp.name) == 0)
 									|| (neighbor.attStr[1] != null && neighbor.attStr[1].compareTo(sp.name) == 0)) {
 								PlotEngine.triggerPlot(sp);
 							}
@@ -85,33 +84,33 @@ public class PlayScene extends LiveMapScene {
 			}
 		}
 	}
-	
+
 	// CREATE DIALOG HERE (and update)
 	public void updateDialog() {
-		if(dialogQueue.size() > 0) {
+		if (dialogQueue.size() > 0) {
 			DialogData data = dialogQueue.poll();
 			String words = data.dialog;
-			if(data.npcParent != null)
+			if (data.npcParent != null)
 				words = data.npcParent.name + ": " + words;
-			if(data.itemParent != null)
+			if (data.itemParent != null)
 				words = data.itemParent.name + " Found!  " + words;
-			dialogToDisplay = new Dialog(this, data.name, 400, words, new String[]{"Hmmm..."},new String[]{"0"});
+			dialogToDisplay = new Dialog(this, data.name, 400, words, new String[] { "Hmmm..." }, new String[] { "0" });
 			dialogToDisplay.start(tick);
-		}		
+		}
 	}
 
 	private static boolean pressedEnter = false;
+
 	void checkKeys() {
-		if(dialogToDisplay != null) {
-			if (input.keyDown[Keys.ENTER]) {	
+		if (dialogToDisplay != null) {
+			if (input.keyDown[Keys.ENTER]) {
 				pressedEnter = true;
-			}
-			else if(pressedEnter){
+			} else if (pressedEnter) {
 				dialogToDisplay.choose(dialogToDisplay.choices.get(0));
 				dialogToDisplay = null;
 				pressedEnter = false;
 			}
-		}else {
+		} else {
 			checkVerticalMovement();
 			checkHorizontalMovement();
 			checkMapChange();
@@ -125,27 +124,27 @@ public class PlayScene extends LiveMapScene {
 				JammyJam.game.player.y = Shared.MAP_WIDTH * 32 - 5;
 			checkWarp();
 		}
-		
+
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
 		}
-		
-		if(input.keyDown[Keys.B]) {
-			dialogToDisplay = new Dialog(this, "hey", 400, "heyy", new String[]{"Hmmm..."},new String[]{"0"});
+
+		if (input.keyDown[Keys.B]) {
+			dialogToDisplay = new Dialog(this, "hey", 400, "heyy", new String[] { "Hmmm..." }, new String[] { "0" });
 			dialogToDisplay.start(tick);
 		}
 	}
 
 	void checkWarp() {
 		int x = (JammyJam.game.player.x + 16) / 32;
-		if(x >= Shared.MAP_WIDTH)
+		if (x >= Shared.MAP_WIDTH)
 			x = Shared.MAP_WIDTH - 1;
-		if(x < 0)
+		if (x < 0)
 			x = 0;
 		int y = (JammyJam.game.player.y + 16) / 32;
-		if(y >= Shared.MAP_WIDTH)
+		if (y >= Shared.MAP_WIDTH)
 			y = Shared.MAP_WIDTH - 1;
-		if(y < 0)
+		if (y < 0)
 			y = 0;
 		MapData data = Realm.mapData[Realm.curMap];
 		if (data.tile[x][y] != null && data.tile[x][y].att[0] == Shared.Attributes.WARP.ordinal()) {
@@ -158,35 +157,58 @@ public class PlayScene extends LiveMapScene {
 	int oldY = 0;
 	int oldX = 0;
 
+	boolean movedVert;
+	boolean movedHor;
+
 	void checkVerticalMovement() {
+		movedVert = false;
 		oldY = JammyJam.game.player.y;
 		if (input.keyDown[Keys.UP]) {
 			JammyJam.game.player.y -= 5;
+			JammyJam.game.player.dir = 0;
+			movedVert = true;
 		} else if (input.keyDown[Keys.DOWN]) {
 			JammyJam.game.player.y += 5;
+			JammyJam.game.player.dir = 2;
+			movedVert = true;
 		}
-		if (checkCollision())
+		if (checkCollision()) {
+			movedVert = false;
 			JammyJam.game.player.y = oldY;
+		}
 	}
 
 	void checkHorizontalMovement() {
+		movedHor = false;
+		if (movedVert)
+			return;
 		oldX = JammyJam.game.player.x;
 
 		if (input.keyDown[Keys.LEFT]) {
 			JammyJam.game.player.x -= 5;
+			JammyJam.game.player.dir = 1;
+			movedHor = true;
 		} else if (input.keyDown[Keys.RIGHT]) {
 			JammyJam.game.player.x += 5;
+			JammyJam.game.player.dir = 3;
+			movedHor = true;
 		}
-		if (checkCollision())
+		if (checkCollision()) {
+			movedHor = false;
 			JammyJam.game.player.x = oldX;
+		}
 	}
 
 	boolean checkCollision() {
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
-
-		return (checkWallCollision(playerTilePositionX, playerTilePositionY)
-				|| checkNpcCollision(playerTilePositionX, playerTilePositionY));
+		boolean b1 = checkWallCollision(playerTilePositionX, playerTilePositionY)
+				|| checkNpcCollision(playerTilePositionX, playerTilePositionY);
+		playerTilePositionX = (JammyJam.game.player.x - 16) / 32;
+		boolean b2 = checkWallCollision(playerTilePositionX, playerTilePositionY)
+				|| checkNpcCollision(playerTilePositionX, playerTilePositionY);
+		
+		return (b1 || b2);
 	}
 
 	boolean checkWallCollision(int playerTilePositionX, int playerTilePositionY) {
@@ -262,7 +284,7 @@ public class PlayScene extends LiveMapScene {
 		return false;
 
 	}
-	
+
 	public void render() {
 		super.render();
 
@@ -278,18 +300,15 @@ public class PlayScene extends LiveMapScene {
 						item.height);
 		}
 
-		draw(Assets.textures.get("sprites"), JammyJam.game.player.x, JammyJam.game.player.y, 64, 0, 32, 32);
-		
-		
 	}
 
 	@Override
 	public void buttonPressed(String id) {
-		switch(id) {
+		switch (id) {
 		case "dialog0":
 			dialogToDisplay.choose(dialogToDisplay.choices.get(0));
 			dialogToDisplay = null;
-			pressedEnter = false;			
+			pressedEnter = false;
 			break;
 		}
 	}

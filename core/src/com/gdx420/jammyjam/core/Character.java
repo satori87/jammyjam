@@ -5,10 +5,10 @@ import com.bg.bearplane.gui.Scene;
 public class Character {
 
 	public int x,y,dir,map;
-	int walkStep;
-	long moveStamp;
-	boolean moving = false;
-	
+	public int walkStep;
+	public long moveStamp;
+	public boolean moving = false;
+	public String sprite = "Guy_1";
 
 	public Character() {
 		
