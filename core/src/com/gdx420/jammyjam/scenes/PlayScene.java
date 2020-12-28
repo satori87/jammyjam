@@ -49,8 +49,10 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	public void updatePlay() {
-		if(JammyJam.gameIsWon)
+		if(JammyJam.gameIsWon) {
 			Scene.change("menu");
+			return;
+		}
 		
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
