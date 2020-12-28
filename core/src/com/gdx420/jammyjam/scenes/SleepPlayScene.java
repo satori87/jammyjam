@@ -59,7 +59,7 @@ public class SleepPlayScene extends PlayScene {
 	}
 
 	public void render() {
-		forceCol = new Color(103f/255f, 89f/255f, 209f/255f,0.92f);
+		forceCol = new Color(103f/255f, 89f/255f, 209f/255f,1);
 		super.render();
 		forceCol = null;
 		drawFontAbs(0, JammyJam.GAME_WIDTH / 2, JammyJam.GAME_HEIGHT - 20, JammyJam.game.sleepTimeManager.getGameTimeString() + " (Sleeping)", true, 3f, Color.BLUE);
