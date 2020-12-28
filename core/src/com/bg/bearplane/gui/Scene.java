@@ -42,6 +42,8 @@ public abstract class Scene extends Frame {
 	static Button msgBoxOK;
 	static Scene lastScene = null;
 
+	public Color forceCol = null; 
+	
 	public String id = "";
 	public boolean autoCenter = false;
 	public long startStamp = 0;
@@ -383,8 +385,18 @@ public abstract class Scene extends Frame {
 
 	public void draw(Texture t, int x, int y, int w, int h, int srcX, int srcY, int srcW, int srcH) {
 		try {
-			if(t != null)
+			Color oldCol = Color.WHITE;
+			if(t != null) {
+				if(forceCol != null) {
+					oldCol = batcher.getColor();					
+					batcher.setColor(forceCol);
+				}
+				
 				batcher.draw(t, x, y, w, h, srcX, srcY, srcW, srcH, false, true);
+				if(forceCol != null) {
+					batcher.setColor(oldCol);
+				}
+			}
 		} catch (Exception e) {
 			Log.error(e);
 

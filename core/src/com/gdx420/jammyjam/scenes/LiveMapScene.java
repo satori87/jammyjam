@@ -277,7 +277,7 @@ public class LiveMapScene extends Scene {
 
 		if (this instanceof PlayScene) {
 			Player p = JammyJam.game.player;
-			dt = new DrawTask(i, p.sprite, p.x - 16, p.y - 32, p.walkStep * 64, p.dir * 64, 32, 64);
+			dt = new DrawTask(i, p.getSprite(this), p.x - 16, p.y - 32, (p.walkStep/(Player.MAX_FRAMES/9)) * 64, p.dir * 64, 32, 64);
 			ly = 32 + p.y;
 			if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
 				layerList.get(ly).add(dt);
@@ -285,7 +285,7 @@ public class LiveMapScene extends Scene {
 
 			for (NonPlayableCharacter npc : JammyJam.game.npcList) {
 				if (npc.onScreen) {
-					dt = new DrawTask(i, npc.tile_sheet, npc.x - 16, npc.y - 32, p.walkStep * 64, 128, 32, 64);
+					dt = new DrawTask(i, npc.tile_sheet, npc.x - 16, npc.y - 32, 0, 128, 32, 64);
 					ly = 32 + npc.y;
 					if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
 						layerList.get(ly).add(dt);
