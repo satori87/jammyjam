@@ -53,6 +53,10 @@ public class PlayScene extends LiveMapScene {
 	public void updatePlay() {
 		if (JammyJam.gameIsWon) {
 			Scene.change("menu");
+			if (JammyJam.musicLoop != null)
+				JammyJam.musicLoop.stop();
+			JammyJam.musicLoop = Assets.sounds.get("Pursuit_seamless");
+			JammyJam.musicLoop.loop();
 			return;
 		}
 
@@ -167,7 +171,7 @@ public class PlayScene extends LiveMapScene {
 			Scene.change("menu");
 			if (JammyJam.musicLoop != null)
 				JammyJam.musicLoop.stop();
-			JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
+			JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");
 			JammyJam.musicLoop.loop();
 		}
 

@@ -54,7 +54,7 @@ public class SleepPlayScene extends PlayScene {
 		player().y = Shared.START_Y;
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();
-		JammyJam.musicLoop = Assets.sounds.get("Pursuit_seamless");
+		JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");
 		JammyJam.musicLoop.loop();
 	}
 

@@ -37,7 +37,7 @@ public class MenuScene extends Scene {
 		addButton("quit", hw, hh + 96 + y, 256, 48, "Quit");
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();
-		JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
+		JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");
 		JammyJam.musicLoop.loop();
 
 		
@@ -63,7 +63,7 @@ public class MenuScene extends Scene {
 			Scene.change("sleepPlayScene");
 			if(JammyJam.musicLoop != null)
 				JammyJam.musicLoop.stop();
-			JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");
+			JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
 			JammyJam.musicLoop.loop();		
 			break;
 		case "lol":
