@@ -14,7 +14,7 @@ public class Realm extends BaseRealm {
 
 	public static MapData[] mapData = new MapData[Shared.NUM_MAPS];
 
-	public static int curMap = 111;
+	public static int curMap = Shared.START_MAP;
 	public static int loadedMapsCount = 0;
 
 	public Map map;

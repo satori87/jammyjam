@@ -7,6 +7,7 @@ import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.Realm;
+import com.gdx420.jammyjam.core.Shared;
 
 import java.time.LocalTime;
 
@@ -46,7 +47,10 @@ public class AwakePlayScene extends PlayScene {
 	void changeToSleepScene() {
 		Scene.change("sleepPlayScene");
 		JammyJam.game.sleepTimeManager.setGameClock(startSleepTime);
-		changeMap(Realm.curMap);
+		
+		changeMap(Shared.START_MAP);
+		player().x = Shared.START_X;
+		player().y = Shared.START_Y;
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();
 		JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");

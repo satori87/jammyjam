@@ -42,7 +42,7 @@ public class JammyJam implements Bearable {
 	public static Assets assets = new Assets();
 	public Realm realm = new Realm(assets);
 	public Config config = new Config();
-	public Player player = new Player(305, 280);
+	public Player player = new Player(Shared.START_X,Shared.START_Y);
 	public List<NonPlayableCharacter> npcList = new ArrayList<NonPlayableCharacter>();
 	public List<Item> loadedItems = new ArrayList<Item>();
 	public List<StoryPoint> storyPoints = new ArrayList<StoryPoint>();
