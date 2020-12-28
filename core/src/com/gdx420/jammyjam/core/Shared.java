@@ -9,7 +9,11 @@ public class Shared {
 	public static final int MOVE_TIME = 500;
 	public static final int BOUNDING_BOX = 5;
 	public static final int NUM_ITEMS_PER_DIALOG = 10;
-
+	public static final int START_MAP = 111;
+	public static final int  START_X = 305;
+	public static final int  START_Y = 280;
+	
+	
 	public static enum Attributes {
 		NO_ATTRIBUTE, WALL, MONSTER, WARP, DOOR, EFFECT, LIGHT, NPC_SPAWN, STORYPOINT, ITEM
 	}

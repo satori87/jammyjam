@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.Realm;
+import com.gdx420.jammyjam.core.Shared;
 import com.badlogic.gdx.graphics.Color;
 
 public class SleepPlayScene extends PlayScene {
@@ -48,7 +49,9 @@ public class SleepPlayScene extends PlayScene {
 	void changeToAwakeScene() {
 		Scene.change("awakePlayScene");
 		JammyJam.game.awakeTimeManager.setGameClock(startAwakeTime);
-		changeMap(Realm.curMap);
+		changeMap(Shared.START_MAP);
+		player().x = Shared.START_X;
+		player().y = Shared.START_Y;
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();
 		JammyJam.musicLoop = Assets.sounds.get("Pursuit_seamless");
