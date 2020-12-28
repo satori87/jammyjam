@@ -1,10 +1,6 @@
 {
     "name": "Thomas",
-	"tile_sheet" : "sprites",
-	"source_x" : 128,
-	"source_y" : 192,
-	"width" : 32,
-	"height" : 32,
+	"tile_sheet" : "Guy_3",
 	"active_awake" : true,
 	
     "dialogs": [

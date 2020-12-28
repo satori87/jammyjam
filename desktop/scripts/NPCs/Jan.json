@@ -1,10 +1,6 @@
 {
     "name": "Jan",
-	"tile_sheet" : "Indoor_Decor_2",
-	"source_x" : 445,
-	"source_y" : 230,
-	"width" : 32,
-	"height" : 32,
+	"tile_sheet" : "Corpse",
 	"active_sleep" : true,	
 	
     "dialogs": [
