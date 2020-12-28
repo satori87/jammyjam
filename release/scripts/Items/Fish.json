@@ -1,0 +1,12 @@
+{
+	"name": "Fish",
+	"tile_sheet" : "Items_1",
+	"source_x" : 63,
+	"source_y" : 62,
+	"width" : 65,
+	"height" : 64,
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

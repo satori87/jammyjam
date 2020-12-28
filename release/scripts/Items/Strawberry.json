@@ -1,0 +1,12 @@
+{
+	"name": "Strawberry",
+	"tile_sheet" : "Items_1",
+	"source_x" : 35,
+	"source_y" : 134,
+	"width" : 29,
+	"height" : 24,
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

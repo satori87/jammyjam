@@ -1,0 +1,12 @@
+{
+    "name": "StairwayDown",
+	"tile_sheet" : "Indoor_Decor_1",
+	"source_x" : 1,
+	"source_y" : 193,
+	"width" : 256,
+	"height" : 64,
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

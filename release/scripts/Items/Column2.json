@@ -1,0 +1,12 @@
+{
+    "name": "Column2",
+	"tile_sheet" : "Building_Decor",
+	"source_x" : 160,
+	"source_y" : 0,
+	"width" : 32,
+	"height" : 134,
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

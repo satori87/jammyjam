@@ -2,7 +2,7 @@ package com.gdx420.jammyjam.scenes;
 
 import java.time.LocalTime;
 import com.gdx420.jammyjam.core.Assets;
-
+import com.gdx420.jammyjam.core.DialogData;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.gui.Scene;
@@ -23,6 +23,12 @@ public class SleepPlayScene extends PlayScene {
 		super.start();
 		
 		JammyJam.game.sleepTimeManager.setGameClock(LocalTime.of(22, 0));
+		DialogData data = new DialogData("Sleep Intro", "The night is a motionless plum; dark, moist, quiet... too quiet. Dame next door been missing weeks and every eye has turned blind.");
+		PlayScene.dialogQueue.add(data);
+		data = new DialogData("Sleep Intro2", "The air drips off the windows and calmness drains from me. This is my bedroom, but something is off... Hmm... I must be asleep. But what is different?");
+		PlayScene.dialogQueue.add(data);
+		data = new DialogData("Sleep Intro3", "And then I remember Jan. A solid oak hardens inside me. I must help find her... or what's left of her. The night is young and I'm on the case...");
+		PlayScene.dialogQueue.add(data);
 	}
 
 	public void update() {

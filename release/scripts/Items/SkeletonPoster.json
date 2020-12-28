@@ -1,0 +1,12 @@
+{
+    "name": "SkeletonPoster",
+	"tile_sheet" : "Indoor_Decor_1",
+	"source_x" : 358,
+	"source_y" : 1,
+	"width" : 52,
+	"height" : 64,
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

@@ -1,0 +1,12 @@
+{
+    "name": "FloatingCar",
+	"tile_sheet" : "cars_gold",
+	"source_x" : 0,
+	"source_y" : 253,
+	"width" : 192,
+	"height" : 99,	
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

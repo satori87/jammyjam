@@ -1,0 +1,12 @@
+{
+    "name": "FloatingPond",
+	"tile_sheet" : "Outdoor_Cliff_2",
+	"source_x" : 356,
+	"source_y" : 228,
+	"width" : 91,
+	"height" : 88,	
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

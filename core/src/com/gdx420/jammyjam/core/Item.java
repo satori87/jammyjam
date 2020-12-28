@@ -9,6 +9,7 @@ public class Item {
 	public int height = -1;
 	public boolean active_sleep = false;
 	public boolean active_awake = false;
+	public boolean interact = true;
 	
 	public String text = new String();
 	

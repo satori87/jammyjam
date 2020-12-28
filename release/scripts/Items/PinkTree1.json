@@ -1,0 +1,12 @@
+{
+    "name": "PinkTree1",
+	"tile_sheet" : "Outdoor_Trees_1",
+	"source_x" : 212,
+	"source_y" : 128,
+	"width" : 115,
+	"height" : 128,	
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

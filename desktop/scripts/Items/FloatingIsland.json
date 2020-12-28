@@ -1,0 +1,12 @@
+{
+    "name": "FloatingIsland",
+	"tile_sheet" : "bridges_2",
+	"source_x" : 287,
+	"source_y" : 287,
+	"width" : 224,
+	"height" : 224,	
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

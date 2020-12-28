@@ -42,6 +42,8 @@ public class PlotEngine {
 		}		
 	}
 	public static void obtainItem(Item item) {
+		if(item.interact == false)
+			return;
 		if(!JammyJam.game.player.obtainedItems.contains(item)) {
 			JammyJam.game.player.obtainedItems.add(item);
 			item.onScreen = false;

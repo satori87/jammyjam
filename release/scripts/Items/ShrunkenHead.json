@@ -1,0 +1,12 @@
+{
+    "name": "ShrunkenHead",
+	"tile_sheet" : "Indoor_Decor_2",
+	"source_x" : 67,
+	"source_y" : 256,
+	"width" : 24,
+	"height" : 32,
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}

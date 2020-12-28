@@ -1,0 +1,12 @@
+{
+	"name": "Pumpkin",
+	"tile_sheet" : "Items_1",
+	"source_x" : 162,
+	"source_y" : 131,
+	"width" : 30,
+	"height" : 30,
+	"text" : "blah",
+	"active_awake" : false,
+	"active_sleep" : true,
+	"interact" : false
+}
