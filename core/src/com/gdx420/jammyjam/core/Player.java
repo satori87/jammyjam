@@ -11,7 +11,7 @@ public class Player extends Character {
 	public List<Item> obtainedItems = new ArrayList<Item>();
 
 	public static final int MAX_FRAMES = 54;
-	public static final int MOVE_STEP = 7;
+	public static final int MOVE_STEP = 2;
 	
 	public Player(int _x, int _y) {
 		super();
