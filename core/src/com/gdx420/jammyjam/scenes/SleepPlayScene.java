@@ -48,9 +48,7 @@ public class SleepPlayScene extends PlayScene {
 	void changeToAwakeScene() {
 		Scene.change("awakePlayScene");
 		JammyJam.game.awakeTimeManager.setGameClock(startAwakeTime);
-		JammyJam.game.spawnNPCs(Realm.curMap);
-		JammyJam.game.spawnItems(Realm.curMap);
-		JammyJam.game.spawnStoryPoints(Realm.curMap);
+		changeMap(Realm.curMap);
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();
 		JammyJam.musicLoop = Assets.sounds.get("Pursuit_seamless");
