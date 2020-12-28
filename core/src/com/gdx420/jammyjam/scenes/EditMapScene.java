@@ -474,8 +474,7 @@ public class EditMapScene extends RenderEditMapScene {
 				shift = !shift;
 				break;
 			case Keys.F4:
-				Log.debug("F4");
-				Scene.change("playScene");
+				Scene.change("sleepPlayScene");
 				break;
 			case Keys.F5:
 				// commit();

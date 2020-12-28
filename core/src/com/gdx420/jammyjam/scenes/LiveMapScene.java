@@ -282,13 +282,14 @@ public class LiveMapScene extends Scene {
 			if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
 				layerList.get(ly).add(dt);
 			}
+
 			for (NonPlayableCharacter npc : JammyJam.game.npcList) {
 				if (npc.onScreen) {
-					dt = new DrawTask(i, npc.sprite, npc.x - 16, npc.y - 32, p.walkStep * 64, npc.dir * 64, 32, 64);
-				}
-				ly = 16 + npc.y;
-				if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
-					layerList.get(ly).add(dt);
+					dt = new DrawTask(i, npc.tile_sheet, npc.x - 16, npc.y - 32, p.walkStep * 64, 128, 32, 64);
+					ly = 16 + npc.y;
+					if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
+						layerList.get(ly).add(dt);
+					}
 				}
 			}
 		}

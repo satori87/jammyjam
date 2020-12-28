@@ -34,6 +34,7 @@ public class PlayScene extends LiveMapScene {
 
 	public void start() {
 		super.start();
+		changeMap(1);
 	}
 
 	public void update() {
@@ -60,8 +61,8 @@ public class PlayScene extends LiveMapScene {
 
 					if ((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0)
 							|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(item.name) == 0)) {
-						//if(isSpaceBarPressed)
-							PlotEngine.obtainItem(item);
+						// if(isSpaceBarPressed)
+						PlotEngine.obtainItem(item);
 					}
 				}
 			}
@@ -78,7 +79,7 @@ public class PlayScene extends LiveMapScene {
 
 							if ((neighbor.attStr[0] != null && neighbor.attStr[0].compareTo(sp.name) == 0)
 									|| (neighbor.attStr[1] != null && neighbor.attStr[1].compareTo(sp.name) == 0)) {
-								if(isSpaceBarPressed == true)
+								if (isSpaceBarPressed == true)
 									PlotEngine.triggerStoryPoint(sp);
 							}
 						}
@@ -125,20 +126,20 @@ public class PlayScene extends LiveMapScene {
 				JammyJam.game.player.x = Shared.MAP_WIDTH * 32 - 5;
 			if (JammyJam.game.player.y >= Shared.MAP_WIDTH * 32 - 5)
 				JammyJam.game.player.y = Shared.MAP_WIDTH * 32 - 5;
-			checkWarp();
+
 		}
 
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
 		}
 
-		if(input.keyDown(Keys.SPACE))
+		if (input.keyDown(Keys.SPACE))
 			isSpaceBarPressed = true;
 		else
 			isSpaceBarPressed = false;
 	}
 
-	void checkWarp() {
+	boolean checkWarp() {
 		int x = (JammyJam.game.player.x + 16) / 32;
 		if (x >= Shared.MAP_WIDTH)
 			x = Shared.MAP_WIDTH - 1;
@@ -154,7 +155,9 @@ public class PlayScene extends LiveMapScene {
 			changeMap(data.tile[x][y].attData[0][0]);
 			JammyJam.game.player.x = data.tile[x][y].attData[0][1] * 32 - 16;
 			JammyJam.game.player.y = data.tile[x][y].attData[0][2] * 32 - 16;
+			return true;
 		}
+		return false;
 	}
 
 	int oldY = 0;
@@ -205,12 +208,16 @@ public class PlayScene extends LiveMapScene {
 	boolean checkCollision() {
 		int playerTilePositionX = (JammyJam.game.player.x + 16) / 32;
 		int playerTilePositionY = (JammyJam.game.player.y + 16) / 32;
+
+		if (checkWarp()) {
+			return false;
+		}
 		boolean b1 = checkWallCollision(playerTilePositionX, playerTilePositionY)
 				|| checkNpcCollision(playerTilePositionX, playerTilePositionY);
 		playerTilePositionX = (JammyJam.game.player.x - 16) / 32;
 		boolean b2 = checkWallCollision(playerTilePositionX, playerTilePositionY)
 				|| checkNpcCollision(playerTilePositionX, playerTilePositionY);
-		
+
 		return (b1 || b2);
 	}
 
@@ -223,11 +230,7 @@ public class PlayScene extends LiveMapScene {
 				|| currentTile.att[1] == Shared.Attributes.WALL.ordinal())) {
 			return true;
 		}
-		if (currentTile != null && (currentTile.att[0] == Shared.Attributes.DOOR.ordinal()
-				|| currentTile.att[1] == Shared.Attributes.DOOR.ordinal())) {
-			// TODO warp to inside, possibly lock / unlock
-			return true;
-		}
+
 		return false;
 	}
 
@@ -238,10 +241,10 @@ public class PlayScene extends LiveMapScene {
 				int npcTilePositionX = (npc.x + 16) / 32;
 				int npcTilePositionY = (npc.y + 16) / 32;
 				if (npcTilePositionX == playerTilePositionX && npcTilePositionY == playerTilePositionY) {
-					//if(isSpaceBarPressed) {
-						PlotEngine.npcInteraction(npc);
-						result = true;
-					//}
+					// if(isSpaceBarPressed) {
+					PlotEngine.npcInteraction(npc);
+					result = true;
+					// }
 				}
 			}
 		}
@@ -278,6 +281,7 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	void changeMap(int mapTo) {
+		Log.debug("aa");
 		Realm.curMap = mapTo;
 		JammyJam.game.spawnNPCs(Realm.curMap);
 		JammyJam.game.spawnItems(Realm.curMap);
@@ -297,12 +301,6 @@ public class PlayScene extends LiveMapScene {
 
 	public void render() {
 		super.render();
-
-		for (NonPlayableCharacter npc : JammyJam.game.npcList) {
-			if (npc.onScreen)
-				draw(Assets.textures.get(npc.tile_sheet), npc.x, npc.y, npc.source_x, npc.source_y, npc.width,
-						npc.height);
-		}
 
 		for (Item item : JammyJam.game.loadedItems) {
 			if (item.onScreen && !item.tile_sheet.isEmpty())

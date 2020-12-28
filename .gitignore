@@ -1,4 +1,4 @@
-/desktop/maps/
+
 
 ## Java
 
@@ -34,7 +34,7 @@ www-test/
 com_crashlytics_export_strings.xml
 
 ## Eclipse
-
+/desktop/maps/map1.map
 .classpath
 .project
 .metadata/
@@ -115,3 +115,4 @@ Thumbs.db
 /ios/xcode/native/
 /ios/IOSLauncher.app
 /ios/IOSLauncher.app.dSYM
+desktop/maps/map1.map

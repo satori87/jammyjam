@@ -136,7 +136,7 @@ public class JammyJam implements Bearable {
 
 		loadNPCs();
 		spawnNPCs(Realm.curMap);
-		
+
 		loadStoryPoints();
 		spawnStoryPoints(Realm.curMap);
 
@@ -149,7 +149,7 @@ public class JammyJam implements Bearable {
 		try {
 			stream = Files.newDirectoryStream(dir);
 			for (Path file : stream) {
-				//System.out.println("Loading NPC: " + file.getFileName());
+				// System.out.println("Loading NPC: " + file.getFileName());
 				npcList.add((NonPlayableCharacter) Util.importJSON("/scripts/NPCs/" + file.getFileName(),
 						NonPlayableCharacter.class));
 			}
@@ -165,32 +165,32 @@ public class JammyJam implements Bearable {
 		DirectoryStream<Path> stream;
 		try {
 			stream = Files.newDirectoryStream(dir);
-			for (Path file: stream) {
-		       // System.out.println("Loaded Item: " + file.getFileName());
-		        loadedItems.add((Item) Util.importJSON("scripts/Items/" + file.getFileName(), Item.class));
-		    }
+			for (Path file : stream) {
+				// System.out.println("Loaded Item: " + file.getFileName());
+				loadedItems.add((Item) Util.importJSON("scripts/Items/" + file.getFileName(), Item.class));
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void loadStoryPoints() {
 		Path dir = Paths.get(new File("").getAbsolutePath() + "/scripts/StoryPoints/");
-		
+
 		DirectoryStream<Path> stream;
 		try {
 			stream = Files.newDirectoryStream(dir);
-			for (Path file: stream) {
-		        //System.out.println("Loaded StoryPoint: " + file.getFileName());
-		        storyPoints.add((StoryPoint) Util.importJSON("scripts/StoryPoints/" + file.getFileName(), StoryPoint.class));
-		    }
+			for (Path file : stream) {
+				// System.out.println("Loaded StoryPoint: " + file.getFileName());
+				storyPoints.add(
+						(StoryPoint) Util.importJSON("scripts/StoryPoints/" + file.getFileName(), StoryPoint.class));
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 
 	@Override
 	public void dispose() {
@@ -202,18 +202,18 @@ public class JammyJam implements Bearable {
 		for (NonPlayableCharacter npc : npcList) {
 			npc.onScreen = false;
 		}
-
-		for (int x = 0; x < Shared.MAP_WIDTH; x++)
-			for (int y = 0; y < Shared.MAP_WIDTH; y++)
+		for (int x = 0; x < Shared.MAP_WIDTH; x++) {
+			for (int y = 0; y < Shared.MAP_WIDTH; y++) {
+				
 				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.NPC_SPAWN.ordinal()
 						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.NPC_SPAWN.ordinal()) {
-					for(NonPlayableCharacter npc : npcList) {
-						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
-								&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0) 
-							|| (Realm.mapData[currentMap].tile[x][y].attStr[1] != null
-									&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
-							if( ( npc.active_sleep && Scene.scene instanceof SleepPlayScene)
-									|| (npc.active_awake && Scene.scene instanceof AwakePlayScene)) {									
+					for (NonPlayableCharacter npc : npcList) {
+						if ((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
+								&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
+								|| (Realm.mapData[currentMap].tile[x][y].attStr[1] != null
+										&& npc.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
+							if ((npc.active_sleep && Scene.scene instanceof SleepPlayScene)
+									|| (npc.active_awake && Scene.scene instanceof AwakePlayScene)) {
 								npc.onScreen = true;
 								npc.x = x * 32;
 								npc.y = y * 32;
@@ -221,6 +221,8 @@ public class JammyJam implements Bearable {
 						}
 					}
 				}
+			}
+		}
 	}
 
 	public void spawnItems(int currentMap) {
@@ -229,20 +231,19 @@ public class JammyJam implements Bearable {
 			item.onScreen = false;
 		}
 
-		for(int x = 0; x < Shared.MAP_WIDTH; x++)
-			for(int y = 0; y < Shared.MAP_WIDTH; y++)
-				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal() 
-					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal())
-				{
+		for (int x = 0; x < Shared.MAP_WIDTH; x++)
+			for (int y = 0; y < Shared.MAP_WIDTH; y++)
+				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.ITEM.ordinal()
+						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.ITEM.ordinal()) {
 					for (Item item : loadedItems) {
-						if(item.tile_sheet.isEmpty())
+						if (item.tile_sheet.isEmpty())
 							continue;
-						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
+						if ((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
 								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
-							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
-								&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
-							if(!player.obtainedItems.contains(item)) {
-								if( ( item.active_sleep && Scene.scene instanceof SleepPlayScene)
+								|| (Realm.mapData[currentMap].tile[x][y].attStr[1] != null
+										&& item.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
+							if (!player.obtainedItems.contains(item)) {
+								if ((item.active_sleep && Scene.scene instanceof SleepPlayScene)
 										|| (item.active_awake && Scene.scene instanceof AwakePlayScene)) {
 									item.onScreen = true;
 									item.x = x * 32;
@@ -250,34 +251,33 @@ public class JammyJam implements Bearable {
 								}
 							}
 						}
-					}				
+					}
 				}
 	}
-	
+
 	public void spawnStoryPoints(int currentMap) {
 		for (StoryPoint sp : storyPoints) {
 			sp.onScreen = false;
 		}
 
-		for(int x = 0; x < Shared.MAP_WIDTH; x++)
-			for(int y = 0; y < Shared.MAP_WIDTH; y++)
-				if(Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.STORYPOINT.ordinal() 
-					|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.STORYPOINT.ordinal())
-				{
+		for (int x = 0; x < Shared.MAP_WIDTH; x++)
+			for (int y = 0; y < Shared.MAP_WIDTH; y++)
+				if (Realm.mapData[currentMap].tile[x][y].att[0] == Shared.Attributes.STORYPOINT.ordinal()
+						|| Realm.mapData[currentMap].tile[x][y].att[1] == Shared.Attributes.STORYPOINT.ordinal()) {
 					for (StoryPoint sp : storyPoints) {
-						if((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
+						if ((Realm.mapData[currentMap].tile[x][y].attStr[0] != null
 								&& sp.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[0]) == 0)
-							||(Realm.mapData[currentMap].tile[x][y].attStr[1] != null
-								&& sp.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
-							if( ( sp.active_sleep && Scene.scene instanceof SleepPlayScene)
+								|| (Realm.mapData[currentMap].tile[x][y].attStr[1] != null
+										&& sp.name.compareTo(Realm.mapData[currentMap].tile[x][y].attStr[1]) == 0)) {
+							if ((sp.active_sleep && Scene.scene instanceof SleepPlayScene)
 									|| (sp.active_awake && Scene.scene instanceof AwakePlayScene)) {
-								//System.out.println("Spawning story point: " + sp.name);
+								// System.out.println("Spawning story point: " + sp.name);
 								sp.onScreen = true;
 								sp.x = x * 32;
 								sp.y = y * 32;
 							}
 						}
-					}				
+					}
 				}
 	}
 
