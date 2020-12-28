@@ -46,9 +46,7 @@ public class AwakePlayScene extends PlayScene {
 	void changeToSleepScene() {
 		Scene.change("sleepPlayScene");
 		JammyJam.game.sleepTimeManager.setGameClock(startSleepTime);
-		JammyJam.game.spawnNPCs(Realm.curMap);
-		JammyJam.game.spawnItems(Realm.curMap);
-		JammyJam.game.spawnStoryPoints(Realm.curMap);
+		changeMap(Realm.curMap);
 		if(JammyJam.musicLoop != null)
 			JammyJam.musicLoop.stop();
 		JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");

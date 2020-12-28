@@ -108,7 +108,6 @@ public class PlayScene extends LiveMapScene {
 
 	private static boolean pressedEnter = false;
 
-
 	void checkKeys() {
 		warp = false;
 		if (dialogToDisplay != null) {
@@ -136,7 +135,7 @@ public class PlayScene extends LiveMapScene {
 
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
-if(JammyJam.musicLoop != null)
+			if (JammyJam.musicLoop != null)
 				JammyJam.musicLoop.stop();
 			JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
 			JammyJam.musicLoop.loop();
@@ -165,7 +164,7 @@ if(JammyJam.musicLoop != null)
 	boolean movedHor;
 
 	void checkVerticalMovement() {
-		
+
 		movedVert = false;
 		oldY = JammyJam.game.player.y;
 		if (input.keyDown[Keys.UP]) {
