@@ -12,7 +12,7 @@ public class PlotEngine {
 	public static void triggerStoryPoint(StoryPoint sp) {
 		
 		// prevent multiple times in a row
-		if(System.currentTimeMillis() - lastStoryPointTimestamp < 3000)
+		if(System.currentTimeMillis() - lastStoryPointTimestamp < 2000)
 			return;
 		
 		lastStoryPointTimestamp = System.currentTimeMillis();
@@ -56,7 +56,7 @@ public class PlotEngine {
 		
 	public static void npcInteraction(NonPlayableCharacter npc) {
 		// prevent multiple times in a row
-		if(System.currentTimeMillis() - lastStoryPointTimestamp < 3000)
+		if(System.currentTimeMillis() - lastStoryPointTimestamp < 2000)
 			return;
 		
 		lastStoryPointTimestamp = System.currentTimeMillis();
