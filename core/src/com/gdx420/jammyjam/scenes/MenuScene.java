@@ -27,9 +27,9 @@ public class MenuScene extends Scene {
 		//d = new Dialog(this, "test", 400,"woah man", new String[]{"Good, good","I dun lik it","Woah no way bruh"},new String[]{"0","1","2"});
 		//d.start(tick);
 		addLabel("status", hw, hh + 256, 2f, "", Color.WHITE, true);
-		addFrame("frame", hw, hh - 60 + y, 288, 392, true, true);
+		addFrame("frame", hw, hh + y, 288, 300, true, true);
 
-		addLabel("title", hw, hh - 182 + y, 3f, "Jammy Jam", Color.WHITE, true);
+		addLabel("title", hw, hh - 200, 4f, JammyJam.game.getGameName(), Color.WHITE, true);
 
 		addButton("play", hw,  hh - 96 + y, 256, 48, "Test Play");
 		addButton("lol", hw, hh - 32 + y, 256, 48, "Edit Map");
@@ -50,6 +50,8 @@ public class MenuScene extends Scene {
 	public void render() {
 		//d.render();
 		getLabel("status").text = status;
+		
+		
 	}
 
 	@Override
