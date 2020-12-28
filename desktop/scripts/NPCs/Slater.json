@@ -1,6 +1,6 @@
 {
     "name": "Slater",
-	"tile_sheet" : "Guy_2"
+	"tile_sheet" : "Guy_2",
 	"active_awake" : true,
 	
     "dialogs": [
