@@ -81,6 +81,7 @@ public class Field extends Component implements Focusable {
 				if (text.length() == 0 || text.equals("-")) {
 					text = "0";
 				} else {
+					text = text.replace(" ", "");
 					text = Integer.parseInt(text) + "";
 				}
 			}

@@ -51,7 +51,7 @@ public class MenuScene extends Scene {
 		switch (id) {
 		case "play":
 			//Scene.change("play");
-			Scene.change("sleepPlayScene");
+			Scene.change("awakePlayScene");
 			break;
 		case "lol":
 			Scene.change("edit");
