@@ -1,18 +1,18 @@
 {
     "name": "PlayerWindow",
 	"active_sleep" : true,
-	"active_awake" : false	
+	"active_awake" : false,
 	
     "dialogs": [
 		{
 			"name": "remember details",
-			"items_required": []
+			"items_required": [],
 			"dialog": "I remember hearing some commotion next door a few weeks ago... I hadn't remembered hearing them mention 'all the blood'...",
 			"item_given": "PlayerWindowClue_invisible"
 		},
 		{
 			"name": "go explore",
-			"items_required": [ "PlayerWindowClue_invisible" ]
+			"items_required": [ "PlayerWindowClue_invisible" ],
 			"dialog": "When I wake up I need to investigate.",
 		}
 	]

@@ -168,7 +168,7 @@ public class JammyJam implements Bearable {
 		try {
 			stream = Files.newDirectoryStream(dir);
 			for (Path file : stream) {
-				// System.out.println("Loaded Item: " + file.getFileName());
+				 System.out.println("Loaded Item: " + file.getFileName());
 				loadedItems.add((Item) Util.importJSON("scripts/Items/" + file.getFileName(), Item.class));
 			}
 		} catch (IOException e) {
@@ -247,6 +247,7 @@ public class JammyJam implements Bearable {
 							if (!player.obtainedItems.contains(item)) {
 								if ((item.active_sleep && Scene.scene instanceof SleepPlayScene)
 										|| (item.active_awake && Scene.scene instanceof AwakePlayScene)) {
+									System.out.println(item.name);
 									item.onScreen = true;
 									item.x = x * 32;
 									item.y = y * 32;

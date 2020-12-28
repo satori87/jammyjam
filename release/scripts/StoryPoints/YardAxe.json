@@ -1,17 +1,17 @@
 {
     "name": "YardAxe",
-	"active_awake" : true	
+	"active_awake" : true,	
 	
     "dialogs": [
 		{
 			"name": "look for ax clue",
-			"items_required": []
+			"items_required": [],
 			"dialog": "I wonder if this axe was used to kill Jan... No blood on it tho. Maybe there is blood on the steps.",
 			"item_given": "NeighborAxeClue_invisible"
 		},
 		{
 			"name": "check steps",
-			"items_required": [ "NeighborAxeClue_invisible" ]
+			"items_required": [ "NeighborAxeClue_invisible" ],
 			"dialog": "I should definitely check for more blood. Maybe the steps leading into Jan's house...",
 		}
 	]

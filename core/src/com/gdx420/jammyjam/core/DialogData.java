@@ -6,6 +6,7 @@ public class DialogData {
 	public String dialog = new String();
 	public String item_given = new String();
 	public String warp = new String();
+	public boolean win_game = false;
 	
 	public DialogData() {}
 	public DialogData(String _name, String _dialog) {

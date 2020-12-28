@@ -3,17 +3,18 @@
 	"tile_sheet" : "Guy_3",
 	"active_awake" : true,
 	
-    "dialogs": [
-		{
-			"name": "nothing to say - Thomas",
-			"items_required": [ ],
-			"dialog": "You're not a cop, I don't need an alibi.",
-			"item_given": ""
-		},
+    "dialogs": [		
 		{
 			"name": "caught with evidence",
 			"items_required": [ "BloodyBook" ],
 			"dialog": "You caught me. I'll turn myself in.",
+			"item_given": "",
+			"win_game" : true
+		},
+		{
+			"name": "nothing to say - Thomas",
+			"items_required": [ ],
+			"dialog": "You're not a cop, I don't need an alibi.",
 			"item_given": ""
 		}		
 	]
