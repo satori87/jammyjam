@@ -1,0 +1,14 @@
+{
+    "name": "LibraryDoor2",
+	"active_sleep":  true,
+	"active_awake" : true,	
+	
+    "dialogs": [
+		{
+			"name": "library closed inside",
+			"items_required": [],
+			"dialog": "The doors are locked. Better go back out the way I came in.",
+			"item_given": ""
+		}
+	]
+}

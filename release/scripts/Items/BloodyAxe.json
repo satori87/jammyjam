@@ -1,0 +1,10 @@
+{
+    "name": "BloodyAxe",
+	"tile_sheet" : "Indoor_Decor_2",
+	"source_x" : 448,
+	"source_y" : 416,
+	"width" : 32,
+	"height" : 32,	
+	"text" : "OMG! So much blood! How did the police miss this!",
+	"active_awake" : true
+}

@@ -5,11 +5,23 @@
 	
     "dialogs": [		
 		{
-			"name": "caught with evidence",
-			"items_required": [ "BloodyBook" ],
+			"name": "caught with evidence 2",
+			"items_required": [ "BloodyBook", "BloodyAxe" ],
 			"dialog": "You caught me. I'll turn myself in.",
 			"item_given": "",
 			"win_game" : true
+		},	
+		{
+			"name": "caught with evidence",
+			"items_required": [ "BloodyBook" ],
+			"dialog": "That's not enough evidence, no one will believe just that.",
+			"item_given": ""
+		},
+		{
+			"name": "caught with evidence",
+			"items_required": [ "BloodyAxe" ],
+			"dialog": "Nothing ties that to me, my name isn't on it or nuffin'",
+			"item_given": ""
 		},
 		{
 			"name": "nothing to say - Thomas",

@@ -1,0 +1,19 @@
+{
+    "name": "NeighborTrunk2",
+	"active_sleep" : false,
+	"active_awake" : true,
+	
+    "dialogs": [
+		{
+			"name": "look for car clue",
+			"items_required": [],
+			"dialog": "The trunk doesn't have any blood either... maybe I should check Jan's workplace. Off to the library.",
+			"item_given": "NeighborCarClue_invisible"
+		},
+		{
+			"name": "check steps",
+			"items_required": [ "NeighborCarClue_invisible" ],
+			"dialog": "I wonder if there will be more clues at Jan's library job. I should check.",
+		}
+	]
+}
