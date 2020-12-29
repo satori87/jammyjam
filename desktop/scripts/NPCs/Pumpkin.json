@@ -1,0 +1,14 @@
+{
+    "name": "Pumpkin",
+	"tile_sheet" : "Pumpkin",
+	"active_sleep" : true,	
+	
+    "dialogs": [
+		{
+			"name": "dontask",
+			"items_required": [],
+			"dialog": "Don't ask me. I'm a pumpkin.",
+			"item_given": ""
+		}
+	]
+}
