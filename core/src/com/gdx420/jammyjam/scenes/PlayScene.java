@@ -264,12 +264,21 @@ public class PlayScene extends LiveMapScene {
 				}
 			}
 		}
-
+		for (NonPlayableCharacter npc : JammyJam.game.npcList) {
+			if (npc.onScreen) {
+				if (Util.distance(npc.x, npc.y, player().x, player().y) <48) {
+					PlotEngine.npcInteraction(npc);
+					if (Util.distance(npc.x, npc.y, player().x, player().y) <32) {
+					return true;
+					}
+				}
+			}
+		}
 		boolean b1 = checkWallCollision(playerTilePositionX, playerTilePositionY)
-				|| checkNpcCollision(playerTilePositionX, playerTilePositionY);
+				;
 		playerTilePositionX = (JammyJam.game.player.x - 16) / 32;
 		boolean b2 = checkWallCollision(playerTilePositionX, playerTilePositionY)
-				|| checkNpcCollision(playerTilePositionX, playerTilePositionY);
+				;
 
 		return (b1 || b2);
 	}
