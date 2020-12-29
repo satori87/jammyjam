@@ -52,6 +52,8 @@ public class PlotEngine {
 				DialogData data = new DialogData(item.name, item.text);
 				data.itemParent = item;
 				PlayScene.dialogQueue.add(data);
+				if(item.name.compareTo("ZombiePotion") == 0)
+					JammyJam.isZombie = true;
 			}
 		}
 	}

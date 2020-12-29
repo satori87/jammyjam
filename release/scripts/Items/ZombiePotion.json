@@ -1,0 +1,11 @@
+{
+    "name": "ZombiePotion",
+	"tile_sheet" : "Indoor_Furniture_3",
+	"source_x" : 293,
+	"source_y" : 445,
+	"width" : 24,
+	"height" : 22,	
+	"text" : "Oh no, a zombie potion!",	
+	"active_awake" : false,
+	"active_sleep" : true,
+}

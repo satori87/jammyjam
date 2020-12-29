@@ -37,6 +37,7 @@ public class JammyJam implements Bearable {
 	public static final String CONFIG_FILE = "config.txt";
 	
 	public static boolean gameIsWon = false;
+	public static boolean isZombie = false;
 
 	public static JammyJam game;
 	public static Assets assets = new Assets();

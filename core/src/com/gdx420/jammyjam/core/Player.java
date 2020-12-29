@@ -23,6 +23,8 @@ public class Player extends Character {
 		if(scene instanceof AwakePlayScene) {
 			return "Guy_1";
 		} else {
+			if(JammyJam.isZombie)
+				return "NPC_Zombie";
 			return "Guy_Detective";
 		}
 	}
