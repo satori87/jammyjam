@@ -11,10 +11,16 @@
 			"item_given": ""
 		},
 		{
+			"name": "nothing to say - maria ax",
+			"items_required": [ "BloodyAxe" ],
+			"dialog": "Get away creep!",
+			"item_given": ""
+		},		
+		{
 			"name": "nothing to say - maria",
 			"items_required": [ ],
 			"dialog": "Please let me be, I have nothing to say.",
 			"item_given": ""
-		}		
+		}	
 	]
 }

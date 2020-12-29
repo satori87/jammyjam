@@ -5,6 +5,18 @@
 	
     "dialogs": [
 		{
+			"name": "nothing to say-",
+			"items_required": ["Magazine", "Newspaper", "BloodyBook" ],
+			"dialog": "So you got some ketchup on your book, huh? I'm sure someone could fix it...",
+			"item_given": ""
+		},
+		{
+			"name": "nothing to say-cop",
+			"items_required": ["Magazine", "Newspaper", "BloodyAxe" ],
+			"dialog": "Take that thing to the police!",
+			"item_given": ""
+		},
+		{
 			"name": "nothing to say",
 			"items_required": ["Magazine", "Newspaper" ],
 			"dialog": "I don't want to talk about such horrible things.",
@@ -15,13 +27,12 @@
 			"items_required": [ "Newspaper" ],
 			"dialog": "Oh such terrible news. Here take this, I can't read any more",
 			"item_given": "Magazine"
-		},
+		},	
 		{
 			"name": "intro msg",
 			"items_required": [],
 			"dialog": "Hey Morpheus, what a wonderful day. Everything is perfect, never any bad news.",
 			"item_given": ""
 		}
-		
 	]
 }

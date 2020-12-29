@@ -3,12 +3,24 @@
 	"tile_sheet" : "Guy_2",
 	"active_awake" : true,
 	
-    "dialogs": [
+    "dialogs": [		
+		{
+			"name": "slater axe",
+			"items_required": [ "BloodyAxe" ],
+			"dialog": "AHHHHH! He's gonna kill me! Jan, I'm coming home to you...",
+			"item_given": ""
+		},
+		{
+			"name": "slater axe",
+			"items_required": [ "BloodyBood" ],
+			"dialog": "Always loved to read... I warned her, that book circle was becoming way too violent...",
+			"item_given": ""
+		},
 		{
 			"name": "slater intro",
 			"items_required": [ ],
 			"dialog": "Oh my oh my where could she be?",
 			"item_given": ""
-		}		
+		}
 	]
 }

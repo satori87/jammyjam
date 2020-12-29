@@ -9,7 +9,7 @@ public class GameTimeManager {
 		currentGameTime = timeInGame;
 	}
 		
-	public int gameTimeMultiplier = 1; 	
+	public int gameTimeMultiplier = 10; 	
 	
 	public void tickForward() {
 		currentGameTime = currentGameTime.plusMinutes((int)(gameTimeMultiplier));

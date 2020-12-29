@@ -5,6 +5,18 @@
 	
     "dialogs": [
 		{
+			"name": "I am you - ax",
+			"items_required": [ "BloodyAxe" ],
+			"dialog": "Ask not whose blood is it, but whose blood flows in the veins of the arms that swing it?",
+			"item_given": ""
+		},
+		{
+			"name": "I am you - book",
+			"items_required": [ "BloodyBook" ],
+			"dialog": "You can learn a lot from a book. Follow your instinct. Keep your eyes open. Happy dreaming.",
+			"item_given": ""
+		},
+		{
 			"name": "I am you",
 			"items_required": [ ],
 			"dialog": "What you see in dreams is influenced by your psychic powers. Follow the clues.",

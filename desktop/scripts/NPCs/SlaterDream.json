@@ -5,6 +5,18 @@
 	
     "dialogs": [		
 		{
+			"name": "dream slater 1",
+			"items_required": [ "BloodyAxe"],
+			"dialog": "Is that the axe from my house?",
+			"item_given": ""
+		},		
+		{
+			"name": "dream slater 2",
+			"items_required": [ "BloodyBook"],
+			"dialog": "Another life lost to fantasy fiction...",
+			"item_given": ""
+		},
+		{
 			"name": "dream slater",
 			"items_required": [],
 			"dialog": "I thought the police would never stop questioning me... how could I have done this?",

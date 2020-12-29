@@ -5,12 +5,6 @@
 	
     "dialogs": [
 		{
-			"name": "help me",
-			"items_required": [ ],
-			"dialog": "Help me Morpheus, you're my only hope.",
-			"item_given": ""
-		},
-		{
 			"name": "not dead",
 			"items_required": [ "Newspaper" ],
 			"dialog": "I'm not just missing... I'm dead.",
@@ -21,7 +15,24 @@
 			"items_required": ["Magazine"],
 			"dialog": "My husband didn't do it...",
 			"item_given": ""
+		},
+		{
+			"name": "axe",
+			"items_required": [ "BloodyAxe" ],
+			"dialog": "Yes, you are getting there! Now find a name.",
+			"item_given": ""
+		},
+		{
+			"name": "book",
+			"items_required": [ "BloodyBook" ],
+			"dialog": "That book was there, when I died... but where is the weapon?",
+			"item_given": ""
+		},		
+		{
+			"name": "help me",
+			"items_required": [ ],
+			"dialog": "Help me Morpheus, you're my only hope.",
+			"item_given": ""
 		}
-		
 	]
 }
