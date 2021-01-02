@@ -59,7 +59,7 @@ public abstract class Scene extends Frame {
 		focus = null;
 	}
 	
-	public static Dialog dialogToDisplay = null;
+	public static DialogDisplay dialogToDisplay = null;
 	
 	// Lifecyle
 
@@ -74,7 +74,7 @@ public abstract class Scene extends Frame {
 		}
 	}
 
-	public static void updateScene() {
+	public static void updateScene() {		
 		if (scene != null) {
 			if (!locked) {
 				scene.updateBase();

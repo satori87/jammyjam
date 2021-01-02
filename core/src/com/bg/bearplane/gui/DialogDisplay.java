@@ -7,7 +7,7 @@ import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
 import com.gdx420.jammyjam.core.Shared;
 
-public class Dialog {
+public class DialogDisplay {
 
 	Scene scene;
 
@@ -34,7 +34,7 @@ public class Dialog {
 	public String[] choicetext;
 	public String[] choiceid;
 	
-	public Dialog(Scene scene, String id, int width, String text, String[] choicetext,
+	public DialogDisplay(Scene scene, String id, int width, String text, String[] choicetext,
 			String[] choiceid) {
 		this.scene = scene;
 		this.id = id;
@@ -44,7 +44,7 @@ public class Dialog {
 		this.text = text;	
 	}
 
-	public Dialog(Scene scene, String id, int width, String text) {
+	public DialogDisplay(Scene scene, String id, int width, String text) {
 		this(scene, id, width, text, new String[] { "Ok" }, new String[] { "" });
 	}
 

@@ -17,15 +17,16 @@ import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.scenes.AwakePlayScene;
+import com.gdx420.jammyjam.scenes.ControlsScene;
 import com.gdx420.jammyjam.scenes.EditMapScene;
 import com.gdx420.jammyjam.scenes.MenuScene;
 import com.gdx420.jammyjam.scenes.OptionsScene;
 import com.gdx420.jammyjam.scenes.PlayScene;
 import com.gdx420.jammyjam.scenes.SleepPlayScene;
 import com.gdx420.jammyjam.scenes.UpdateScene;
+import com.gdx420.jammyjam.scenes.WinScene;
 
 public class JammyJam implements Bearable {
-	public static Sound musicLoop = null;
 
 	public static final boolean IS_RELEASE = false; // change to true for release
 	public static final int GAME_WIDTH = 1366;
@@ -57,11 +58,13 @@ public class JammyJam implements Bearable {
 	public boolean playing = false;
 
 	// scenes
-	public static OptionsScene optionsScene = new OptionsScene();
-	public static UpdateScene updateScene = new UpdateScene();
-	public static EditMapScene editMapScene = new EditMapScene();
+	public static OptionsScene optionsScene;
+	public static ControlsScene controlsScene;
+	public static UpdateScene updateScene;
+	public static EditMapScene editMapScene;
 	public static AwakePlayScene awakePlayScene;
 	public static SleepPlayScene sleepPlayScene;
+	public static WinScene winScene;
 
 	public JammyJam() {
 		game = this;
@@ -71,9 +74,14 @@ public class JammyJam implements Bearable {
 
 	public void create() {
 		Log.info("Jammy Jam Initializing");
+		optionsScene = new OptionsScene();
+		controlsScene = new ControlsScene();
+		updateScene = new UpdateScene();
+		editMapScene = new EditMapScene();
 		editMapScene = new EditMapScene();
 		awakePlayScene = new AwakePlayScene();
 		sleepPlayScene = new SleepPlayScene();
+		winScene = new WinScene();
 
 	}
 
@@ -126,9 +134,11 @@ public class JammyJam implements Bearable {
 		Scene.addScene("menu", new MenuScene());
 		Scene.addScene("update", updateScene);
 		Scene.addScene("options", optionsScene);
+		Scene.addScene("controls", controlsScene);
 		Scene.addScene("edit", editMapScene);
 		Scene.addScene("awakePlayScene", awakePlayScene);
 		Scene.addScene("sleepPlayScene", sleepPlayScene);
+		Scene.addScene("winScene", winScene);
 	}
 
 	@Override

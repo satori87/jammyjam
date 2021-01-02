@@ -2,10 +2,12 @@ package com.gdx420.jammyjam.scenes;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
-import com.bg.bearplane.gui.Dialog;
+import com.bg.bearplane.gui.DialogDisplay;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
+import com.gdx420.jammyjam.core.AudioManager;
 import com.gdx420.jammyjam.core.DialogData;
+import com.gdx420.jammyjam.core.DialogQueue;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.Realm;
 import com.gdx420.jammyjam.core.Shared;
@@ -25,11 +27,11 @@ public class AwakePlayScene extends PlayScene {
 
 		JammyJam.game.sleepTimeManager.setGameClock(LocalTime.of(22, 0));
 		DialogData data = new DialogData("Awake Intro", "What a strange dream. It wasn't real... or was it? Somehow I seemed to know things... things I shouldn't have known.");
-		PlayScene.dialogQueue.add(data);
+		DialogQueue.add(data);
 		data = new DialogData("Awake Intro2", "It really felt like I was a private eye... I think I should follow up on what I dreamt about. Maybe there are still some clues out there.");
-		PlayScene.dialogQueue.add(data);
+		DialogQueue.add(data);
 		data = new DialogData("Awake Intro3", "Where can I find evidence of Jan's fate? Perhaps her house... I'll start next door. Can't hurt to ask around...");
-		PlayScene.dialogQueue.add(data);
+		DialogQueue.add(data);
 	}
 
 	public void update() {
@@ -60,10 +62,7 @@ public class AwakePlayScene extends PlayScene {
 		changeMap(Shared.START_MAP);
 		player().x = Shared.START_X;
 		player().y = Shared.START_Y;
-		if(JammyJam.musicLoop != null)
-			JammyJam.musicLoop.stop();
-		JammyJam.musicLoop = Assets.sounds.get("Dream_Music2");
-		JammyJam.musicLoop.loop();		
+		AudioManager.playSleepMusic();
 	}
 
 	public void render() {

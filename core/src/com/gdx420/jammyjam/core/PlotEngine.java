@@ -3,7 +3,6 @@ package com.gdx420.jammyjam.core;
 import com.bg.bearplane.gui.Scene;
 
 import com.gdx420.jammyjam.scenes.AwakePlayScene;
-import com.gdx420.jammyjam.scenes.PlayScene;
 import com.gdx420.jammyjam.scenes.SleepPlayScene;
 
 public class PlotEngine {
@@ -49,9 +48,8 @@ public class PlotEngine {
 			item.onScreen = false;
 			if(!item.text.isEmpty())
 			{
-				DialogData data = new DialogData(item.name, item.text);
-				data.itemParent = item;
-				PlayScene.dialogQueue.add(data);
+				DialogData data = new DialogData(item.name, item.name + " Found!  " + item.text);
+				DialogQueue.add(data);
 				if(item.name.compareTo("ZombiePotion") == 0)
 					JammyJam.isZombie = true;
 			}
@@ -105,8 +103,8 @@ public class PlotEngine {
 	}
 	
 	private static void doNpcActions(NonPlayableCharacter npc, DialogData dlg) {
-		dlg.npcParent = npc;
-		PlayScene.dialogQueue.add(dlg);
+		DialogData data = new DialogData(npc.name, npc.name + " : " + dlg.dialog);
+		DialogQueue.add(dlg);
 		
 		if(!dlg.item_given.isEmpty()) {
 			for(Item item : JammyJam.game.loadedItems) {
@@ -115,11 +113,7 @@ public class PlotEngine {
 				}
 			}
 		}
-		if(dlg.win_game) {
-			DialogData data = new DialogData("Won Game", "Congrats kid, you snagged the baddie and saved the day. Keep an eye out for the full version of this game someday.");
-			PlayScene.dialogQueue.add(data);
-			if(JammyJam.gameIsWon)
-				Scene.change("menu");
+		if(dlg.win_game) {			
 			JammyJam.gameIsWon = true;
 		}
 	}
@@ -142,7 +136,7 @@ public class PlotEngine {
 		return true;
 	}
 	private static void doStoryActions(StoryPoint sp, DialogData dlg) {
-		PlayScene.dialogQueue.add(dlg);
+		DialogQueue.add(dlg);
 		
 		if(!dlg.item_given.isEmpty()) {
 			for(Item item : JammyJam.game.loadedItems) {

@@ -2,6 +2,7 @@ package com.bg.bearplane.engine;
 
 import com.badlogic.gdx.Screen;
 import com.bg.bearplane.gui.Scene;
+import com.gdx420.jammyjam.core.DialogQueue;
 
 public class GameScreen implements Screen {
 
@@ -25,6 +26,7 @@ public class GameScreen implements Screen {
 			for (Timer t : Bearplane.timers.values()) {
 				t.update(tick);
 			}
+			DialogQueue.update();
 			Scene.updateScene();
 			game.getRealm().tick = tick;
 			game.getRealm().updateBase();

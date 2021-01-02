@@ -5,16 +5,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.JammyJam;
 
-public class OptionsScene extends Scene {
+public class ControlsScene extends Scene {
 
 
 	@Override
 	public void start() {
 		super.start();
-		addLabel("title", JammyJam.GAME_WIDTH / 2, 64, 2f, "Options", Color.WHITE, true);
+		addLabel("title", JammyJam.GAME_WIDTH / 2, 64, 2f, "Controls", Color.WHITE, true);
 		//addFrame("f",400,500,200,200,false,false);
 		//addButton("oops", 200, 200, 256, 48, "OOPS");
-		/*
 		addLabel("Movement", JammyJam.GAME_WIDTH / 2, 128, 2f, "Movement: Arrow Keys", Color.WHITE, true);
 		addLabel("Time", JammyJam.GAME_WIDTH / 2, 192, 2f, "Fast Forward Time: Tab", Color.WHITE, true);
 		addLabel("Menu", JammyJam.GAME_WIDTH / 2, 256, 2f, "Escape: Menu", Color.WHITE, true);
@@ -26,7 +25,7 @@ public class OptionsScene extends Scene {
 		addLabel("Mac", JammyJam.GAME_WIDTH / 2, 575, 2f, "Mac Canepi (Bearable Games)", Color.WHITE, true);
 		addLabel("Infinite", JammyJam.GAME_WIDTH / 2, 640, 2f, "Faris (Wheeler Games)", Color.WHITE, true);
 		addLabel("Santorno", JammyJam.GAME_WIDTH / 2, 704, 2f, "Ahmed Moustafa", Color.WHITE, true);
-		*/
+		
 		
 		//addFrame("topframe", )
 		

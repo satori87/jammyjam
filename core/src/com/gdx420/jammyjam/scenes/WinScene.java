@@ -4,55 +4,40 @@ import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
 import com.gdx420.jammyjam.core.AudioManager;
+import com.gdx420.jammyjam.core.DialogData;
+import com.gdx420.jammyjam.core.DialogQueue;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.SystemSettings;
 
-public class MenuScene extends Scene {
-	private static String status = "";
+public class WinScene extends Scene {
 	
-	public MenuScene() {}
+	public WinScene() {}
 	
 	public void start() {
 		super.start();
 		setupDisplay();
-		AudioManager.playMenuMusic();
+		AudioManager.playWinMusic();
 	}
 	
 	public void setupDisplay() {
+		
 		int halfWidth = JammyJam.GAME_WIDTH / 2;
 		int halfHeight = JammyJam.GAME_HEIGHT / 2;
 		int yOffset = 64;
 		int halfYOffset = yOffset / 2;
 		int buttonWidth = 256;
 		int buttonHeight = 48;
-		int frameWidth = 288;
+		int frameWidth = 700;
 		int frameHeight = 300;
 		
+		
 		addLabel("title", halfWidth, halfHeight - 200, 4f, JammyJam.game.getGameName(), Color.WHITE, true);
-		addLabel("status", halfWidth, halfHeight + 256, 2f, status, Color.WHITE, true);
-		
-		if(SystemSettings.getMapEditorAvailable()) {		
-			addFrame("frame", halfWidth, halfHeight + yOffset + halfYOffset, frameWidth, frameHeight + yOffset + halfYOffset, true, true);
-		} else {
-			addFrame("frame", halfWidth, halfHeight + yOffset, frameWidth, frameHeight, true, true);
-		}
-		
-		int indexCount = 0;
-		int buttonYOffsets[] = {
-				halfHeight - (halfYOffset + yOffset) + yOffset,
-				halfHeight - halfYOffset + yOffset,
-				halfHeight + halfYOffset + yOffset,
-				halfHeight + (halfYOffset + yOffset) + yOffset,
-				halfHeight + (halfYOffset + yOffset * 2) + yOffset
-				};		
-						
-		addButton("play", halfWidth,  buttonYOffsets[indexCount++], buttonWidth, buttonHeight, "Play Demo");
-		if(SystemSettings.getMapEditorAvailable()) {
-			addButton("editMap", halfWidth, buttonYOffsets[indexCount++], buttonWidth, buttonHeight, "Edit Map");
-		}
-		addButton("controls", halfWidth, buttonYOffsets[indexCount++], buttonWidth, buttonHeight, "Controls");
-		addButton("options", halfWidth, buttonYOffsets[indexCount++], buttonWidth, buttonHeight, "Options");
-		addButton("quit", halfWidth, buttonYOffsets[indexCount++], buttonWidth, buttonHeight, "Quit");
+		addFrame("frame", halfWidth, halfHeight + yOffset, frameWidth, frameHeight, true, true);
+		addLabel("winText1", halfWidth, halfHeight - halfYOffset, 2f, "Congrats kid, you snagged", Color.WHITE, true);		
+		addLabel("winText2", halfWidth, halfHeight, 2f, "the baddie and saved the day.", Color.WHITE, true);
+		addLabel("winText3", halfWidth, halfHeight + halfYOffset, 2f, "Keep an eye out for the full", Color.WHITE, true);
+		addLabel("winText42", halfWidth, halfHeight + yOffset, 2f, "version of this game someday.", Color.WHITE, true);
+		addButton("quit", halfWidth, halfHeight + yOffset + halfYOffset + yOffset, buttonWidth, buttonHeight, "Quit");
 	}
 	
 
@@ -60,12 +45,12 @@ public class MenuScene extends Scene {
 	}
 
 	public void render() {
-		getLabel("status").text = status;
 	}
 
 	@Override
 	public void buttonPressed(String id) {	
 		switch (id) {
+		/*
 		case "play":
 			Scene.change("sleepPlayScene");
 			AudioManager.playSleepMusic();
@@ -79,6 +64,7 @@ public class MenuScene extends Scene {
 		case "controls":
 			Scene.change("controls");
 			break;
+			*/
 		case "quit":
 			System.exit(0);
 			break;

@@ -8,10 +8,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
-import com.bg.bearplane.gui.Dialog;
+import com.bg.bearplane.gui.DialogDisplay;
 import com.bg.bearplane.gui.Scene;
 import com.gdx420.jammyjam.core.Assets;
+import com.gdx420.jammyjam.core.AudioManager;
 import com.gdx420.jammyjam.core.DialogData;
+import com.gdx420.jammyjam.core.DialogQueue;
 import com.gdx420.jammyjam.core.Item;
 import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.MapData;
@@ -28,7 +30,7 @@ public class PlayScene extends LiveMapScene {
 	LocalTime startSleepTime = LocalTime.of(22, 0);
 	LocalTime startAwakeTime = LocalTime.of(8, 0);
 
-	public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
+	//public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
 	public static boolean isSpaceBarPressed = false;
 
 	long lastMapChange = 0;
@@ -44,19 +46,15 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	public void update() {
-		if (dialogToDisplay != null || dialogQueue.size() > 0)
+		if (dialogToDisplay != null || DialogQueue.any())
 			updateDialog();
 		else
 			updatePlay();
 	}
 
 	public void updatePlay() {
-		if (JammyJam.gameIsWon) {
-			Scene.change("menu");
-			if (JammyJam.musicLoop != null)
-				JammyJam.musicLoop.stop();
-			JammyJam.musicLoop = Assets.sounds.get("Pursuit_seamless");
-			JammyJam.musicLoop.loop();
+		if (JammyJam.gameIsWon) {			
+			Scene.change("winScene");
 			return;
 		}
 
@@ -108,7 +106,7 @@ public class PlayScene extends LiveMapScene {
 
 	// CREATE DIALOG HERE (and update)
 	public void updateDialog() {
-		
+		/*
 		if(dialogToDisplay != null)
 			return;
 
@@ -125,9 +123,10 @@ public class PlayScene extends LiveMapScene {
 				words = data.npcParent.name + ": " + words;
 			if (data.itemParent != null)
 				words = data.itemParent.name + " Found!  " + words;
-			dialogToDisplay = new Dialog(this, data.name, 400, words, new String[] { "Hmmm..." }, new String[] { "0" });
+			dialogToDisplay = new DialogDisplay(this, data.name, 400, words, new String[] { "Hmmm..." }, new String[] { "0" });
 			dialogToDisplay.start(tick);
 		}
+		*/
 	}
 
 	public Player player() {
@@ -169,10 +168,7 @@ public class PlayScene extends LiveMapScene {
 
 		if (input.keyDown[Keys.ESCAPE]) {
 			Scene.change("menu");
-			if (JammyJam.musicLoop != null)
-				JammyJam.musicLoop.stop();
-			JammyJam.musicLoop = Assets.sounds.get("Dream_Music1");
-			JammyJam.musicLoop.loop();
+			AudioManager.playMenuMusic();
 		}
 
 		if (input.keyDown(Keys.SPACE))
