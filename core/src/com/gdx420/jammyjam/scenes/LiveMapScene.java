@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.engine.DrawTask;
@@ -20,6 +21,7 @@ import com.gdx420.jammyjam.core.JammyJam;
 import com.gdx420.jammyjam.core.MapData;
 import com.gdx420.jammyjam.core.NonPlayableCharacter;
 import com.gdx420.jammyjam.core.Player;
+import com.gdx420.jammyjam.core.PlotEngine;
 import com.gdx420.jammyjam.core.Realm;
 import com.gdx420.jammyjam.core.Shared;
 import com.gdx420.jammyjam.core.Tile;
@@ -185,7 +187,7 @@ public class LiveMapScene extends Scene {
 		region.flip(false, true);
 		drawRegion(region, 0, 0, false, 0, 1);
 		// Realm.realm.render();
-		// Realm.renderFX(3);
+		// Realm.renderFX(3);		
 
 		processTextLayer();
 
@@ -264,8 +266,6 @@ public class LiveMapScene extends Scene {
 	
 	void processMidLayer() {
 		int i = 3;
-		int aa = 0;
-		String a = "";
 		ArrayList<ArrayList<DrawTask>> layerList = null;
 		layerList = new ArrayList<ArrayList<DrawTask>>();
 		for (int y = 0; y < Shared.MAP_WIDTH * 32 + 64; y++) {
@@ -282,7 +282,7 @@ public class LiveMapScene extends Scene {
 		}
 		if (this instanceof PlayScene) {
 			Player p = JammyJam.game.player;
-			dt = new DrawTask(i, p.getSprite(this), p.x - 16, p.y - 32, (p.walkStep/(Player.MAX_FRAMES/9)) * 64, p.dir * 64, 32, 64);
+			dt = new DrawTask(i, p.getSprite(this), p.x - p.width/2, p.y - p.height/2, (p.walkStep/(Player.MAX_FRAMES/9)) * 64, p.dir * 64, p.width, p.height);
 			ly = 32 + p.y;
 			if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
 				layerList.get(ly).add(dt);
@@ -290,13 +290,14 @@ public class LiveMapScene extends Scene {
 
 			for (NonPlayableCharacter npc : JammyJam.game.npcList) {
 				if (npc.onScreen) {
-					dt = new DrawTask(i, npc.tile_sheet, npc.x - 16, npc.y - 32, (ww/(Player.MAX_FRAMES/9)) * 64, 128, 32, 64);
+					dt = new DrawTask(i, npc.tile_sheet, npc.x - npc.width/2, npc.y - npc.height/2, (ww/(Player.MAX_FRAMES/9)) * 64, 128, npc.width, npc.height);
 					ly = 32 + npc.y;
 					if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
 						layerList.get(ly).add(dt);
 					}
 				}
 			}
+			
 		}
 
 		for (int y = 0; y < Shared.MAP_WIDTH; y++) {
@@ -312,6 +313,21 @@ public class LiveMapScene extends Scene {
 				}
 			}
 		}
+		
+		/*
+		for(com.gdx420.jammyjam.core.Renderable clue : PlotEngine.clueList) {
+			if(clue != null) {
+				final int halfTile = 16;
+				dt = new DrawTask(i, clue.sprite, clue.x-clue.width/2 + halfTile, clue.y-clue.height/2 + halfTile, 0, 0, clue.width, clue.height);
+				ly = 32 + clue.y;
+				if (ly >= 0 && ly < Shared.MAP_WIDTH * 32 + 64) {
+					layerList.get(ly).add(dt);
+				}
+			}
+		}
+		*/
+
+
 
 		for (ArrayList<DrawTask> sortedY : layerList) {
 			for (DrawTask sortedX : sortedY) {

@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Util;
+import com.gdx420.jammyjam.core.DialogQueue;
 import com.bg.bearplane.engine.Log;
 
 public abstract class Scene extends Frame {
@@ -58,8 +59,6 @@ public abstract class Scene extends Frame {
 		}
 		focus = null;
 	}
-	
-	public static DialogDisplay dialogToDisplay = null;
 	
 	// Lifecyle
 
@@ -117,8 +116,7 @@ public abstract class Scene extends Frame {
 			for (ListBox l : listBoxes.values()) {
 				l.updateComponent(tick);
 			}
-			if(dialogToDisplay != null)
-				dialogToDisplay.update(tick);
+			DialogQueue.updateDisplayDialog(tick);
 			for (int i = 0; i < 10; i++) {
 				if (input.wasMouseJustClicked[i]) { // none of the scene objects caught this
 					mouseDown(input.mouseDownX[i], input.mouseDownY[i], i);
@@ -168,8 +166,8 @@ public abstract class Scene extends Frame {
 			moveCameraTo(Bearplane.game.getGameWidth() / 2, Bearplane.game.getGameHeight() / 2);
 		}
 		render();
-		if(dialogToDisplay != null)
-			dialogToDisplay.render();
+		DialogQueue.render();		
+		
 	}
 
 	public abstract void render();

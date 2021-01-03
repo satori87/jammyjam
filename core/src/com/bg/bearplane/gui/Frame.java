@@ -18,7 +18,7 @@ public class Frame extends Component {
 	public HashMap<String, Field> fields = new HashMap<String, Field>();
 	public HashMap<String, CheckBox> checkBoxes = new HashMap<String, CheckBox>();
 	public HashMap<String, ListBox> listBoxes = new HashMap<String, ListBox>();
-	public HashMap<String, DialogDisplay> dialogDisplaies = new HashMap<String, DialogDisplay>();
+	public HashMap<String, DialogDisplay> dialogDisplays = new HashMap<String, DialogDisplay>();
 
 	Frame parent = null;
 

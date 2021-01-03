@@ -34,6 +34,8 @@ public class DialogDisplay {
 	public String[] choicetext;
 	public String[] choiceid;
 	
+	public long endTick;
+	
 	public DialogDisplay(Scene scene, String id, int width, String text, String[] choicetext,
 			String[] choiceid) {
 		this.scene = scene;

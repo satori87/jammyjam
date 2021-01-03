@@ -11,25 +11,30 @@ public class ControlsScene extends Scene {
 	@Override
 	public void start() {
 		super.start();
-		addLabel("title", JammyJam.GAME_WIDTH / 2, 64, 2f, "Controls", Color.WHITE, true);
-		//addFrame("f",400,500,200,200,false,false);
-		//addButton("oops", 200, 200, 256, 48, "OOPS");
-		addLabel("Movement", JammyJam.GAME_WIDTH / 2, 128, 2f, "Movement: Arrow Keys", Color.WHITE, true);
-		addLabel("Time", JammyJam.GAME_WIDTH / 2, 192, 2f, "Fast Forward Time: Tab", Color.WHITE, true);
-		addLabel("Menu", JammyJam.GAME_WIDTH / 2, 256, 2f, "Escape: Menu", Color.WHITE, true);
+		int wordSpace = 50;
+		int count = 1;
+		float font = 2f;
+		int center = JammyJam.GAME_WIDTH / 2;
+		addLabel("title", center, wordSpace * count++, font, "Controls", Color.WHITE, true);
+		Color controlsColor = Color.YELLOW;
 		
+		addLabel("Movement", center, wordSpace * count++, font, "Movement: Arrow Keys", controlsColor, true);
+		addLabel("Space", center, wordSpace * count++, font, "Talk/Inspect: Space Bar", controlsColor, true);
+		addLabel("Return", center, wordSpace * count++, font, "Dialog Confirm: Enter/Return", controlsColor, true);
+		addLabel("Time", center, wordSpace * count++, font, "Fast Forward Time: Tab", controlsColor, true);
+		addLabel("Menu", center, wordSpace * count++, font, "Menu: Escape", controlsColor, true);
 		
-		addLabel("Credits:", JammyJam.GAME_WIDTH / 2, 384, 2f, "Credits:", Color.WHITE, true);
-		addLabel("Bear", JammyJam.GAME_WIDTH / 2, 448, 2f, "Michael Whitlock (Bearable Games)", Color.WHITE, true);
-		addLabel("Joker", JammyJam.GAME_WIDTH / 2, 512, 2f, "Christian Vanderbeck (Bearable Games)", Color.WHITE, true);
-		addLabel("Mac", JammyJam.GAME_WIDTH / 2, 575, 2f, "Mac Canepi (Bearable Games)", Color.WHITE, true);
-		addLabel("Infinite", JammyJam.GAME_WIDTH / 2, 640, 2f, "Faris (Wheeler Games)", Color.WHITE, true);
-		addLabel("Santorno", JammyJam.GAME_WIDTH / 2, 704, 2f, "Ahmed Moustafa", Color.WHITE, true);
-		
-		
-		//addFrame("topframe", )
-		
-		//addFrame(this)
+		Color creditsColor = Color.BLUE;
+		int creditStart = 500;
+		count = 0;
+		font -= 0.2f;
+		wordSpace = 45;
+		addLabel("Credits", center, creditStart + wordSpace * count++, font, "Credits", Color.GRAY, true);
+		addLabel("Bear", center, creditStart + wordSpace * count++, font, "Michael Whitlock (Bearable Games)", creditsColor, true);
+		addLabel("Joker", center, creditStart + wordSpace * count++, font, "Christian Vanderbeck (Bearable Games)", creditsColor, true);
+		addLabel("Mac", center, creditStart + wordSpace * count++, font, "Mac Canepi (Bearable Games)", creditsColor, true);
+		addLabel("Infinite", center, creditStart + wordSpace * count++, font, "Faris (Wheeler Games)", creditsColor, true);
+		addLabel("Santorno", center, creditStart + wordSpace * count++, font, "Ahmed Moustafa", creditsColor, true);		
 		
 	}
 	

@@ -48,6 +48,8 @@ public class JammyJam implements Bearable {
 	public List<NonPlayableCharacter> npcList = new ArrayList<NonPlayableCharacter>();
 	public List<Item> loadedItems = new ArrayList<Item>();
 	public List<StoryPoint> storyPoints = new ArrayList<StoryPoint>();
+	
+	public static boolean isSpaceBarPressed = false;
 
 	// timing
 	long tick = 0;

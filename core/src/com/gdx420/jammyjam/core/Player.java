@@ -17,6 +17,8 @@ public class Player extends Character {
 		super();
 		x = _x;
 		y = _y;
+		width = 32;
+		height = 64;
 	}
 	
 	public String getSprite(Scene scene) {

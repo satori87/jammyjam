@@ -1,21 +1,49 @@
 package com.gdx420.jammyjam.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bg.bearplane.gui.Scene;
 
 import com.gdx420.jammyjam.scenes.AwakePlayScene;
 import com.gdx420.jammyjam.scenes.SleepPlayScene;
 
 public class PlotEngine {
-	public static long lastStoryPointTimestamp = System.currentTimeMillis(); 
+	public static List<Renderable> clueList = new ArrayList<Renderable>();
+	public static void clearClueCache() { 
+		clueList.clear();
+	}
+	
+	public static boolean checkStoryPoint(StoryPoint sp) {
+		boolean clueExists = false;
+		for(Renderable r : clueList) {
+			if(r.x == sp.x && r.y == sp.y) {
+				clueExists = true;
+			}
+		}
+		if(!clueExists) {
+			Renderable clue = null;
+			for(Renderable r : clueList) {
+				if(r == null) {
+					clue = r;
+					continue;
+				}
+			}
+			if(clue == null) {
+				clue = new Renderable();
+				clue.sprite = "magnifying-glass";
+				clue.x = sp.x;
+				clue.y = sp.y;
+				clue.width = clue.height = 32;
+			}
+			clueList.add(clue);
+		}
+		if(JammyJam.isSpaceBarPressed)
+			return true;
+		return false;
+	}	
 	
 	public static void triggerStoryPoint(StoryPoint sp) {
-		
-		// prevent multiple times in a row
-		if(System.currentTimeMillis() - lastStoryPointTimestamp < 2000)
-			return;
-		
-		lastStoryPointTimestamp = System.currentTimeMillis();
-		
 		if( ( sp.active_sleep && Scene.scene instanceof SleepPlayScene)
 				|| (sp.active_awake && Scene.scene instanceof AwakePlayScene)) {
 			for(DialogData dlg : sp.dialogs) {				
@@ -57,11 +85,6 @@ public class PlotEngine {
 	}
 		
 	public static void npcInteraction(NonPlayableCharacter npc) {
-		// prevent multiple times in a row
-		if(System.currentTimeMillis() - lastStoryPointTimestamp < 2000)
-			return;
-		
-		lastStoryPointTimestamp = System.currentTimeMillis();
 		for(DialogData dlg : npc.dialogs) {				
 			int matchedItemsCount = 0;
 			int itemsRequiredCount = 0;
@@ -90,6 +113,11 @@ public class PlotEngine {
 		if(dlg.wasDisplayed) {
 			if(lastNpc != null && lastNpcDlg != null) {
 				doNpcActions(npc, dlg);
+				for(Renderable clue : clueList) {
+					if(npc.x == clue.x && npc.y == clue.y) {
+						clue = null; // factory reset
+					}
+				}
 				return true;
 			}
 			return false;
@@ -118,24 +146,11 @@ public class PlotEngine {
 		}
 	}
 	
-	private static StoryPoint lastStoryPoint = null;
-	private static DialogData lastStoryDlg = null;
 	private static boolean foundStoryPoint(StoryPoint sp, DialogData dlg) {
-		if(dlg.wasDisplayed) {
-			if(lastStoryPoint != null && lastStoryDlg != null) {
-				doStoryActions(sp, dlg);
-				return true;
-			}
-			return false;
-		}
-		dlg.wasDisplayed = true;
-		lastStoryPoint = sp;
-		lastStoryDlg = dlg;
-		
 		doStoryActions(sp, dlg);		
 		return true;
 	}
-	private static void doStoryActions(StoryPoint sp, DialogData dlg) {
+	private static void doStoryActions(StoryPoint sp, DialogData dlg) {		
 		DialogQueue.add(dlg);
 		
 		if(!dlg.item_given.isEmpty()) {

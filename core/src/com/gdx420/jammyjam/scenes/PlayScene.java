@@ -6,6 +6,7 @@ import java.util.Queue;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
+import com.bg.bearplane.engine.DrawTask;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.DialogDisplay;
@@ -30,8 +31,7 @@ public class PlayScene extends LiveMapScene {
 	LocalTime startSleepTime = LocalTime.of(22, 0);
 	LocalTime startAwakeTime = LocalTime.of(8, 0);
 
-	//public static Queue<DialogData> dialogQueue = new LinkedList<DialogData>();
-	public static boolean isSpaceBarPressed = false;
+	
 
 	long lastMapChange = 0;
 
@@ -46,13 +46,11 @@ public class PlayScene extends LiveMapScene {
 	}
 
 	public void update() {
-		if (dialogToDisplay != null || DialogQueue.any())
-			updateDialog();
-		else
 			updatePlay();
 	}
 
-	public void updatePlay() {
+	public void updatePlay() {		
+		
 		if (JammyJam.gameIsWon) {			
 			Scene.change("winScene");
 			return;
@@ -72,11 +70,24 @@ public class PlayScene extends LiveMapScene {
 					if (!item.onScreen)
 						continue;
 
+					// on an item tile
 					if ((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(item.name) == 0)
 							|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(item.name) == 0)) {
-						// if(isSpaceBarPressed)
 						PlotEngine.obtainItem(item);
-					}
+					}					
+				}
+			}
+
+			PlotEngine.clearClueCache();
+			// on a plot point
+			for (StoryPoint sp : JammyJam.game.storyPoints) {
+				if (!sp.onScreen)
+					continue;
+				
+				if ((currentTile.attStr[0] != null && currentTile.attStr[0].compareTo(sp.name) == 0)
+						|| (currentTile.attStr[1] != null && currentTile.attStr[1].compareTo(sp.name) == 0)) {
+					if(PlotEngine.checkStoryPoint(sp))
+						PlotEngine.triggerStoryPoint(sp);
 				}
 			}
 
@@ -92,7 +103,7 @@ public class PlayScene extends LiveMapScene {
 
 							if ((neighbor.attStr[0] != null && neighbor.attStr[0].compareTo(sp.name) == 0)
 									|| (neighbor.attStr[1] != null && neighbor.attStr[1].compareTo(sp.name) == 0)) {
-								if (isSpaceBarPressed == true)
+								if(PlotEngine.checkStoryPoint(sp))
 									PlotEngine.triggerStoryPoint(sp);
 							}
 						}
@@ -100,33 +111,6 @@ public class PlayScene extends LiveMapScene {
 				}
 			}
 		}
-	}
-
-	public static long lastDialogUpdate = System.currentTimeMillis();
-
-	// CREATE DIALOG HERE (and update)
-	public void updateDialog() {
-		/*
-		if(dialogToDisplay != null)
-			return;
-
-		// prevent multiple times in a row
-		if(System.currentTimeMillis() - lastDialogUpdate < 2000)
-			return;
-
-		lastDialogUpdate = System.currentTimeMillis();
-
-		if (dialogQueue.size() > 0) {
-			DialogData data = dialogQueue.poll();
-			String words = data.dialog;
-			if (data.npcParent != null)
-				words = data.npcParent.name + ": " + words;
-			if (data.itemParent != null)
-				words = data.itemParent.name + " Found!  " + words;
-			dialogToDisplay = new DialogDisplay(this, data.name, 400, words, new String[] { "Hmmm..." }, new String[] { "0" });
-			dialogToDisplay.start(tick);
-		}
-		*/
 	}
 
 	public Player player() {
@@ -137,13 +121,11 @@ public class PlayScene extends LiveMapScene {
 
 	void checkKeys() {
 		warp = false;
-		if (dialogToDisplay != null) {
+		if (DialogQueue.isDialogDisplayed()) {
 			if (input.keyDown[Keys.ENTER]) {
 				pressedEnter = true;
 			} else if (pressedEnter) {
-				dialogToDisplay.choose(dialogToDisplay.choices.get(0));
-				dialogToDisplay = null;
-				pressedEnter = false;
+				confirmDialog();
 			}
 		} else {
 			checkVerticalMovement();
@@ -171,10 +153,20 @@ public class PlayScene extends LiveMapScene {
 			AudioManager.playMenuMusic();
 		}
 
-		if (input.keyDown(Keys.SPACE))
-			isSpaceBarPressed = true;
-		else
-			isSpaceBarPressed = false;
+		if (input.keyDown[Keys.SPACE]) {
+			JammyJam.isSpaceBarPressed = true;
+		}
+		else {
+			if(JammyJam.isSpaceBarPressed) {
+				// lifted button			
+			}
+			JammyJam.isSpaceBarPressed = false;
+		}
+	}
+	
+	void confirmDialog() {
+		DialogQueue.confirmDialog(tick);
+		pressedEnter = false;
 	}
 
 	void warp(int x, int y) {
@@ -263,9 +255,11 @@ public class PlayScene extends LiveMapScene {
 		for (NonPlayableCharacter npc : JammyJam.game.npcList) {
 			if (npc.onScreen) {
 				if (Util.distance(npc.x, npc.y, player().x, player().y) <48) {
-					PlotEngine.npcInteraction(npc);
+					if(JammyJam.isSpaceBarPressed) {
+						PlotEngine.npcInteraction(npc);
+					}
 					if (Util.distance(npc.x, npc.y, player().x, player().y) <32) {
-					return true;
+						return true;
 					}
 				}
 			}
@@ -365,6 +359,15 @@ public class PlayScene extends LiveMapScene {
 				draw(Assets.textures.get(item.tile_sheet), item.x, item.y, item.source_x, item.source_y, item.width,
 						item.height);
 		}
+		
+
+		for(com.gdx420.jammyjam.core.Renderable clue : PlotEngine.clueList) {
+			if(clue != null) {
+				final int halfTile = 16;
+				draw(Assets.textures.get(clue.sprite), clue.x-clue.width/2 + halfTile, clue.y-clue.height/2 + halfTile, 0, 0, clue.width, clue.height);
+			}
+		}
+
 
 	}
 
@@ -372,9 +375,7 @@ public class PlayScene extends LiveMapScene {
 	public void buttonPressed(String id) {
 		switch (id) {
 		case "dialog0":
-			dialogToDisplay.choose(dialogToDisplay.choices.get(0));
-			dialogToDisplay = null;
-			pressedEnter = false;
+			confirmDialog();			
 			break;
 		}
 	}
