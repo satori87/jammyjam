@@ -1,4 +1,4 @@
-package com.gdx420.sleepsleep.desktop;
+package com.bg.sleepsleep.desktop;
 
 import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
