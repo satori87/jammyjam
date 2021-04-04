@@ -2,7 +2,7 @@ package com.gdx420.sleepsleep.desktop;
 
 import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
-import com.gdx420.jammyjam.core.JammyJam;
+import com.bg.jammyjam.core.JammyJam;
 
 public class DesktopLauncher {
 

@@ -1,9 +1,9 @@
-package com.gdx420.jammyjam.scenes;
+package com.bg.jammyjam.scenes;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.core.JammyJam;
+import com.bg.jammyjam.core.JammyJam;
 
 public class OptionsScene extends Scene {
 

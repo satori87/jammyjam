@@ -1,10 +1,9 @@
-package com.gdx420.jammyjam.core;
+package com.bg.jammyjam.core;
 
 import com.bg.bearplane.gui.Scene;
-
-import com.gdx420.jammyjam.scenes.AwakePlayScene;
-import com.gdx420.jammyjam.scenes.PlayScene;
-import com.gdx420.jammyjam.scenes.SleepPlayScene;
+import com.bg.jammyjam.scenes.AwakePlayScene;
+import com.bg.jammyjam.scenes.PlayScene;
+import com.bg.jammyjam.scenes.SleepPlayScene;
 
 public class PlotEngine {
 	public static long lastStoryPointTimestamp = System.currentTimeMillis(); 

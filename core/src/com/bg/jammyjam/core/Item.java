@@ -1,7 +1,6 @@
-package com.gdx420.jammyjam.core;
+package com.bg.jammyjam.core;
 
-public class NonPlayableCharacter extends Character {
-	
+public class Item {
 	public String name = new String();
 	public String tile_sheet = new String();
 	public int source_x = -1;
@@ -10,8 +9,12 @@ public class NonPlayableCharacter extends Character {
 	public int height = -1;
 	public boolean active_sleep = false;
 	public boolean active_awake = false;
+	public boolean interact = true;
 	
-	public DialogData[] dialogs;
+	public String text = new String();
 	
-	public boolean onScreen = false;	
+	public boolean onScreen = false;
+	public int x;
+	public int y;
+
 }

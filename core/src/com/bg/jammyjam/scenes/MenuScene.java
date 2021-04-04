@@ -1,12 +1,12 @@
-package com.gdx420.jammyjam.scenes;
+package com.bg.jammyjam.scenes;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.core.Assets;
-import com.gdx420.jammyjam.core.JammyJam;
+import com.bg.jammyjam.core.Assets;
+import com.bg.jammyjam.core.JammyJam;
 
 public class MenuScene extends Scene {
 	

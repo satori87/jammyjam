@@ -1,10 +1,10 @@
-package com.gdx420.jammyjam.core;
+package com.bg.jammyjam.core;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.scenes.AwakePlayScene;
+import com.bg.jammyjam.scenes.AwakePlayScene;
 
 public class Player extends Character {
 

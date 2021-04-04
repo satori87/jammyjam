@@ -5,7 +5,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
-import com.gdx420.jammyjam.core.Shared;
+import com.bg.jammyjam.core.Shared;
 
 public class Dialog {
 

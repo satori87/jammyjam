@@ -1,4 +1,4 @@
-package com.gdx420.jammyjam.scenes;
+package com.bg.jammyjam.scenes;
 
 import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,11 +6,11 @@ import com.bg.bearplane.engine.DrawTask;
 import com.bg.bearplane.gui.Field;
 import com.bg.bearplane.gui.Label;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.core.Assets;
-import com.gdx420.jammyjam.core.MapData;
-import com.gdx420.jammyjam.core.Realm;
-import com.gdx420.jammyjam.core.Shared;
-import com.gdx420.jammyjam.core.Tile;
+import com.bg.jammyjam.core.Assets;
+import com.bg.jammyjam.core.MapData;
+import com.bg.jammyjam.core.Realm;
+import com.bg.jammyjam.core.Shared;
+import com.bg.jammyjam.core.Tile;
 
 public class RenderEditMapScene extends Scene {
 

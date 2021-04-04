@@ -1,4 +1,4 @@
-package com.gdx420.jammyjam.scenes;
+package com.bg.jammyjam.scenes;
 
 import java.time.LocalTime;
 import java.util.LinkedList;
@@ -10,18 +10,18 @@ import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.Dialog;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.core.Assets;
-import com.gdx420.jammyjam.core.DialogData;
-import com.gdx420.jammyjam.core.Item;
-import com.gdx420.jammyjam.core.JammyJam;
-import com.gdx420.jammyjam.core.MapData;
-import com.gdx420.jammyjam.core.NonPlayableCharacter;
-import com.gdx420.jammyjam.core.Player;
-import com.gdx420.jammyjam.core.PlotEngine;
-import com.gdx420.jammyjam.core.Realm;
-import com.gdx420.jammyjam.core.Shared;
-import com.gdx420.jammyjam.core.StoryPoint;
-import com.gdx420.jammyjam.core.Tile;
+import com.bg.jammyjam.core.Assets;
+import com.bg.jammyjam.core.DialogData;
+import com.bg.jammyjam.core.Item;
+import com.bg.jammyjam.core.JammyJam;
+import com.bg.jammyjam.core.MapData;
+import com.bg.jammyjam.core.NonPlayableCharacter;
+import com.bg.jammyjam.core.Player;
+import com.bg.jammyjam.core.PlotEngine;
+import com.bg.jammyjam.core.Realm;
+import com.bg.jammyjam.core.Shared;
+import com.bg.jammyjam.core.StoryPoint;
+import com.bg.jammyjam.core.Tile;
 
 public class PlayScene extends LiveMapScene {
 

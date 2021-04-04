@@ -1,4 +1,4 @@
-package com.gdx420.jammyjam.scenes;
+package com.bg.jammyjam.scenes;
 
 import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
@@ -14,15 +14,15 @@ import com.bg.bearplane.engine.DrawTask;
 import com.bg.bearplane.engine.Effect;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.gui.Scene;
+import com.bg.jammyjam.core.Assets;
+import com.bg.jammyjam.core.JammyJam;
+import com.bg.jammyjam.core.MapData;
+import com.bg.jammyjam.core.NonPlayableCharacter;
+import com.bg.jammyjam.core.Player;
+import com.bg.jammyjam.core.Realm;
+import com.bg.jammyjam.core.Shared;
+import com.bg.jammyjam.core.Tile;
 import com.bg.bearplane.gui.Field;
-import com.gdx420.jammyjam.core.Assets;
-import com.gdx420.jammyjam.core.JammyJam;
-import com.gdx420.jammyjam.core.MapData;
-import com.gdx420.jammyjam.core.NonPlayableCharacter;
-import com.gdx420.jammyjam.core.Player;
-import com.gdx420.jammyjam.core.Realm;
-import com.gdx420.jammyjam.core.Shared;
-import com.gdx420.jammyjam.core.Tile;
 
 public class LiveMapScene extends Scene {
 

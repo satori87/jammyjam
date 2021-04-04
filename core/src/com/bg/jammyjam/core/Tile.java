@@ -1,4 +1,4 @@
-package com.gdx420.jammyjam.core;
+package com.bg.jammyjam.core;
 
 import java.io.Serializable;
 

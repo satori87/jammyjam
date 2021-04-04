@@ -1,4 +1,4 @@
-package com.gdx420.jammyjam.core;
+package com.bg.jammyjam.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,13 +16,13 @@ import com.bg.bearplane.engine.Bearplane;
 import com.bg.bearplane.engine.Log;
 import com.bg.bearplane.engine.Util;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.scenes.AwakePlayScene;
-import com.gdx420.jammyjam.scenes.EditMapScene;
-import com.gdx420.jammyjam.scenes.MenuScene;
-import com.gdx420.jammyjam.scenes.OptionsScene;
-import com.gdx420.jammyjam.scenes.PlayScene;
-import com.gdx420.jammyjam.scenes.SleepPlayScene;
-import com.gdx420.jammyjam.scenes.UpdateScene;
+import com.bg.jammyjam.scenes.AwakePlayScene;
+import com.bg.jammyjam.scenes.EditMapScene;
+import com.bg.jammyjam.scenes.MenuScene;
+import com.bg.jammyjam.scenes.OptionsScene;
+import com.bg.jammyjam.scenes.PlayScene;
+import com.bg.jammyjam.scenes.SleepPlayScene;
+import com.bg.jammyjam.scenes.UpdateScene;
 
 public class JammyJam implements Bearable {
 	public static Sound musicLoop = null;

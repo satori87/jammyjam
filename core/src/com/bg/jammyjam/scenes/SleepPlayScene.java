@@ -1,14 +1,15 @@
-package com.gdx420.jammyjam.scenes;
+package com.bg.jammyjam.scenes;
 
 import java.time.LocalTime;
-import com.gdx420.jammyjam.core.Assets;
-import com.gdx420.jammyjam.core.DialogData;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.core.JammyJam;
-import com.gdx420.jammyjam.core.Realm;
-import com.gdx420.jammyjam.core.Shared;
+import com.bg.jammyjam.core.Assets;
+import com.bg.jammyjam.core.DialogData;
+import com.bg.jammyjam.core.JammyJam;
+import com.bg.jammyjam.core.Realm;
+import com.bg.jammyjam.core.Shared;
 import com.badlogic.gdx.graphics.Color;
 
 public class SleepPlayScene extends PlayScene {

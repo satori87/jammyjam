@@ -1,4 +1,4 @@
-package com.gdx420.jammyjam.scenes;
+package com.bg.jammyjam.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -13,10 +13,10 @@ import com.bg.bearplane.gui.Frame;
 import com.bg.bearplane.gui.Label;
 import com.bg.bearplane.gui.ListBox;
 import com.bg.bearplane.gui.Scene;
-import com.gdx420.jammyjam.core.MapData;
-import com.gdx420.jammyjam.core.Realm;
-import com.gdx420.jammyjam.core.Shared;
-import com.gdx420.jammyjam.core.Tile;
+import com.bg.jammyjam.core.MapData;
+import com.bg.jammyjam.core.Realm;
+import com.bg.jammyjam.core.Shared;
+import com.bg.jammyjam.core.Tile;
 
 public class EditMapScene extends RenderEditMapScene {
 
